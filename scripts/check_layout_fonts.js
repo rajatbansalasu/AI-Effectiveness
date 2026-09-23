@@ -6,7 +6,7 @@ const { chromium } = require('playwright');
 
   console.log("=== SLIDE AUDIT: VIEWPORT OVERFLOW & FONT SIZE CHECK (1440x900 & 1728x920) ===");
 
-  for (let slideNum = 1; slideNum <= 17; slideNum++) {
+  for (let slideNum = 1; slideNum <= 18; slideNum++) {
     await page.goto(`http://localhost:3000/#slide=${slideNum}`);
     await page.reload();
     await page.waitForTimeout(300);
@@ -61,7 +61,7 @@ const { chromium } = require('playwright');
   // Also test at 1728x920
   await page.setViewportSize({ width: 1728, height: 920 });
   console.log("\n=== TESTING AT 1728x920 ===");
-  for (let slideNum = 1; slideNum <= 17; slideNum++) {
+  for (let slideNum = 1; slideNum <= 18; slideNum++) {
     await page.goto(`http://localhost:3000/#slide=${slideNum}`);
     await page.waitForTimeout(200);
 

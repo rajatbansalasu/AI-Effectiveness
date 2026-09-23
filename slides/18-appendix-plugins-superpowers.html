@@ -1,0 +1,105 @@
+<section class="slide" data-slide="18">
+      <div class="slide-content">
+        <div class="slide-header" style="margin-bottom: 0.65rem;">
+          <span class="slide-category">Appendix D &bull; Plugins, Extensions &amp; Tooling</span>
+          <h2>Plugins &amp; Superpowers: <span class="gradient-text">The Double-Edged Token Sword</span></h2>
+          <p class="slide-desc" style="font-size: 0.95rem;">Enhancements like <strong>Cursor Superpower</strong> and <strong>CE (Community Extensions)</strong> boost workflow speed—but silent background context injections can secretly inflate token spend by 4x.</p>
+        </div>
+
+        <!-- 2-Column Grid -->
+        <div style="display: grid; grid-template-columns: 1.05fr 1fr; gap: 0.8rem; flex: 1; min-height: 0;">
+
+          <!-- Left Column: The Benefits vs The Stealth Context Explosion -->
+          <div style="display: flex; flex-direction: column; gap: 0.55rem;">
+            
+            <!-- The Upside -->
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-left: 3px solid var(--accent-emerald); border-radius: 8px; padding: 0.6rem 0.85rem;">
+              <h3 style="font-size: 0.86rem; color: var(--accent-emerald); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 6px;">
+                <span>✨</span> The Upside: High-Velocity Workflow Accelerators
+              </h3>
+              <ul style="font-size: 0.76rem; line-height: 1.4; color: var(--text-secondary); padding-left: 1.1rem; margin: 0;">
+                <li><strong>Automated Prompt Chaining:</strong> Standardized PR templates, auto-generated commit diffs, and rapid boilerplate injection.</li>
+                <li><strong>Multi-Tool Connectors:</strong> Direct UI shortcuts to Jira tickets, Figma design tokens, and Sentry error logs.</li>
+                <li><strong>Notepad &amp; Memory Shortcuts:</strong> Quick-insert scratchpad notes without retyping architectural context.</li>
+              </ul>
+            </div>
+
+            <!-- The Stealth Token Trap Breakdown -->
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-left: 3px solid var(--danger-color); border-radius: 8px; padding: 0.6rem 0.85rem; flex: 1;">
+              <h3 style="font-size: 0.86rem; color: var(--danger-color); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 6px;">
+                <span>🚨</span> The Hidden Trap: Stealth Context Inflation
+              </h3>
+              
+              <!-- Visual Token Stack Math -->
+              <div style="display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.73rem; margin-top: 0.3rem;">
+                <div style="background: var(--bg-card); border-left: 2px solid #38bdf8; padding: 0.3rem 0.6rem; border-radius: 4px; display: flex; justify-content: space-between;">
+                  <span>Your Actual Prompt (<em>"Fix null check on line 4"</em>)</span>
+                  <strong style="color: #38bdf8;">~25 tokens</strong>
+                </div>
+                <div style="background: var(--bg-card); border-left: 2px solid #a855f7; padding: 0.3rem 0.6rem; border-radius: 4px; display: flex; justify-content: space-between;">
+                  <span>+ Plugin System Instructions &amp; Meta-Prompts</span>
+                  <strong style="color: #a855f7;">+ 4,500 tokens</strong>
+                </div>
+                <div style="background: var(--bg-card); border-left: 2px solid #f59e0b; padding: 0.3rem 0.6rem; border-radius: 4px; display: flex; justify-content: space-between;">
+                  <span>+ Injected Tool Schemas &amp; LSP Metadata</span>
+                  <strong style="color: #f59e0b;">+ 8,000 tokens</strong>
+                </div>
+                <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.35rem 0.6rem; border-radius: 4px; display: flex; justify-content: space-between; font-weight: 700; color: var(--danger-color);">
+                  <span>Total Input Ingested Per Keystroke:</span>
+                  <span>12,525 tokens (500x overhead!)</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right Column: The 4 Golden Rules of Plugin & Extension Hygiene -->
+          <div style="display: flex; flex-direction: column; gap: 0.55rem;">
+            
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.65rem 0.85rem; flex: 1;">
+              <h3 style="font-size: 0.86rem; color: var(--accent-cyan); margin-bottom: 0.45rem; display: flex; align-items: center; gap: 6px;">
+                <span>🛡️</span> The 4 Golden Rules of Plugin Hygiene
+              </h3>
+
+              <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                <div style="background: var(--bg-card); border-radius: 5px; padding: 0.4rem 0.6rem; border: 1px solid var(--border-color); font-size: 0.74rem;">
+                  <strong style="color: var(--accent-cyan);">1. Inspect the Breakdown Tray:</strong>
+                  <div style="color: var(--text-secondary); margin-top: 1px;">Click the Context Ring before prompting. Verify that plugins aren't silently consuming &gt;20% of your input window.</div>
+                </div>
+
+                <div style="background: var(--bg-card); border-radius: 5px; padding: 0.4rem 0.6rem; border: 1px solid var(--border-color); font-size: 0.74rem;">
+                  <strong style="color: var(--accent-purple);">2. Scope to Workspace (Never Global):</strong>
+                  <div style="color: var(--text-secondary); margin-top: 1px;">Install heavy plugin configs inside project-level <code>.cursor/</code> rather than global user settings to avoid bleeding across repos.</div>
+                </div>
+
+                <div style="background: var(--bg-card); border-radius: 5px; padding: 0.4rem 0.6rem; border: 1px solid var(--border-color); font-size: 0.74rem;">
+                  <strong style="color: var(--accent-emerald);">3. Disable Auto-Inject on Simple Tasks:</strong>
+                  <div style="color: var(--text-secondary); margin-top: 1px;">Toggle off automatic full-repository schema injectors when doing rapid 1-file surgical fixes.</div>
+                </div>
+
+                <div style="background: var(--bg-card); border-radius: 5px; padding: 0.4rem 0.6rem; border: 1px solid var(--border-color); font-size: 0.74rem;">
+                  <strong style="color: var(--accent-amber);">4. Prune Idle MCP &amp; Tool Schemas:</strong>
+                  <div style="color: var(--text-secondary); margin-top: 1px;">Each active MCP server appends its full JSON schema to <em>every single turn</em>. Disable unused servers during daily coding.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Summary Banner -->
+            <div style="background: rgba(6, 182, 212, 0.08); border: 1px solid rgba(6, 182, 212, 0.3); border-radius: 6px; padding: 0.4rem 0.75rem; font-size: 0.73rem; text-align: center; color: var(--text-secondary);">
+              💡 <em>"The best extension is the one that gives you maximum leverage with minimum invisible token overhead."</em>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (3-4 mins):</h4>
+        <ul>
+          <li><strong>The Plugin Double-Edged Sword:</strong> Acknowledge that tools like Cursor Superpower and community extensions provide great UI productivity shortcuts. But emphasize the hidden engineering cost: many of them inject huge system prompts and schema payloads behind your back.</li>
+          <li><strong>Show the Math:</strong> Walk through the visual token breakdown: A 25-token question like "Fix line 4" can cost 12,500 tokens because of background meta-prompts and unused tool definitions. Over 20 turns, that burns 250,000 pooled tokens and adds 15 seconds of latency per prompt!</li>
+          <li><strong>The Pruning Rule:</strong> Remind the team to click the Context Ring periodically to audit what's consuming their context, and disable idle MCP servers when not in active use.</li>
+        </ul>
+      </div>
+    </section>

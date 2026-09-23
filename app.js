@@ -45,7 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
     "Open Q&A & Resource Toolkit",
     "Appendix A: Team MCP Infrastructure",
     "Appendix B: CI/CD Guardrails & Quality",
-    "Appendix C: Power User Playbook & .cursorignore"
+    "Appendix C: Power User Playbook & .cursorignore",
+    "Appendix D: Plugins & Superpowers Token Overhead"
   ];
 
   // ==========================================

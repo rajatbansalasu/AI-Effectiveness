@@ -586,7 +586,8 @@
       "Open Q&A & Resource Toolkit",
       "Appendix A: Team MCP Infrastructure",
       "Appendix B: CI/CD Guardrails & Quality",
-      "Appendix C: Power User Playbook & .cursorignore"
+      "Appendix C: Power User Playbook & .cursorignore",
+      "Appendix D: Plugins & Superpowers Token Overhead"
     ];
 
     const slideCategories = [
@@ -606,7 +607,8 @@
       "Q&A & Resources",
       "Appendix A • Infrastructure & Security",
       "Appendix B • DevOps & Quality",
-      "Appendix C • Velocity & Sandboxing"
+      "Appendix C • Velocity & Sandboxing",
+      "Appendix D • Plugins & Extensions"
     ];
 
     let currentSlide = 1;
@@ -889,6 +891,14 @@
           <li><strong>The .cursorignore Imperative:</strong> Explain why lockfiles and build outputs are vector indexing poison: "When an engineer types <code>@codebase how does auth work?</code>, Cursor searches embeddings. If <code>package-lock.json</code> is indexed, it injects 30,000 lines of npm package names, crowding out actual source code!"</li>
           <li><strong>Git Worktree Sandboxing:</strong> Show how senior engineers run aggressive agent refactors in a separate git worktree without dirtying their main branch or killing their dev server.</li>
           <li><strong>Spec-Driven Development:</strong> Explain that writing a quick markdown spec before letting an agent touch code reduces wasted tokens and rollback cycles by over 70%.</li>
+        </ul>
+      `,
+      18: `
+        <h4>🎙️ Speaker Talking Points (3-4 mins):</h4>
+        <ul>
+          <li><strong>The Plugin Double-Edged Sword:</strong> Acknowledge that tools like Cursor Superpower and community extensions provide great UI productivity shortcuts. But emphasize the hidden engineering cost: many of them inject huge system prompts and schema payloads behind your back.</li>
+          <li><strong>Show the Math:</strong> Walk through the visual token breakdown: A 25-token question like "Fix line 4" can cost 12,500 tokens because of background meta-prompts and unused tool definitions. Over 20 turns, that burns 250,000 pooled tokens and adds 15 seconds of latency per prompt!</li>
+          <li><strong>The Pruning Rule:</strong> Remind the team to click the Context Ring periodically to audit what's consuming their context, and disable idle MCP servers when not in active use.</li>
         </ul>
       `
     };

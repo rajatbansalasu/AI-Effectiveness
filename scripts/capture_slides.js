@@ -7,7 +7,7 @@ const path = require('path');
 
   const artifactDir = '/Users/rajatbansal/.gemini/antigravity-ide/brain/a30cb014-9945-45af-a498-e773d81aca57';
 
-  for (let slideNum = 1; slideNum <= 17; slideNum++) {
+  for (let slideNum = 1; slideNum <= 18; slideNum++) {
     await page.goto(`http://localhost:3000/#slide=${slideNum}`);
     await page.reload();
     await page.waitForTimeout(400);
@@ -33,5 +33,5 @@ const path = require('path');
   }
 
   await browser.close();
-  console.log('All 17 slides captured successfully in both Dark and Light themes!');
+  console.log('All 18 slides captured successfully in both Dark and Light themes!');
 })();
