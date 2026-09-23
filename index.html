@@ -56,6 +56,10 @@
         <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M6 2L18 2 18 6 6 6z"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
         <span>Handout Cheatsheet</span>
       </a>
+      <a href="https://github.com/rajatbansalasu/AI-Effectiveness" target="_blank" class="nav-btn" title="GitHub Repository & Clone Source">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <span>GitHub</span>
+      </a>
       <button class="nav-btn" id="btn-fullscreen" title="Toggle Fullscreen (F)">
         <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
       </button>
@@ -597,148 +601,139 @@
           <p class="slide-desc">Cursor provides 4 unified AI Chat Modes (cycle via <kbd>Shift + Tab</kbd>) alongside editor surfaces (Tab, <kbd>Cmd+K</kbd>). Picking the wrong mode burns 10x more tokens and causes file churn.</p>
         </div>
 
-        <div class="modality-grid">
-          <div class="modality-card">
-            <div class="modality-header">
-              <div class="modality-icon">🗺️</div>
+        <div class="modality-grid" style="grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin-bottom: 0.6rem;">
+          <div class="modality-card" style="padding: 0.6rem 0.75rem;">
+            <div class="modality-header" style="margin-bottom: 0.35rem;">
+              <div class="modality-icon" style="font-size: 1.2rem;">🗺️</div>
               <div>
-                <h3>Plan Mode</h3>
-                <span class="shortcut">Shift + Tab &bull; The Architect</span>
+                <h3 style="font-size: 0.92rem; margin: 0;">Plan Mode</h3>
+                <span class="shortcut" style="font-size: 0.68rem;">Shift+Tab &bull; The Architect</span>
               </div>
             </div>
-            <div class="modality-body">
-              <div class="badge-row">
-                <span class="mini-badge bg-blue">Plan First</span>
-                <span class="mini-badge bg-green">Zero File Risk</span>
+            <div class="modality-body" style="font-size: 0.76rem; line-height: 1.35;">
+              <div class="badge-row" style="margin-bottom: 0.35rem; gap: 0.3rem;">
+                <span class="mini-badge bg-blue" style="font-size: 0.66rem; padding: 1px 5px;">Plan First</span>
+                <span class="mini-badge bg-green" style="font-size: 0.66rem; padding: 1px 5px;">0 Diff Risk</span>
               </div>
-              <p>Drafts an implementation blueprint &amp; dependency checklist for review <strong>before</strong> modifying code.</p>
-              <div class="when-to-use">
-                <strong>When to use:</strong> Multi-file features, major refactors, complex schema changes, and preventing destructive hallucinated file deletions.
+              <p style="font-size: 0.75rem; margin-bottom: 0.35rem; color: var(--text-secondary);">Drafts implementation blueprint &amp; file checklist <strong>before</strong> touching code.</p>
+              <div class="when-to-use" style="font-size: 0.72rem; padding-top: 0.35rem;">
+                <strong>Best For:</strong> Multi-file features, schema changes &amp; large refactors.
               </div>
             </div>
           </div>
 
-          <div class="modality-card">
-            <div class="modality-header">
-              <div class="modality-icon">💬</div>
+          <div class="modality-card" style="padding: 0.6rem 0.75rem;">
+            <div class="modality-header" style="margin-bottom: 0.35rem;">
+              <div class="modality-icon" style="font-size: 1.2rem;">💬</div>
               <div>
-                <h3>Ask Mode</h3>
-                <span class="shortcut">Cmd + L &bull; The Assistant</span>
+                <h3 style="font-size: 0.92rem; margin: 0;">Ask Mode</h3>
+                <span class="shortcut" style="font-size: 0.68rem;">Cmd+L &bull; The Assistant</span>
               </div>
             </div>
-            <div class="modality-body">
-              <div class="badge-row">
-                <span class="mini-badge bg-green">Read-Only</span>
-                <span class="mini-badge bg-blue">Fast &amp; Cheap</span>
+            <div class="modality-body" style="font-size: 0.76rem; line-height: 1.35;">
+              <div class="badge-row" style="margin-bottom: 0.35rem; gap: 0.3rem;">
+                <span class="mini-badge bg-green" style="font-size: 0.66rem; padding: 1px 5px;">Read-Only</span>
+                <span class="mini-badge bg-blue" style="font-size: 0.66rem; padding: 1px 5px;">Safe &amp; Cheap</span>
               </div>
-              <p>Conversational Q&amp;A, syntax explanations, and codebase navigation with <strong>zero file mutations</strong>.</p>
-              <div class="when-to-use">
-                <strong>When to use:</strong> Exploring unfamiliar legacy files, explaining regex/algorithms, architecture debates, safe production inspection.
+              <p style="font-size: 0.75rem; margin-bottom: 0.35rem; color: var(--text-secondary);">Conversational Q&amp;A and syntax exploration with <strong>zero file mutations</strong>.</p>
+              <div class="when-to-use" style="font-size: 0.72rem; padding-top: 0.35rem;">
+                <strong>Best For:</strong> Legacy codebase onboarding, regex, and architecture Q&amp;A.
               </div>
             </div>
           </div>
 
-          <div class="modality-card">
-            <div class="modality-header">
-              <div class="modality-icon">🚀</div>
+          <div class="modality-card" style="padding: 0.6rem 0.75rem;">
+            <div class="modality-header" style="margin-bottom: 0.35rem;">
+              <div class="modality-icon" style="font-size: 1.2rem;">🚀</div>
               <div>
-                <h3>Agent Mode</h3>
-                <span class="shortcut">Cmd + I &bull; The Builder</span>
+                <h3 style="font-size: 0.92rem; margin: 0;">Agent Mode</h3>
+                <span class="shortcut" style="font-size: 0.68rem;">Cmd+I &bull; The Builder</span>
               </div>
             </div>
-            <div class="modality-body">
-              <div class="badge-row">
-                <span class="mini-badge bg-red">Autonomous</span>
-                <span class="mini-badge bg-blue">Multi-File Edits</span>
+            <div class="modality-body" style="font-size: 0.76rem; line-height: 1.35;">
+              <div class="badge-row" style="margin-bottom: 0.35rem; gap: 0.3rem;">
+                <span class="mini-badge bg-red" style="font-size: 0.66rem; padding: 1px 5px;">Autonomous</span>
+                <span class="mini-badge bg-blue" style="font-size: 0.66rem; padding: 1px 5px;">Tool Loops</span>
               </div>
-              <p>Autonomous multi-file editor that creates files, runs terminal tests/lints, and self-heals syntax errors.</p>
-              <div class="when-to-use">
-                <strong>When to use:</strong> Executing an approved Plan, scaffolding fullstack features, cross-layer API contract sync, test verification.
+              <p style="font-size: 0.75rem; margin-bottom: 0.35rem; color: var(--text-secondary);">Autonomous multi-file editor: creates files, runs tests, and self-heals errors.</p>
+              <div class="when-to-use" style="font-size: 0.72rem; padding-top: 0.35rem;">
+                <strong>Best For:</strong> Executing approved plans, scaffolding &amp; test suites.
               </div>
             </div>
           </div>
 
-          <div class="modality-card">
-            <div class="modality-header">
-              <div class="modality-icon">🔬</div>
+          <div class="modality-card" style="padding: 0.6rem 0.75rem;">
+            <div class="modality-header" style="margin-bottom: 0.35rem;">
+              <div class="modality-icon" style="font-size: 1.2rem;">🔬</div>
               <div>
-                <h3>Debug Mode</h3>
-                <span class="shortcut">Shift + Tab &bull; Investigator</span>
+                <h3 style="font-size: 0.92rem; margin: 0;">Debug Mode</h3>
+                <span class="shortcut" style="font-size: 0.68rem;">Shift+Tab &bull; Investigator</span>
               </div>
             </div>
-            <div class="modality-body">
-              <div class="badge-row">
-                <span class="mini-badge bg-yellow">Evidence-Based</span>
-                <span class="mini-badge bg-blue">Log Inspector</span>
+            <div class="modality-body" style="font-size: 0.76rem; line-height: 1.35;">
+              <div class="badge-row" style="margin-bottom: 0.35rem; gap: 0.3rem;">
+                <span class="mini-badge bg-yellow" style="font-size: 0.66rem; padding: 1px 5px;">Evidence-Based</span>
+                <span class="mini-badge bg-blue" style="font-size: 0.66rem; padding: 1px 5px;">Log Inspector</span>
               </div>
-              <p>Root-cause investigator that interrogates test failures, runtime errors, and logs without blind guessing.</p>
-              <div class="when-to-use">
-                <strong>When to use:</strong> Diagnosing flaky integration tests, race conditions, connection timeouts, and cryptic stack traces.
+              <p style="font-size: 0.75rem; margin-bottom: 0.35rem; color: var(--text-secondary);">Root-cause investigator that interrogates test failures without blind guessing.</p>
+              <div class="when-to-use" style="font-size: 0.72rem; padding-top: 0.35rem;">
+                <strong>Best For:</strong> Flaky tests, runtime race conditions &amp; stack traces.
               </div>
             </div>
           </div>
         </div>
 
-        <div class="comparison-table-wrap">
-          <table class="simple-table">
+        <!-- Matrix Table -->
+        <div class="comparison-table-wrap" style="margin-bottom: 0.6rem;">
+          <table class="simple-table" style="font-size: 0.76rem;">
             <thead>
-              <tr>
-                <th>Engineering Task</th>
-                <th>❌ Inefficient Modality</th>
-                <th>✅ Optimal Modality &amp; Surface</th>
-                <th>Token &amp; Speed Advantage</th>
+              <tr style="background: var(--bg-card);">
+                <th style="padding: 4px 8px;">Engineering Task</th>
+                <th style="padding: 4px 8px;">❌ Inefficient Modality</th>
+                <th style="padding: 4px 8px;">✅ Optimal Modality &amp; Surface</th>
+                <th style="padding: 4px 8px;">Token &amp; Speed Advantage</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Quick 1-line null-check or helper method</td>
-                <td>Open Agent / Composer (reads entire repo)</td>
-                <td>Highlight &rarr; <kbd>Cmd+K</kbd> (Inline Edit) or <kbd>Tab</kbd></td>
-                <td><strong>95% less tokens</strong>, &lt; 1s instant diff</td>
+                <td style="padding: 4px 8px;"><strong>Quick 1-line null check or helper</strong></td>
+                <td style="padding: 4px 8px; color: var(--text-secondary);">Open Agent / Composer (reads repo)</td>
+                <td style="padding: 4px 8px;">Highlight &rarr; <kbd>Cmd+K</kbd> (Inline) or <kbd>Tab</kbd></td>
+                <td style="padding: 4px 8px;"><strong style="color: var(--accent-emerald);">95% less tokens</strong>, &lt; 1s instant diff</td>
               </tr>
               <tr>
-                <td>Understand a 600-line unfamiliar legacy service</td>
-                <td>Paste into Agent mode (risks accidental edits)</td>
-                <td><strong>Ask Mode (<kbd>Cmd+L</kbd>)</strong> with <code>@file</code></td>
-                <td><strong>100% read-only safe</strong>, 80% less tokens</td>
+                <td style="padding: 4px 8px;"><strong>Understand 600-line legacy service</strong></td>
+                <td style="padding: 4px 8px; color: var(--text-secondary);">Paste into Agent (accidental edits)</td>
+                <td style="padding: 4px 8px;"><strong>Ask Mode (<kbd>Cmd+L</kbd>)</strong> with <code>@file</code></td>
+                <td style="padding: 4px 8px;"><strong style="color: var(--accent-cyan);">100% read-only safe</strong>, 80% less tokens</td>
               </tr>
               <tr>
-                <td>Refactor 4 files: Controller, DTO, Entity &amp; API Contract</td>
-                <td>Run Agent mode blind without constraints</td>
-                <td><strong>Plan Mode</strong> first &rarr; approve &rarr; <strong>Agent Mode</strong></td>
-                <td><strong>Eliminates 100k token hallucination loops</strong></td>
+                <td style="padding: 4px 8px;"><strong>Refactor 4 files &amp; API contracts</strong></td>
+                <td style="padding: 4px 8px; color: var(--text-secondary);">Run Agent blind without constraints</td>
+                <td style="padding: 4px 8px;"><strong>Plan Mode</strong> first &rarr; approve &rarr; <strong>Agent</strong></td>
+                <td style="padding: 4px 8px;"><strong style="color: var(--accent-emerald);">Eliminates 100k token hallucination loops</strong></td>
               </tr>
               <tr>
-                <td>Diagnose failing integration test or cryptic runtime error</td>
-                <td>Ask generic chat with zero logs</td>
-                <td><strong>Debug Mode</strong> with <code>@terminal</code> or test output</td>
-                <td><strong>Targeted surgical fix</strong> backed by evidence</td>
+                <td style="padding: 4px 8px;"><strong>Diagnose failing test or runtime error</strong></td>
+                <td style="padding: 4px 8px; color: var(--text-secondary);">Ask generic chat with zero logs</td>
+                <td style="padding: 4px 8px;"><strong>Debug Mode</strong> with <code>@terminal</code> logs</td>
+                <td style="padding: 4px 8px;"><strong style="color: var(--accent-cyan);">Targeted surgical fix</strong> backed by evidence</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="pricing-truth-box" style="margin-top: 0.8rem; background: var(--bg-card); border: 1px solid var(--border-color); border-left: 4px solid #7e22ce; border-radius: 8px; padding: 0.65rem 0.9rem; font-size: 0.82rem;">
-          <div style="font-weight: 700; color: #7e22ce; margin-bottom: 0.3rem; display: flex; align-items: center; justify-content: space-between;">
-            <span>💰 Official Docs: Is there a Pricing Difference Between Chat Modes?</span>
-            <span style="font-family: var(--font-mono); font-size: 0.74rem; background: rgba(126, 34, 206, 0.1); color: #7e22ce; padding: 2px 8px; border-radius: 4px; font-weight: 700;">Identical Token Rate &bull; 10x-50x Token Volume</span>
+        <!-- Combined Footer Bar: Pricing Truth + Keyboard Switcher -->
+        <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 0.6rem; font-size: 0.77rem;">
+          <div class="pricing-truth-box" style="background: var(--bg-card); border: 1px solid var(--border-color); border-left: 3px solid #7e22ce; border-radius: 6px; padding: 0.45rem 0.75rem; line-height: 1.35;">
+            <strong style="color: #7e22ce;">💰 Docs Truth on Mode Pricing:</strong>
+            <span style="color: var(--text-secondary); display: block; margin-top: 1px;">All chat modes have <strong>identical per-token rates ($0 surcharge)</strong>. Agent costs 10x–50x more purely due to multi-turn tool loops (reading files, executing bash, rewriting diffs).</span>
           </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; line-height: 1.4;">
-            <div>
-              <strong>Per-Token Billing Rate: IDENTICAL ($0 Mode Surcharge)</strong><br/>
-              Official Cursor docs confirm: there is no mode-specific surcharge. Plan, Ask, Agent, and Debug bill at the exact same base model token price (e.g., Sonnet 5 @ $2/$10 in/out with $0 platform markup).
-            </div>
-            <div>
-              <strong>Effective Cost: 10x–50x SPREAD (Tool Loop Overhead)</strong><br/>
-              <strong>Ask Mode:</strong> 1 single Q&amp;A turn = ~2k–5k tokens.<br/>
-              <strong>Agent Mode:</strong> Multi-turn tool execution loop (terminal runs, file reads, linter self-heals) = <strong>50k–300k+ tokens</strong> per run!
-            </div>
-          </div>
-        </div>
 
-        <div class="info-banner" style="margin-top: 0.65rem; font-size: 0.83rem; display: flex; align-items: center; justify-content: space-between;">
-          <span>💡 <strong>Workflow Pro-Tip:</strong> Press <kbd>Shift + Tab</kbd> inside the chat prompt to instantly toggle between <strong>Plan &rarr; Agent &rarr; Ask &rarr; Debug</strong>. For non-trivial features, always <em>Plan first</em>, review the file list, then hit <em>Agent</em> to execute!</span>
-          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent-cyan); white-space: nowrap;">Shift + Tab = Quick Switch</span>
+          <div class="info-banner" style="background: var(--bg-card); border: 1px solid var(--border-color); border-left: 3px solid var(--accent-cyan); border-radius: 6px; padding: 0.45rem 0.75rem; line-height: 1.35;">
+            <strong style="color: var(--accent-cyan);">💡 Keyboard Pro-Tip:</strong>
+            <span style="color: var(--text-secondary); display: block; margin-top: 1px;">Press <kbd>Shift + Tab</kbd> inside chat to instantly cycle <strong>Plan &rarr; Agent &rarr; Ask &rarr; Debug</strong>. Always <em>Plan first</em>, then execute with <em>Agent</em>!</span>
+          </div>
         </div>
       </div>
 
@@ -1438,14 +1433,23 @@ Format findings as a markdown table: `| Severity | Location | Issue | Recommende
             <div class="res-action-btn">View Templates ⚡</div>
           </div>
 
-          <div class="resource-card" style="border-top: 3px solid #10b981;">
+          <a href="https://github.com/rajatbansalasu/AI-Effectiveness" target="_blank" class="resource-card" style="border-top: 3px solid #10b981;">
             <div class="res-card-top">
-              <span class="res-icon">💡</span>
-              <h3 class="res-title">Slack #ai-best-practices</h3>
+              <span class="res-icon">🐙</span>
+              <h3 class="res-title">GitHub Repository</h3>
             </div>
-            <p class="res-desc">Share high-ROI prompt templates, report token traps, and vote on team-wide cursor rules.</p>
-            <div class="res-action-btn">Join Channel →</div>
-          </div>
+            <p class="res-desc">Fork or clone the complete masterclass slide deck, cheatsheet, and speaker console source.</p>
+            <div class="res-action-btn">View on GitHub ↗</div>
+          </a>
+        </div>
+
+        <!-- Copyable Git Clone Bar -->
+        <div style="margin: 0.5rem 0; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 6px; padding: 0.4rem 0.8rem; display: flex; align-items: center; justify-content: space-between; font-size: 0.77rem;">
+          <span style="display: flex; align-items: center; gap: 8px;">
+            <span>📦 <strong>Clone Deck:</strong></span>
+            <code>git clone https://github.com/rajatbansalasu/AI-Effectiveness.git</code>
+          </span>
+          <span style="color: var(--text-secondary); font-size: 0.74rem;">Run: <code>npm install && npm start</code></span>
         </div>
 
         <!-- Interactive Fun: Masterclass Knowledge Challenge & Certificate -->
