@@ -328,13 +328,74 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Fullscreen Toggle
-  btnFullscreen.addEventListener('click', () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch(() => {});
+  // ==========================================
+  // Cross-Browser Fullscreen Controller
+  // ==========================================
+  function isFullscreenActive() {
+    return !!(
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.mozFullScreenElement ||
+      document.msFullscreenElement
+    );
+  }
+
+  function toggleFullscreen() {
+    const docEl = document.documentElement;
+    if (!isFullscreenActive()) {
+      try {
+        if (docEl.requestFullscreen) {
+          docEl.requestFullscreen().catch(() => {});
+        } else if (docEl.webkitRequestFullscreen) {
+          docEl.webkitRequestFullscreen();
+        } else if (docEl.mozRequestFullScreen) {
+          docEl.mozRequestFullScreen();
+        } else if (docEl.msRequestFullscreen) {
+          docEl.msRequestFullscreen();
+        }
+      } catch (err) {
+        console.warn('Fullscreen request failed:', err);
+      }
     } else {
-      document.exitFullscreen().catch(() => {});
+      try {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        }
+      } catch (err) {
+        console.warn('Exit fullscreen failed:', err);
+      }
     }
+  }
+
+  function updateFullscreenButtonState() {
+    if (!btnFullscreen) return;
+    const isFull = isFullscreenActive();
+    if (isFull) {
+      btnFullscreen.title = "Exit Fullscreen (F)";
+      btnFullscreen.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path></svg>`;
+      btnFullscreen.classList.add('active');
+    } else {
+      btnFullscreen.title = "Toggle Fullscreen (F)";
+      btnFullscreen.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>`;
+      btnFullscreen.classList.remove('active');
+    }
+  }
+
+  if (btnFullscreen) {
+    btnFullscreen.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleFullscreen();
+    });
+  }
+
+  ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'].forEach(evt => {
+    document.addEventListener(evt, updateFullscreenButtonState);
   });
 
   // Button Listeners
@@ -372,11 +433,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (e.key === 't' || e.key === 'T') {
       tocModal.classList.toggle('open');
     } else if (e.key === 'f' || e.key === 'F') {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(() => {});
-      } else {
-        document.exitFullscreen().catch(() => {});
-      }
+      e.preventDefault();
+      toggleFullscreen();
     } else if (e.key === 'Home') {
       goToSlide(1);
     } else if (e.key === 'End') {
