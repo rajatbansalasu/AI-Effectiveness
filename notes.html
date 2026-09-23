@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presenter Console | AI Effectiveness & Token Value-Maxing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root, body.theme-light {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --card-elevated: #f1f5f9;
+      --border: #e2e8f0;
+      --border-focus: #0284c7;
+      --text: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --accent: #0284c7;
+      --accent-hover: #0369a1;
+      --accent-light: #e0f2fe;
+      --emerald: #059669;
+      --emerald-light: #d1fae5;
+      --amber: #d97706;
+      --rose: #dc2626;
+      --purple: #7e22ce;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+      --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.05);
+    }
+
+    body.theme-dark {
+      --bg: #090d16;
+      --card-bg: #0f172a;
+      --card-elevated: #1e293b;
+      --border: #334155;
+      --border-focus: #38bdf8;
+      --text: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --accent-light: rgba(56, 189, 248, 0.15);
+      --emerald: #34d399;
+      --emerald-light: rgba(52, 211, 153, 0.15);
+      --amber: #fbbf24;
+      --rose: #f87171;
+      --purple: #a855f7;
+      --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    /* Top Presenter Bar */
+    .presenter-bar {
+      height: 64px;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-shrink: 0;
+      box-shadow: var(--shadow-sm);
+      z-index: 10;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--emerald-light);
+      color: var(--emerald);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .status-badge.disconnected {
+      background: #fee2e2;
+      color: var(--rose);
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--card-elevated);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn:hover:not(:disabled) {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
+    .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .slide-select {
+      background: var(--card-elevated);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+      max-width: 260px;
+    }
+
+    .slide-select:focus {
+      border-color: var(--accent);
+    }
+
+    .timer-section {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--card-elevated);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .timer-display {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--emerald);
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      cursor: pointer;
+      padding: 3px 6px;
+      border-radius: 4px;
+      transition: all 0.15s;
+    }
+
+    .icon-btn:hover {
+      background: var(--border);
+      color: var(--text);
+    }
+
+    .font-controls {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      background: var(--card-elevated);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2px;
+    }
+
+    .font-btn {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      padding: 4px 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .font-btn:hover {
+      background: var(--card-bg);
+      color: var(--text);
+    }
+
+    /* Main Console Workspace */
+    .console-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      overflow: hidden;
+    }
+
+    /* Left: Primary Active Slide Notes */
+    .primary-notes-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      overflow-y: auto;
+    }
+
+    .slide-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .slide-category-badge {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .timing-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .active-slide-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .notes-content-area {
+      flex: 1;
+      font-size: 1.15rem; /* Dynamic font scale */
+      line-height: 1.65;
+      color: var(--text);
+    }
+
+    .notes-content-area h4 {
+      font-size: 1.2em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .notes-content-area ul, .notes-content-area ol {
+      padding-left: 1.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .notes-content-area li {
+      margin-bottom: 0.85rem;
+    }
+
+    .notes-content-area strong {
+      color: var(--text);
+      background: var(--accent-light);
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    .notes-content-area em {
+      font-style: italic;
+      color: var(--text-secondary);
+    }
+
+    .notes-content-area kbd, .notes-content-area code {
+      font-family: 'Fira Code', monospace;
+      background: var(--card-elevated);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.9em;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    body.theme-light .notes-content-area code {
+      color: #0369a1;
+    }
+
+    /* Right Sidebar: Upcoming & Deck Map */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      overflow: hidden;
+    }
+
+    /* Next Slide Card */
+    .next-slide-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.2rem;
+      box-shadow: var(--shadow-sm);
+      flex-shrink: 0;
+    }
+
+    .sidebar-card-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .next-slide-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+
+    .next-slide-preview-text {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Agenda Checklist */
+    .agenda-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.2rem;
+      box-shadow: var(--shadow-sm);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .agenda-list {
+      flex: 1;
+      overflow-y: auto;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 0.5rem;
+      padding-right: 4px;
+    }
+
+    .agenda-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      border: 1px solid transparent;
+      color: var(--text-secondary);
+    }
+
+    .agenda-item:hover {
+      background: var(--card-elevated);
+      color: var(--text);
+    }
+
+    .agenda-item.active {
+      background: var(--accent-light);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .agenda-item.completed {
+      opacity: 0.6;
+    }
+
+    .agenda-num {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      min-width: 22px;
+    }
+
+    .agenda-name {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1;
+    }
+
+    /* Bottom Quick Shortcuts */
+    .presenter-footer {
+      height: 38px;
+      background: var(--card-bg);
+      border-top: 1px solid var(--border);
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .shortcut-tag {
+      font-family: 'Fira Code', monospace;
+      background: var(--card-elevated);
+      border: 1px solid var(--border);
+      padding: 1px 5px;
+      border-radius: 4px;
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body class="theme-light">
+
+  <!-- Top Bar -->
+  <header class="presenter-bar">
+    <div class="brand-section">
+      <div class="status-badge" id="conn-status">
+        <span class="status-dot"></span>
+        <span id="conn-text">Connected to Deck</span>
+      </div>
+    </div>
+
+    <!-- Navigation & Slide Selector -->
+    <div class="nav-controls">
+      <button class="btn" id="btn-prev" title="Previous Slide (← / PageUp)">◀ Prev</button>
+      <select class="slide-select" id="slide-select" title="Jump to Slide">
+        <!-- Generated by JS -->
+      </select>
+      <button class="btn" id="btn-next" title="Next Slide (→ / Space / PageDown)">Next ▶</button>
+    </div>
+
+    <!-- Timer & Display Options -->
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <div class="timer-section" title="Master Session Timer">
+        <span class="timer-display" id="timer-display">60:00</span>
+        <button class="icon-btn" id="timer-toggle-btn" title="Start/Pause Timer (P)">▶</button>
+        <button class="icon-btn" id="timer-reset-btn" title="Reset Timer">↺</button>
+      </div>
+
+      <div class="font-controls" title="Adjust Talking Points Font Size">
+        <button class="font-btn" id="btn-font-dec">A-</button>
+        <button class="font-btn" id="btn-font-inc">A+</button>
+      </div>
+
+      <button class="btn" id="btn-theme" title="Toggle Theme" style="padding: 6px 10px;">
+        <span id="theme-icon">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Workspace Body -->
+  <main class="console-body">
+    <!-- Active Slide Notes Panel -->
+    <section class="primary-notes-card">
+      <div class="slide-meta-row">
+        <span class="slide-category-badge" id="slide-category">Introduction & Hook</span>
+        <span class="timing-badge" id="slide-target-time">⏱ Target: 3-4 mins</span>
+      </div>
+      <h1 class="active-slide-title" id="slide-title">Slide 1: Title & Masterclass Overview</h1>
+      <div class="notes-content-area" id="notes-content">
+        <!-- Talking points populated dynamically -->
+      </div>
+    </section>
+
+    <!-- Right Column: Next Slide & Full Agenda -->
+    <aside class="sidebar">
+      <!-- Next Slide Card -->
+      <div class="next-slide-card">
+        <div class="sidebar-card-title">
+          <span>Up Next</span>
+          <span id="next-slide-num">Slide 2</span>
+        </div>
+        <div class="next-slide-name" id="next-slide-name">The 2M Token Trap (Anti-Pattern)</div>
+        <div class="next-slide-preview-text" id="next-slide-preview">
+          Coming up: How engineers burn millions of tokens in single bloated chats and why fresh chats restore accuracy.
+        </div>
+      </div>
+
+      <!-- Agenda Map -->
+      <div class="agenda-card">
+        <div class="sidebar-card-title">
+          <span>Presentation Deck Map</span>
+          <span id="deck-progress">1 / 14</span>
+        </div>
+        <ul class="agenda-list" id="agenda-list">
+          <!-- Populated by JS -->
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Footer Hints -->
+  <footer class="presenter-footer">
+    <div>
+      <span>Teams Presenter Mode: <strong>Keep this window private</strong> on your screen while sharing only the deck in Teams.</span>
+    </div>
+    <div style="display: flex; gap: 1rem;">
+      <span><span class="shortcut-tag">Space</span> / <span class="shortcut-tag">→</span> Next</span>
+      <span><span class="shortcut-tag">←</span> Prev</span>
+      <span><span class="shortcut-tag">P</span> Timer</span>
+    </div>
+  </footer>
+
+  <script>
+    // Slide Metadata Directory
+    const slideTitles = [
+      "Title & Masterclass Overview",
+      "The 2M Token Trap (Anti-Pattern)",
+      "Cursor Pricing & Model Economics",
+      "Interactive Token & Cost Calculator",
+      "Taming MCP & Agentic Tool Loops",
+      "The Cursor Modality Playbook",
+      "Precision Context Referencing (@ Mastery)",
+      "Automate Standards with .cursorrules",
+      "Domain Example 1: Java & Spring Boot",
+      "Domain Example 2: Full-Stack React & TS",
+      "Domain Example 3: Data Engineering & SQL",
+      "CCAO Framework & Reusable Templates",
+      "The 5 Golden Rules for Monday Morning",
+      "Open Q&A & Resource Toolkit"
+    ];
+
+    const slideCategories = [
+      "Introduction & Hook",
+      "The Problem",
+      "Model Economics",
+      "Interactive Simulation",
+      "Agentic Reliability",
+      "Cursor Modality Playbook",
+      "Context Curation",
+      "Automation & Rules",
+      "Domain Architecture",
+      "Domain Architecture",
+      "Domain Architecture",
+      "Prompt Framework",
+      "Executive Takeaways",
+      "Q&A & Resources"
+    ];
+
+    let currentSlide = 1;
+    const totalSlides = slideTitles.length;
+    let fontSize = 1.15; // rem
+    let isConnected = false;
+
+    // Elements
+    const connStatus = document.getElementById('conn-status');
+    const connText = document.getElementById('conn-text');
+    const slideSelect = document.getElementById('slide-select');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const timerDisplay = document.getElementById('timer-display');
+    const timerToggleBtn = document.getElementById('timer-toggle-btn');
+    const timerResetBtn = document.getElementById('timer-reset-btn');
+    const btnFontInc = document.getElementById('btn-font-inc');
+    const btnFontDec = document.getElementById('btn-font-dec');
+    const btnTheme = document.getElementById('btn-theme');
+    const themeIcon = document.getElementById('theme-icon');
+
+    const slideCategory = document.getElementById('slide-category');
+    const slideTargetTime = document.getElementById('slide-target-time');
+    const slideTitle = document.getElementById('slide-title');
+    const notesContent = document.getElementById('notes-content');
+
+    const nextSlideNum = document.getElementById('next-slide-num');
+    const nextSlideName = document.getElementById('next-slide-name');
+    const nextSlidePreview = document.getElementById('next-slide-preview');
+    const deckProgress = document.getElementById('deck-progress');
+    const agendaList = document.getElementById('agenda-list');
+
+    // BroadcastChannel for cross-window communication
+    let channel;
+    try {
+      channel = new BroadcastChannel('speaker_notes_channel');
+      channel.onmessage = handleChannelMessage;
+    } catch (e) {
+      console.warn('BroadcastChannel not available:', e);
+    }
+
+    // Populate Slide Selector and Agenda Map
+    function initUI() {
+      slideSelect.innerHTML = '';
+      agendaList.innerHTML = '';
+
+      slideTitles.forEach((title, idx) => {
+        const slideNum = idx + 1;
+        // Option for select dropdown
+        const opt = document.createElement('option');
+        opt.value = slideNum;
+        opt.textContent = `Slide ${slideNum}: ${title}`;
+        slideSelect.appendChild(opt);
+
+        // Item for Agenda list
+        const li = document.createElement('li');
+        li.className = 'agenda-item';
+        li.dataset.slide = slideNum;
+        li.innerHTML = `
+          <span class="agenda-num">${String(slideNum).padStart(2, '0')}</span>
+          <span class="agenda-name">${title}</span>
+        `;
+        li.addEventListener('click', () => {
+          sendToDeck({ type: 'NAV_GOTO', slideNum });
+          updateSlideView(slideNum);
+        });
+        agendaList.appendChild(li);
+      });
+    }
+
+    // Update the console display for a given slide number
+    function updateSlideView(n, customNotesHtml, customTiming) {
+      if (n < 1) n = 1;
+      if (n > totalSlides) n = totalSlides;
+      currentSlide = n;
+
+      // Update dropdown & progress
+      slideSelect.value = currentSlide;
+      deckProgress.textContent = `${currentSlide} / ${totalSlides}`;
+
+      // Update Prev/Next buttons
+      btnPrev.disabled = currentSlide === 1;
+      btnNext.disabled = currentSlide === totalSlides;
+
+      // Update Category & Title
+      slideCategory.textContent = slideCategories[currentSlide - 1] || 'Presentation';
+      slideTitle.textContent = `Slide ${currentSlide}: ${slideTitles[currentSlide - 1]}`;
+
+      // Update Agenda active states
+      const items = agendaList.querySelectorAll('.agenda-item');
+      items.forEach((item, idx) => {
+        const itemNum = idx + 1;
+        item.classList.toggle('active', itemNum === currentSlide);
+        item.classList.toggle('completed', itemNum < currentSlide);
+      });
+
+      // Update Next Slide Preview
+      if (currentSlide < totalSlides) {
+        nextSlideNum.textContent = `Slide ${currentSlide + 1}`;
+        nextSlideName.textContent = slideTitles[currentSlide];
+        nextSlidePreview.textContent = `Coming up: ${slideCategories[currentSlide]} - ${slideTitles[currentSlide]}`;
+      } else {
+        nextSlideNum.textContent = 'End of Deck';
+        nextSlideName.textContent = 'Q&A / Wrap-Up';
+        nextSlidePreview.textContent = 'You have reached the final slide. Open floor to team questions.';
+      }
+
+      // If custom notes HTML was passed from deck, render it
+      if (customNotesHtml) {
+        notesContent.innerHTML = customNotesHtml;
+      } else {
+        // Fallback: extract from opener if available, or show placeholder
+        extractNotesFromOpener(n);
+      }
+
+      // Extract timing estimate from notes header if available
+      const timingMatch = notesContent.innerHTML.match(/\((\d+[\-\d]*\s*mins?[^)]*)\)/i);
+      if (timingMatch) {
+        slideTargetTime.textContent = `⏱ Target: ${timingMatch[1]}`;
+      } else if (customTiming) {
+        slideTargetTime.textContent = customTiming;
+      } else {
+        slideTargetTime.textContent = '⏱ Target: 4 mins';
+      }
+    }
+
+    // Extract notes directly from opener DOM if same-origin
+    function extractNotesFromOpener(slideNum) {
+      try {
+        if (window.opener && !window.opener.closed && window.opener.document) {
+          const slideElem = window.opener.document.querySelector(`.slide[data-slide="${slideNum}"]`);
+          if (slideElem) {
+            const notesEl = slideElem.querySelector('.speaker-notes');
+            if (notesEl) {
+              notesContent.innerHTML = notesEl.innerHTML;
+              setConnected(true);
+              return;
+            }
+          }
+        }
+      } catch (err) {
+        // Cross-origin or restricted
+      }
+
+      if (!notesContent.innerHTML || notesContent.innerHTML.trim() === '') {
+        notesContent.innerHTML = `
+          <h4>🎙️ Speaker Talking Points</h4>
+          <p>Deliver the core takeaway for <em>${slideTitles[slideNum - 1]}</em> clearly and concisely.</p>
+        `;
+      }
+    }
+
+    // Send command to Presentation Deck
+    function sendToDeck(msg) {
+      if (channel) {
+        channel.postMessage(msg);
+      }
+      try {
+        if (window.opener && !window.opener.closed) {
+          window.opener.postMessage(msg, '*');
+        }
+      } catch (e) {}
+    }
+
+    // Handle messages received from Presentation Deck
+    function handleChannelMessage(e) {
+      const data = e.data;
+      if (!data) return;
+
+      setConnected(true);
+
+      switch (data.type) {
+        case 'DECK_STATE':
+        case 'SLIDE_CHANGE':
+          updateSlideView(data.currentSlide, data.notesHtml, data.timing);
+          if (data.timerRemaining !== undefined) {
+            updateTimerDisplay(data.timerRemaining, data.isTimerRunning);
+          }
+          if (data.theme) {
+            applyTheme(data.theme);
+          }
+          break;
+
+        case 'TIMER_TICK':
+        case 'TIMER_SYNC':
+          updateTimerDisplay(data.timerRemaining, data.isTimerRunning);
+          break;
+
+        case 'THEME_SYNC':
+          applyTheme(data.theme);
+          break;
+      }
+    }
+
+    function setConnected(status) {
+      isConnected = status;
+      if (status) {
+        connStatus.classList.remove('disconnected');
+        connText.textContent = 'Connected to Deck';
+      } else {
+        connStatus.classList.add('disconnected');
+        connText.textContent = 'Searching for Deck...';
+      }
+    }
+
+    function updateTimerDisplay(remaining, isRunning) {
+      const mins = Math.floor(remaining / 60);
+      const secs = remaining % 60;
+      timerDisplay.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      timerToggleBtn.textContent = isRunning ? '⏸' : '▶';
+
+      if (remaining <= 300 && remaining > 0) {
+        timerDisplay.style.color = 'var(--amber)';
+      } else if (remaining <= 0) {
+        timerDisplay.style.color = 'var(--rose)';
+      } else {
+        timerDisplay.style.color = 'var(--emerald)';
+      }
+    }
+
+    // Theme Management
+    function applyTheme(theme) {
+      document.body.classList.remove('theme-light', 'theme-dark');
+      document.body.classList.add(theme);
+      themeIcon.textContent = theme === 'theme-light' ? '🌙' : '☀️';
+      localStorage.setItem('deck_theme', theme);
+    }
+
+    function toggleTheme() {
+      const current = document.body.classList.contains('theme-dark') ? 'theme-dark' : 'theme-light';
+      const next = current === 'theme-light' ? 'theme-dark' : 'theme-light';
+      applyTheme(next);
+      sendToDeck({ type: 'THEME_CHANGE', theme: next });
+    }
+
+    // Event Listeners
+    btnPrev.addEventListener('click', () => {
+      sendToDeck({ type: 'NAV_PREV' });
+      if (currentSlide > 1) updateSlideView(currentSlide - 1);
+    });
+
+    btnNext.addEventListener('click', () => {
+      sendToDeck({ type: 'NAV_NEXT' });
+      if (currentSlide < totalSlides) updateSlideView(currentSlide + 1);
+    });
+
+    slideSelect.addEventListener('change', (e) => {
+      const num = parseInt(e.target.value, 10);
+      sendToDeck({ type: 'NAV_GOTO', slideNum: num });
+      updateSlideView(num);
+    });
+
+    timerToggleBtn.addEventListener('click', () => {
+      sendToDeck({ type: 'TIMER_TOGGLE' });
+    });
+
+    timerResetBtn.addEventListener('click', () => {
+      sendToDeck({ type: 'TIMER_RESET' });
+    });
+
+    btnFontInc.addEventListener('click', () => {
+      if (fontSize < 1.8) {
+        fontSize += 0.1;
+        notesContent.style.fontSize = `${fontSize}rem`;
+      }
+    });
+
+    btnFontDec.addEventListener('click', () => {
+      if (fontSize > 0.9) {
+        fontSize -= 0.1;
+        notesContent.style.fontSize = `${fontSize}rem`;
+      }
+    });
+
+    btnTheme.addEventListener('click', toggleTheme);
+
+    // Keyboard Navigation inside Notes window
+    window.addEventListener('keydown', (e) => {
+      if (['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        btnNext.click();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        btnPrev.click();
+      } else if (e.key === 'p' || e.key === 'P') {
+        timerToggleBtn.click();
+      }
+    });
+
+    // Window message listener (for direct postMessage from opener)
+    window.addEventListener('message', handleChannelMessage);
+
+    // Initialize
+    initUI();
+    const savedTheme = localStorage.getItem('deck_theme') || 'theme-light';
+    applyTheme(savedTheme);
+
+    // Request initial state from Deck
+    sendToDeck({ type: 'REQUEST_SYNC' });
+
+    // Initial check from URL hash or opener
+    const hash = window.location.hash;
+    if (hash.startsWith('#slide=')) {
+      const num = parseInt(hash.replace('#slide=', ''), 10);
+      if (!isNaN(num)) updateSlideView(num);
+    } else {
+      updateSlideView(1);
+    }
+
+    // Ping check for opener connection
+    setTimeout(() => {
+      if (!isConnected) {
+        extractNotesFromOpener(currentSlide);
+      }
+    }, 400);
+  </script>
+</body>
+</html>

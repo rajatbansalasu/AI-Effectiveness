@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Effectiveness & Token Value-Maxing | Engineering Masterclass</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Prism.js for syntax highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" id="prism-theme" rel="stylesheet" />
+  <!-- Google Fonts: JetBrains Mono & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body class="theme-light">
+
+  <!-- Header / Navigation Bar -->
+  <header class="top-nav">
+    <div class="nav-left">
+      <div class="brand-badge">
+        <span class="pulse-dot"></span>
+        <span class="brand-title">AI Effectiveness & Token Value-Maxing</span>
+      </div>
+      <span class="slide-indicator" id="slide-indicator">Slide 1 / 14</span>
+    </div>
+    
+    <div class="nav-center">
+      <div class="session-timer" id="session-timer" title="1-Hour Talk Timer">
+        <svg class="timer-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        <span id="timer-display">60:00</span>
+        <button id="timer-toggle-btn" class="icon-btn" title="Start/Pause Timer">▶</button>
+        <button id="timer-reset-btn" class="icon-btn" title="Reset Timer">↺</button>
+      </div>
+    </div>
+
+    <div class="nav-right">
+      <button class="nav-btn" id="btn-theme" title="Toggle Light / Dark Theme">
+        <span id="theme-icon">🌙</span>
+        <span id="theme-label">Dark</span>
+      </button>
+      <button class="nav-btn" id="btn-sound" title="Toggle Sound Effects (Web Audio)">
+        <span id="sound-icon">🔊</span>
+      </button>
+      <button class="nav-btn" id="btn-toc" title="Table of Contents (T)">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        <span>Overview</span>
+      </button>
+      <button class="nav-btn" id="btn-notes" title="Open Speaker Notes in Separate Window (N)">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        <span>Speaker Notes ↗</span>
+      </button>
+      <a href="cheatsheet.html" target="_blank" class="nav-btn highlight" title="Open Printable Handout Cheatsheet">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M6 2L18 2 18 6 6 6z"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        <span>Handout Cheatsheet</span>
+      </a>
+      <button class="nav-btn" id="btn-fullscreen" title="Toggle Fullscreen (F)">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar-container">
+    <div class="progress-bar" id="progress-bar"></div>
+  </div>
+
+  <!-- Main Presentation Deck Container -->
+  <main class="deck-container" id="deck-container">
+
+    <!-- Slide 1: 01-title.html -->
+    <section class="slide active" data-slide="1">
+      <div class="slide-content title-slide">
+        <div class="badge-pill">1-Hour Engineering Masterclass</div>
+        <h1 class="hero-title">
+          AI Effectiveness & <br>
+          <span class="gradient-text">Token Value-Maxing</span>
+        </h1>
+        <p class="hero-subtitle">
+          Stop burning 2,000,000 tokens on typo fixes — A pragmatic guide to mastering Cursor, Model Economics, and High-Leverage Agentic Workflows.
+        </p>
+
+        <div class="hero-stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">1-2M</div>
+            <div class="stat-label">Tokens wasted per single bloated chat</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">40%</div>
+            <div class="stat-label">Code completed via Tab &amp; Inline Edits</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">10x</div>
+            <div class="stat-label">Output velocity when context is curated</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">30s → 1.5s</div>
+            <div class="stat-label">Latency reduction via precision context</div>
+          </div>
+        </div>
+
+        <div class="keyboard-hints">
+          <span>Press <kbd>→</kbd> or <kbd>Space</kbd> to advance</span>
+          <span>Press <kbd>N</kbd> for Speaker Notes</span>
+          <span>Press <kbd>T</kbd> for Slide Grid</span>
+          <span>Press <kbd>F</kbd> for Fullscreen</span>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (3-4 mins):</h4>
+        <ul>
+          <li><strong>Hook:</strong> Welcome everyone. Over the last few months, every engineer here got access to frontier AI in Cursor. But look at our metrics: we are burning millions of tokens per developer, yet half our team is stuck fighting hallucinations, spinning tool loops, and hitting slow response times.</li>
+          <li><strong>The Goal of this 1 Hour:</strong> Shift from <em>"brute-force AI prompting"</em> to <em>"engineering-grade precision AI"</em>. We will cover model economics, context window physics, taming MCP agents, and battle-tested prompt templates across Java, React, and Data pipelines.</li>
+          <li><strong>Takeaway Promise:</strong> You will write better code, finish PRs 3x faster, and stop waiting 45 seconds for a model to respond.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Slide 2: 02-token-trap.html -->
+    <section class="slide" data-slide="2">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">The Problem</span>
+          <h2>The Silent Productivity Killer: <span class="text-danger">The 2M Token Trap</span></h2>
+          <p class="slide-desc">Why running an "infinite chat thread" is killing your code quality and multiplying latency.</p>
+        </div>
+
+        <div class="grid-2col">
+          <div class="card danger-card">
+            <div class="card-header">
+              <span class="card-tag tag-danger">❌ The Anti-Pattern: "Infinite Chat Syndrome"</span>
+            </div>
+            <ul class="bullet-list">
+              <li><strong>Day-Long Chat Threads:</strong> Asking 20 unrelated questions in one Composer / Chat session without resetting.</li>
+              <li><strong>Attention Dilution ("Lost in the Middle"):</strong> As context reaches 500k–2M tokens, the LLM's attention weights smear. Critical constraints are silently ignored.</li>
+              <li><strong>Compounding Hallucinations:</strong> Bad code or temporary bugs produced at step 3 become "ground truth" context for step 15.</li>
+              <li><strong>Latency Explosion:</strong> Model has to ingest 1.5M input tokens before generating 5 lines of code → 25s–40s delay per keystroke.</li>
+            </ul>
+          </div>
+
+          <div class="card success-card">
+            <div class="card-header">
+              <span class="card-tag tag-success">✅ The Fix: High-Velocity Ephemeral Context</span>
+            </div>
+            <ul class="bullet-list">
+              <li><strong>The 3-Turn Rule:</strong> If the AI doesn't solve your bug or generate the correct code in <strong>3 turns</strong>, do NOT argue with it. Hit <kbd>Cmd+L</kbd> / <kbd>Cmd+N</kbd>, prune your prompt, and start fresh.</li>
+              <li><strong>Surgical Context Injection:</strong> Reference <em>only</em> the 2-3 files relevant to the current task using precise <code>@file</code> symbols.</li>
+              <li><strong>Ephemeral Sessions:</strong> Treat chat threads like scratch buffers — disposable, single-purpose, and laser-focused.</li>
+              <li><strong>Sub-2-Second Responses:</strong> Keeping context under 20k tokens yields instantaneous, razor-sharp generations.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Interactive Fun: Context Decay Live Simulator -->
+        <div class="decay-sim-card">
+          <div class="sim-header">
+            <div class="sim-title">
+              <span>🔬 Interactive Lab: Watch an LLM Brain Degrade in Real-Time</span>
+            </div>
+            <button class="btn-reset-chat" id="btn-decay-reset" title="Wipe Session with Cmd+L">
+              <span>⚡ Reset Session (Cmd+L)</span>
+            </button>
+          </div>
+
+          <div class="sim-controls-row">
+            <div class="sim-slider-wrap">
+              <div class="sim-slider-label">
+                <span>Chat Thread Length: <strong id="decay-turns-val" style="color:var(--accent-cyan)">Turn 1 (Fresh Session)</strong></span>
+                <span id="decay-health-pill" style="color:var(--success-color); font-weight:700">100% Attention Precision</span>
+              </div>
+              <input type="range" id="decay-slider" min="1" max="18" value="1" class="calc-slider">
+            </div>
+            <div style="font-size:0.75rem; color:var(--text-muted); min-width: 140px; text-align:right;">
+              <span id="decay-tokens-val">Tokens: ~4,200</span><br>
+              <span id="decay-latency-val">Latency: 1.2s</span>
+            </div>
+          </div>
+
+          <div class="sim-output-box pristine" id="decay-output-box">
+            <code>// Turn 1 Output: return users.filter(u => u.isActive && u.roles.includes('ADMIN')); // 🎯 Surgical, 100% accurate</code>
+          </div>
+        </div>
+
+        <div class="banner info-banner" style="margin-top:0.8rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.83rem;">
+          <div>
+            <strong>🔍 Cursor Official Feature: The Context Ring &amp; Breakdown Tray:</strong>
+            <span style="display:block; margin-top: 0.2rem; font-size: 0.78rem; color: var(--text-secondary);">Click the context ring next to your prompt to inspect the breakdown tray: <code>System prompt</code>, <code>Tools</code>, <code>Rules</code>, <code>Skills</code>, <code>MCP</code>, <code>Subagents</code>, <code>Summarized conversation</code>, and <code>Conversation</code>. When full, Cursor silently compresses earlier turns, losing your original constraints!</span>
+          </div>
+          <span style="font-family: var(--font-mono); font-size: 0.74rem; background: var(--bg-card); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border-color); white-space: nowrap; font-weight: 700;">Click Ring &rarr; Tray</span>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (4 mins):</h4>
+        <ul>
+          <li><strong>Interactive Demo:</strong> Drag the slider from Turn 1 to Turn 18. Watch the output code morph from clean TypeScript into a hallucinated mess of non-existent imports and broken syntax!</li>
+          <li>Click the <strong>"Reset Session (Cmd+L)"</strong> button to demonstrate how hitting reset restores instant 1.2s speed and pristine accuracy.</li>
+          <li><strong>Cursor Official Feature: The Context Ring:</strong> Show attendees the small circle icon next to the chat prompt in Cursor. Clicking it opens the <em>Breakdown Tray</em> showing how tokens are allocated across System, Rules, Skills, MCP tools, and Conversation history. Explain that once this ring fills up, Cursor automatically starts compressing previous turns into lossy summaries, causing instructions to degrade.</li>
+          <li>Introduce the team mantra: <strong>"Reset ruthlessly. Never argue past 3 turns."</strong></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Slide 3: 03-pricing-economics.html -->
+    <section class="slide" data-slide="3">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">Economics &amp; Routing</span>
+          <h2>Cursor Pricing &amp; Model Economics: <span class="gradient-text">Spend Smart</span></h2>
+          <p class="slide-desc">In our Enterprise setup, all usage draws from a <strong>Central Pooled Balance</strong>. Separate inline typing from promptable LLM tiers to protect our team's credit pool.</p>
+        </div>
+
+        <!-- In-Editor Foundation Surface -->
+        <div class="editor-surface-banner">
+          <div class="esb-icon">⌨️</div>
+          <div class="esb-body">
+            <div class="esb-title">
+              <strong>In-Editor Surface: Cursor Tab (<kbd>Tab</kbd>) &amp; Inline Edit (<kbd>Cmd+K</kbd>)</strong>
+              <span class="esb-badge">Ultra-Fast Speculative Engine (&lt;100ms)</span>
+            </div>
+            <p>Speculative autocomplete directly in editor. Handles ~40% of routine boilerplate, imports, method signatures, and 1-line edits with minimal token overhead, with the remaining ~60% flowing to Cursor Composer, Auto routing, and Frontier models.</p>
+          </div>
+        </div>
+
+        <!-- 3 Promptable Model Tiers -->
+        <div class="pricing-matrix" style="grid-template-columns: repeat(3, 1fr);">
+          <div class="tier-card tier-fast">
+            <div class="tier-badge">Tier 1: High-Speed Utility</div>
+            <h3>Composer 2.5 / Haiku 4.5</h3>
+            <div class="tier-cost">Ultra-Low Cost ($0.50 - $1.00 / M in)</div>
+            <div class="tier-latency">~600ms - 1.2s &bull; Auto / Gemini Flash</div>
+            <p class="tier-desc">Composer 2.5 ($0.50 in / $2.50 out) &amp; Claude 4.5 Haiku ($1.00 in / $5.00 out) for rapid-fire utility.</p>
+            <div class="tier-usecase">
+              <strong>Best For:</strong>
+              <ul>
+                <li>Regex generation &amp; data parsing</li>
+                <li>SQL queries &amp; schema transforms</li>
+                <li>Standard unit test scaffolding</li>
+                <li>Docstrings, comments &amp; type hints</li>
+              </ul>
+            </div>
+            <div class="tier-target">Target Share: <strong>35-40%</strong> of prompts</div>
+          </div>
+
+          <div class="tier-card tier-premium">
+            <div class="tier-badge">Tier 2: Frontier Coding (Standard)</div>
+            <h3>Claude Sonnet 5 / Grok 4.7</h3>
+            <div class="tier-cost">Frontier Value ($2.00 / M in, $6-$10 / M out)</div>
+            <div class="tier-latency">1.8s - 3.5s &bull; Agent Daily Driver</div>
+            <p class="tier-desc">The modern standard for Agent mode, Composer features, and synchronized multi-file changes.</p>
+            <div class="tier-usecase">
+              <strong>Best For:</strong>
+              <ul>
+                <li>Multi-file refactoring (Composer / Agent)</li>
+                <li>Complex architecture &amp; contract design</li>
+                <li>Full-stack feature generation</li>
+                <li>Non-trivial API integration &amp; debugging</li>
+              </ul>
+            </div>
+            <div class="tier-target">Target Share: <strong>15-20%</strong> of prompts</div>
+          </div>
+
+          <div class="tier-card tier-reasoning">
+            <div class="tier-badge">Tier 3: Pinnacle Reasoning</div>
+            <h3>Claude Opus 5 / Opus 5.5</h3>
+            <div class="tier-cost">Frontier Brain ($5.00 / M in, $25.00 / M out)</div>
+            <div class="tier-latency">4s - 15s (Deep Reasoning)</div>
+            <p class="tier-desc">Massive reasoning capacity for intricate concurrency physics, hard algorithms, and security audits.</p>
+            <div class="tier-usecase">
+              <strong>Best For:</strong>
+              <ul>
+                <li>Distributed race conditions &amp; deadlocks</li>
+                <li>Complex schema &amp; database migrations</li>
+                <li>Security audit &amp; vulnerability analysis</li>
+                <li>Hard algorithmic proofs &amp; optimization</li>
+              </ul>
+            </div>
+            <div class="tier-target">Target Share: <strong>&lt; 5%</strong> of prompts</div>
+          </div>
+        </div>
+
+
+        <!-- The Fast Mode Multiplier & Enterprise Auto Mode Reality -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 0.8rem;">
+          <div class="warning-banner" style="font-size: 0.82rem; border-left: 4px solid var(--accent-amber); padding: 0.6rem 0.8rem;">
+            <strong>🚨 The "Fast Mode" Cost Multiplier Trap:</strong>
+            <div style="margin-top: 0.25rem; font-family: var(--font-mono); font-size: 0.77rem; line-height: 1.4;">
+              <span>• <strong>Composer 2.5:</strong> $0.50 &rarr; <em>Fast is $3.00</em> <span class="text-danger" style="font-weight:700;">(6x cost!)</span></span><br/>
+              <span>• <strong>Grok 4.7:</strong> $2.00 &rarr; <em>Fast is $4.00</em> <span class="text-warning" style="font-weight:700;">(2x cost!)</span></span><br/>
+              <span>• <strong>Claude Opus:</strong> $5.00 &rarr; <em>Fast is $30.00</em> <span class="text-danger" style="font-weight:700;">(6x cost!)</span></span>
+            </div>
+          </div>
+
+          <div class="info-banner" style="font-size: 0.82rem; border-left: 4px solid var(--accent-cyan); padding: 0.6rem 0.8rem; background: rgba(6, 182, 212, 0.08);">
+            <strong>🏢 Enterprise Pooled Usage &amp; Cursor Router (Auto):</strong>
+            <div style="margin-top: 0.25rem; font-size: 0.77rem; line-height: 1.4;">
+              <span>• <strong>100% Pooled Model:</strong> All team usage directly draws from our central enterprise dollar balance.</span><br/>
+              <span>• <strong>Auto Mode ($0 Routing Fee):</strong> Automatically routes to the optimal model based on query complexity.</span><br/>
+              <span>• <strong>Transparent Pass-Through Billing:</strong> Auto bills at the exact base list price of the routed model with <em>no extra router fee or markup</em>.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Fun: Model Router Challenge Mini-Game -->
+        <div class="router-game-box">
+          <div class="game-top-bar">
+            <div style="font-weight:700; font-size:0.95rem; display:flex; align-items:center; gap:8px;">
+              <span>🎮 Interactive Routing Challenge:</span>
+              <span style="color:var(--text-secondary); font-weight:500;" id="game-scenario-step">Scenario 1 of 4</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <div class="game-score-badge" id="game-score-display">Score: 0 / 400 pts</div>
+              <button class="btn-reset-chat" id="btn-router-reset" style="padding: 3px 10px; font-size: 0.74rem;" title="Restart Routing Challenge">
+                <span>↺ Reset</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="scenario-card">
+            <div class="scenario-title" id="scenario-title">Scenario 1: Adding a missing null-check on line 42 of a React Hook</div>
+            <div class="scenario-desc" id="scenario-desc">You caught a TypeError in Sentry: <code>Cannot read properties of undefined (reading 'avatarUrl')</code>. You have the exact file open.</div>
+          </div>
+
+          <div class="game-options-grid">
+            <button class="game-option-btn" data-choice="tab">
+              <span class="opt-name">⌨️ Cursor Tab / Cmd+K</span>
+              <span class="opt-sub">In-Editor (Inline / &lt;100ms)</span>
+            </button>
+            <button class="game-option-btn" data-choice="fast">
+              <span class="opt-name">⚡ Composer 2.5 / Haiku</span>
+              <span class="opt-sub">Tier 1 (&lt; 1s, $0.50/M)</span>
+            </button>
+            <button class="game-option-btn" data-choice="frontier">
+              <span class="opt-name">🚀 Sonnet 5 / Grok 4.7</span>
+              <span class="opt-sub">Tier 2 ($2.00/M, Agentic)</span>
+            </button>
+            <button class="game-option-btn" data-choice="reasoning">
+              <span class="opt-name">🧠 Claude Opus 5 / Opus 5.5</span>
+              <span class="opt-sub">Tier 3 ($5.00/M, Deep Brain)</span>
+            </button>
+          </div>
+
+          <div class="game-feedback" id="game-feedback"></div>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (5 mins):</h4>
+        <ul>
+          <li><strong>Play the Mini-Game with Audience:</strong> Click through the 4 scenarios and ask the room to vote: "Which model would you use for this?"</li>
+          <li><strong>Expose the "Fast Mode" Trap:</strong> Show the room the 6x price jump: "Many engineers click 'Fast' in settings because who doesn't want speed? But Composer 2.5 jumps from $0.50 to $3.00, and Opus jumps to $30.00/$150.00! You burn your entire monthly credit pool in 3 days!"</li>
+          <li><strong>Enterprise Pooled Usage Economics:</strong> Explain our team setup: <em>Everything draws from a shared enterprise credit pool with zero per-seat barrier.</em> If an engineer runs blind 100k-token Agent loops for a 1-line CSS fix, that drains real dollars from the company pool. Driving ~40% of code through Tab and ~35–40% through Tier 1 (Composer 2.5 / Auto) preserves the shared pool for complex features and architecture!</li>
+          <li><strong>Enterprise Auto Mode Billing:</strong> Clarify the exact rule: <em>Auto mode carries $0 routing fee</em> and bills transparently at the exact list price of whatever model handles the prompt.</li>
+          <li><strong>Modern Model Landscape:</strong> Highlight Sonnet 5 ($2.00/M in, $10.00/M out) as the daily driver powerhouse, Composer 2.5 ($0.50/M) as the ultra-cheap utility editor, and Grok 4.7 as the rapid-fire context handler.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Slide 4: 04-token-calculator.html -->
+    <section class="slide" data-slide="4">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">Live Tool</span>
+          <h2>Interactive <span class="gradient-text">Token & Cost Calculator</span></h2>
+          <p class="slide-desc">Simulate the actual token burn and latency penalty of different engineering workflow habits.</p>
+        </div>
+
+        <div class="calc-container">
+          <div class="calc-controls">
+            <div class="control-group">
+              <label for="calc-model">Selected Model:</label>
+              <select id="calc-model" class="calc-select">
+                <option value="sonnet5" selected>Claude Sonnet 5 ($2.00/M in, $10.00/M out + $0.25 CTR)</option>
+                <option value="opus5">Claude Opus 5 ($5.00/M in, $25.00/M out + $0.25 CTR)</option>
+                <option value="opus5-fast">Claude Opus 5 Fast ($30.00/M in, $150.00/M out + $0.25 CTR) 🚨 6x</option>
+                <option value="composer25">Composer 2.5 ($0.50/M in, $2.50/M out &bull; $0 CTR Exempt)</option>
+                <option value="composer25-fast">Composer 2.5 Fast ($3.00/M in, $15.00/M out &bull; $0 CTR Exempt) 🚨 6x</option>
+                <option value="grok47">Grok 4.7 ($2.00/M in, $6.00/M out &bull; $0 CTR Exempt)</option>
+                <option value="grok47-fast">Grok 4.7 Fast ($4.00/M in, $12.00/M out &bull; $0 CTR Exempt) 🚨 2x</option>
+                <option value="haiku45">Claude 4.5 Haiku ($1.00/M in, $5.00/M out + $0.25 CTR)</option>
+                <option value="gemini38-flash">Gemini 3.8 Flash ($0.75/M in, $3.50/M out + $0.25 CTR)</option>
+              </select>
+            </div>
+
+            <div class="control-group">
+              <div class="slider-header">
+                <label for="calc-turns">Turns in Single Chat Session:</label>
+                <span class="slider-val" id="val-turns">8 turns</span>
+              </div>
+              <input type="range" id="calc-turns" min="1" max="25" value="8" class="calc-slider">
+              <div class="slider-hints">
+                <span>1 turn (Surgical)</span>
+                <span>3 turns (Ideal)</span>
+                <span>10+ turns (Bloated)</span>
+                <span>25 turns (Toxic)</span>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <div class="slider-header">
+                <label for="calc-context">Context Attached per Turn:</label>
+                <span class="slider-val" id="val-context">@workspace (150,000 tokens)</span>
+              </div>
+              <input type="range" id="calc-context" min="2000" max="300000" step="5000" value="150000" class="calc-slider">
+              <div class="slider-hints">
+                <span>2k (Snippet)</span>
+                <span>15k (2 Files)</span>
+                <span>50k (Folder)</span>
+                <span>300k (@workspace)</span>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="calc-tool-loop" checked>
+                <span>Agentic MCP / Tool Loops Enabled (Multiplies read rounds 3x)</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="calc-results">
+            <div class="metric-box">
+              <div class="metric-title">Cumulative Session Tokens</div>
+              <div class="metric-value" id="res-total-tokens">1,800,000</div>
+              <div class="metric-sub" id="res-tokens-breakdown">In: 1.76M | Out: 40k</div>
+            </div>
+
+            <div class="metric-box">
+              <div class="metric-title">Est. Total Enterprise Burn (Base + CTR)</div>
+              <div class="metric-value text-accent" id="res-total-cost">$5.88</div>
+              <div class="metric-sub" id="res-cost-sub" style="font-family: var(--font-mono); font-size: 0.72rem;">Base: $5.43 | CTR (+ $0.25/M): $0.45</div>
+            </div>
+
+            <div class="metric-box">
+              <div class="metric-title">Average Roundtrip Latency</div>
+              <div class="metric-value text-warning" id="res-latency">18.4s</div>
+              <div class="metric-sub">Time waiting per response</div>
+            </div>
+
+            <div class="metric-box">
+              <div class="metric-title">Context Quality & Attention Health</div>
+              <div class="health-meter">
+                <div class="health-bar" id="res-health-bar" style="width: 32%; background: var(--danger-color);"></div>
+              </div>
+              <div class="metric-sub text-danger" id="res-health-text">🚨 Severe Attention Degradation (32%)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-takeaway">
+          💡 <strong>Live Demo Observation:</strong> A 3-turn session with 2 targeted files costs <strong>$0.05</strong> and responds in <strong>1.8s</strong> with <strong>98% accuracy</strong>. A 15-turn session with blind <code>@workspace</code> costs <strong>$8.40</strong> and responds in <strong>28s</strong> with <strong>30% accuracy</strong>!
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (5 mins):</h4>
+        <ul>
+          <li>Interact with this live slide! Drag the slider from 25 turns down to 3 turns and watch the cost plummet from $10 to $0.05.</li>
+          <li>Show the latency difference: "When you complain Cursor is slow, 80% of the time it's because you're forcing Sonnet to read 200,000 tokens of your entire codebase before it answers a 1-line question."</li>
+          <li>Point out the Attention Health meter: When it turns red, the model is hallucinating imports and forgetting previous constraints.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Slide 5: 05-mcp-agentic-loops.html -->
+    <section class="slide" data-slide="5">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">Agent Control &amp; MCP Architecture</span>
+          <h2>Taming MCP &amp; Tool Loops: <span class="text-danger">Control Autonomous Agents</span></h2>
+          <p class="slide-desc">Model Context Protocol (MCP) connects Cursor to external tools (DBs, Git, Sentry, Terminal). But unguided multi-turn loops rapidly burn thousands of tokens in minutes.</p>
+        </div>
+
+        <!-- Visual Tool Loop Workflow Ribbon -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin-bottom: 0.8rem;">
+          <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-left: 3px solid var(--accent-cyan); padding: 0.45rem 0.65rem; border-radius: 6px; font-size: 0.76rem;">
+            <strong style="color: var(--accent-cyan); display: flex; align-items: center; gap: 4px;"><span>1</span> User Intent</strong>
+            <div style="color: var(--text-secondary); margin-top: 2px;">Prompt with goals, files, or bug description.</div>
+          </div>
+          <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-left: 3px solid var(--accent-purple); padding: 0.45rem 0.65rem; border-radius: 6px; font-size: 0.76rem;">
+            <strong style="color: var(--accent-purple); display: flex; align-items: center; gap: 4px;"><span>2</span> MCP Tool Invocation</strong>
+            <div style="color: var(--text-secondary); margin-top: 2px;">Agent runs Postgres queries, Git diffs, or Bash commands.</div>
+          </div>
+          <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-left: 3px solid var(--accent-amber); padding: 0.45rem 0.65rem; border-radius: 6px; font-size: 0.76rem;">
+            <strong style="color: var(--accent-amber); display: flex; align-items: center; gap: 4px;"><span>3</span> Tool Output Ingestion</strong>
+            <div style="color: var(--text-secondary); margin-top: 2px;">Entire terminal log / DB output appends into context.</div>
+          </div>
+          <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-left: 3px solid var(--danger-color); padding: 0.45rem 0.65rem; border-radius: 6px; font-size: 0.76rem;">
+            <strong style="color: var(--danger-color); display: flex; align-items: center; gap: 4px;"><span>4</span> The "Doom Loop" Risk</strong>
+            <div style="color: var(--text-secondary); margin-top: 2px;">If tests fail, agent repeats loop &rarr; 50k to 300k+ tokens!</div>
+          </div>
+        </div>
+
+        <div class="mcp-grid">
+          <!-- Left Column: The 4 Laws of High-ROI Agent Loops -->
+          <div class="mcp-guidelines">
+            <h3 class="mcp-title" style="margin-bottom: 0.5rem; font-size: 0.92rem;">🛡️ The 4 Laws of Safe &amp; High-ROI Agent Execution</h3>
+            
+            <div class="law-card" style="padding: 0.55rem 0.75rem; margin-bottom: 0.45rem;">
+              <span class="law-badge">Law 1</span>
+              <div>
+                <strong>Pre-Curate Context (Never Let Agent Guess)</strong>
+                <p style="font-size: 0.76rem; margin-top: 2px;">Pin exact file &amp; line ranges: <code>@OrderService.java:L45-80</code>. Provide schema snippets rather than letting it search hundreds of files.</p>
+              </div>
+            </div>
+
+            <div class="law-card" style="padding: 0.55rem 0.75rem; margin-bottom: 0.45rem;">
+              <span class="law-badge">Law 2</span>
+              <div>
+                <strong>Impose Strict Negative Constraints</strong>
+                <p style="font-size: 0.76rem; margin-top: 2px;">State what NOT to touch: <em>"Do not edit DB migrations, proto contracts, or pom.xml. Only patch OrderStatusHandler."</em></p>
+              </div>
+            </div>
+
+            <div class="law-card" style="padding: 0.55rem 0.75rem; margin-bottom: 0.45rem;">
+              <span class="law-badge">Law 3</span>
+              <div>
+                <strong>Plan First, Gate Execution (<kbd>Shift+Tab</kbd>)</strong>
+                <p style="font-size: 0.76rem; margin-top: 2px;">Ask for an architectural diff plan before running terminal bash commands or destructive multi-file overwrites.</p>
+              </div>
+            </div>
+
+            <div class="law-card" style="padding: 0.55rem 0.75rem;">
+              <span class="law-badge">Law 4</span>
+              <div>
+                <strong>Beware the "MCP Schema Tax"</strong>
+                <p style="font-size: 0.76rem; margin-top: 2px;">Every active MCP server registers tool schemas in your system prompt (5k–15k tokens/turn). Disable unused MCP servers in settings.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Live Agent Loop Simulator -->
+          <div class="agent-sim-wrapper">
+            <!-- Side-by-Side Comparison Quick Summary -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 6px; padding: 0.4rem 0.6rem; font-size: 0.74rem;">
+                <strong style="color: #ef4444;">🔴 Unsteered Rogue Agent:</strong>
+                <div style="color: var(--text-secondary); margin-top: 2px;">Blind search &rarr; 1.45M tokens burned ($7.25) &rarr; breaks build.</div>
+              </div>
+              <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 6px; padding: 0.4rem 0.6rem; font-size: 0.74rem;">
+                <strong style="color: #10b981;">🟢 Steered High-ROI Agent:</strong>
+                <div style="color: var(--text-secondary); margin-top: 2px;">Exact lines + constraints &rarr; 2.4k tokens ($0.03) &rarr; passes in 2.1s.</div>
+              </div>
+            </div>
+
+            <div class="agent-sim-container" style="margin-top: 0;">
+              <div class="agent-sim-header">
+                <div class="agent-sim-tabs">
+                  <button class="agent-sim-tab active-rogue" id="btn-sim-rogue">🔴 Run Rogue Agent</button>
+                  <button class="agent-sim-tab" id="btn-sim-steered">🟢 Run Steered Agent</button>
+                </div>
+                <div class="agent-metrics-row">
+                  <span>Tokens: <strong id="sim-tokens-meter" style="color:#f87171">0</strong></span>
+                  <span>Cost: <strong id="sim-cost-meter" style="color:#f87171">$0.00</strong></span>
+                  <span>Time: <strong id="sim-time-meter">0.0s</strong></span>
+                </div>
+              </div>
+
+              <div class="agent-sim-terminal" id="sim-terminal-screen">
+                <div class="terminal-line accent">💡 Click [🔴 Run Rogue Agent] to see a runaway loop, or [🟢 Run Steered Agent] for high-ROI execution.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Official Docs Pattern: Context Isolation via Subagents -->
+        <div class="banner warning-banner" style="margin-top:0.65rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.8rem; padding: 0.5rem 0.8rem;">
+          <div>
+            <strong>🛡️ Cursor Official Architecture: Context Isolation via Subagents:</strong>
+            <span style="display:block; margin-top: 0.15rem; font-size: 0.76rem; color: var(--text-secondary);">Per official docs (<code>cursor.com/docs/subagents</code>), long research, terminal grep runs, and heavy file inspections run in dedicated <strong>Subagents</strong>. Intermediate noisy tool output stays isolated inside the subagent, returning only a clean summary to your main conversation to prevent context rot!</span>
+          </div>
+          <span style="font-family: var(--font-mono); font-size: 0.72rem; background: var(--bg-card); padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border-color); white-space: nowrap; font-weight: 700;">Context Isolation</span>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (5 mins):</h4>
+        <ul>
+          <li><strong>What is MCP?</strong> Explain simply: <em>Model Context Protocol (MCP)</em> is the open standard that gives Cursor superpowers by letting the LLM talk to external systems—Postgres, GitHub, Jira, Sentry, Terminal, and file search.</li>
+          <li><strong>Why do Unsteered Loops Explode?</strong> Walk through the 4-step diagram: The agent executes a tool (e.g. bash test run), ingests all 2,000 lines of terminal error logs back into context, tries to fix it by editing another file, tests again, and accumulates hundreds of thousands of tokens within 3 minutes.</li>
+          <li><strong>Run the Interactive Demo:</strong> Click <strong>"Run Rogue Agent"</strong> to show the audience the simulated runaway loop ($7.25 burned, 32 files searched, build corrupted). Then click <strong>"Run Steered Agent"</strong> to demonstrate surgical precision (2,400 tokens, $0.03, tests green in 2.1s).</li>
+          <li><strong>Explain Context Isolation (Subagents):</strong> Point to the bottom banner: When you need broad research or heavy terminal grep, use Cursor's <strong>Subagents</strong> (`cursor.com/docs/subagents`) so messy intermediate tool outputs don't contaminate your primary chat context.</li>
+          <li><strong>Quote for the Room:</strong> <em>"An unconstrained agent will happily spend 45 minutes refactoring your entire codebase to fix a typo. Steer the loop with negative constraints!"</em></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Slide 6: 06-modality-playbook.html -->
+    <section class="slide" data-slide="6">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">IDE Mastery &amp; Workflow</span>
+          <h2>The Cursor Modality Playbook: <span class="gradient-text">Plan, Ask, Agent &amp; Surfaces</span></h2>
+          <p class="slide-desc">Cursor provides 4 unified AI Chat Modes (cycle via <kbd>Shift + Tab</kbd>) alongside editor surfaces (Tab, <kbd>Cmd+K</kbd>). Picking the wrong mode burns 10x more tokens and causes file churn.</p>
+        </div>
+
+        <div class="modality-grid">
+          <div class="modality-card">
+            <div class="modality-header">
+              <div class="modality-icon">🗺️</div>
+              <div>
+                <h3>Plan Mode</h3>
+                <span class="shortcut">Shift + Tab &bull; The Architect</span>
+              </div>
+            </div>
+            <div class="modality-body">
+              <div class="badge-row">
+                <span class="mini-badge bg-blue">Plan First</span>
+                <span class="mini-badge bg-green">Zero File Risk</span>
+              </div>
+              <p>Drafts an implementation blueprint &amp; dependency checklist for review <strong>before</strong> modifying code.</p>
+              <div class="when-to-use">
+                <strong>When to use:</strong> Multi-file features, major refactors, complex schema changes, and preventing destructive hallucinated file deletions.
+              </div>
+            </div>
+          </div>
+
+          <div class="modality-card">
+            <div class="modality-header">
+              <div class="modality-icon">💬</div>
+              <div>
+                <h3>Ask Mode</h3>
+                <span class="shortcut">Cmd + L &bull; The Assistant</span>
+              </div>
+            </div>
+            <div class="modality-body">
+              <div class="badge-row">
+                <span class="mini-badge bg-green">Read-Only</span>
+                <span class="mini-badge bg-blue">Fast &amp; Cheap</span>
+              </div>
+              <p>Conversational Q&amp;A, syntax explanations, and codebase navigation with <strong>zero file mutations</strong>.</p>
+              <div class="when-to-use">
+                <strong>When to use:</strong> Exploring unfamiliar legacy files, explaining regex/algorithms, architecture debates, safe production inspection.
+              </div>
+            </div>
+          </div>
+
+          <div class="modality-card">
+            <div class="modality-header">
+              <div class="modality-icon">🚀</div>
+              <div>
+                <h3>Agent Mode</h3>
+                <span class="shortcut">Cmd + I &bull; The Builder</span>
+              </div>
+            </div>
+            <div class="modality-body">
+              <div class="badge-row">
+                <span class="mini-badge bg-red">Autonomous</span>
+                <span class="mini-badge bg-blue">Multi-File Edits</span>
+              </div>
+              <p>Autonomous multi-file editor that creates files, runs terminal tests/lints, and self-heals syntax errors.</p>
+              <div class="when-to-use">
+                <strong>When to use:</strong> Executing an approved Plan, scaffolding fullstack features, cross-layer API contract sync, test verification.
+              </div>
+            </div>
+          </div>
+
+          <div class="modality-card">
+            <div class="modality-header">
+              <div class="modality-icon">🔬</div>
+              <div>
+                <h3>Debug Mode</h3>
+                <span class="shortcut">Shift + Tab &bull; Investigator</span>
+              </div>
+            </div>
+            <div class="modality-body">
+              <div class="badge-row">
+                <span class="mini-badge bg-yellow">Evidence-Based</span>
+                <span class="mini-badge bg-blue">Log Inspector</span>
+              </div>
+              <p>Root-cause investigator that interrogates test failures, runtime errors, and logs without blind guessing.</p>
+              <div class="when-to-use">
+                <strong>When to use:</strong> Diagnosing flaky integration tests, race conditions, connection timeouts, and cryptic stack traces.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="comparison-table-wrap">
+          <table class="simple-table">
+            <thead>
+              <tr>
+                <th>Engineering Task</th>
+                <th>❌ Inefficient Modality</th>
+                <th>✅ Optimal Modality &amp; Surface</th>
+                <th>Token &amp; Speed Advantage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Quick 1-line null-check or helper method</td>
+                <td>Open Agent / Composer (reads entire repo)</td>
+                <td>Highlight &rarr; <kbd>Cmd+K</kbd> (Inline Edit) or <kbd>Tab</kbd></td>
+                <td><strong>95% less tokens</strong>, &lt; 1s instant diff</td>
+              </tr>
+              <tr>
+                <td>Understand a 600-line unfamiliar legacy service</td>
+                <td>Paste into Agent mode (risks accidental edits)</td>
+                <td><strong>Ask Mode (<kbd>Cmd+L</kbd>)</strong> with <code>@file</code></td>
+                <td><strong>100% read-only safe</strong>, 80% less tokens</td>
+              </tr>
+              <tr>
+                <td>Refactor 4 files: Controller, DTO, Entity &amp; API Contract</td>
+                <td>Run Agent mode blind without constraints</td>
+                <td><strong>Plan Mode</strong> first &rarr; approve &rarr; <strong>Agent Mode</strong></td>
+                <td><strong>Eliminates 100k token hallucination loops</strong></td>
+              </tr>
+              <tr>
+                <td>Diagnose failing integration test or cryptic runtime error</td>
+                <td>Ask generic chat with zero logs</td>
+                <td><strong>Debug Mode</strong> with <code>@terminal</code> or test output</td>
+                <td><strong>Targeted surgical fix</strong> backed by evidence</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pricing-truth-box" style="margin-top: 0.8rem; background: var(--bg-card); border: 1px solid var(--border-color); border-left: 4px solid #7e22ce; border-radius: 8px; padding: 0.65rem 0.9rem; font-size: 0.82rem;">
+          <div style="font-weight: 700; color: #7e22ce; margin-bottom: 0.3rem; display: flex; align-items: center; justify-content: space-between;">
+            <span>💰 Official Docs: Is there a Pricing Difference Between Chat Modes?</span>
+            <span style="font-family: var(--font-mono); font-size: 0.74rem; background: rgba(126, 34, 206, 0.1); color: #7e22ce; padding: 2px 8px; border-radius: 4px; font-weight: 700;">Identical Token Rate &bull; 10x-50x Token Volume</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; line-height: 1.4;">
+            <div>
+              <strong>Per-Token Billing Rate: IDENTICAL ($0 Mode Surcharge)</strong><br/>
+              Official Cursor docs confirm: there is no mode-specific surcharge. Plan, Ask, Agent, and Debug bill at the exact same base model token price (e.g., Sonnet 5 @ $2/$10 in/out with $0 platform markup).
+            </div>
+            <div>
+              <strong>Effective Cost: 10x–50x SPREAD (Tool Loop Overhead)</strong><br/>
+              <strong>Ask Mode:</strong> 1 single Q&amp;A turn = ~2k–5k tokens.<br/>
+              <strong>Agent Mode:</strong> Multi-turn tool execution loop (terminal runs, file reads, linter self-heals) = <strong>50k–300k+ tokens</strong> per run!
+            </div>
+          </div>
+        </div>
+
+        <div class="info-banner" style="margin-top: 0.65rem; font-size: 0.83rem; display: flex; align-items: center; justify-content: space-between;">
+          <span>💡 <strong>Workflow Pro-Tip:</strong> Press <kbd>Shift + Tab</kbd> inside the chat prompt to instantly toggle between <strong>Plan &rarr; Agent &rarr; Ask &rarr; Debug</strong>. For non-trivial features, always <em>Plan first</em>, review the file list, then hit <em>Agent</em> to execute!</span>
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent-cyan); white-space: nowrap;">Shift + Tab = Quick Switch</span>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (5 mins):</h4>
+        <ul>
+          <li><strong>Chat Modes Pricing Clarification (Official Docs):</strong> Address the common executive/team question: <em>"Does Agent mode cost more per token than Ask mode?"</em> Official docs answer: <strong>No, the token rate is identical.</strong> However, the bill is 10x–50x higher because Agent mode autonomously chains 5–15 tool calls (reading entire files, running terminal tests, rewriting diffs).</li>
+          <li><strong>The "Agent Trap":</strong> Explain why junior engineers get burned by defaulting to Agent mode for everything: "If you give Agent mode a vague prompt without planning, it will enthusiastically modify 8 files, install 2 npm packages, burn 200k tokens, and break your build in 30 seconds."</li>
+          <li><strong>Why Plan Mode is Essential:</strong> Emphasize Plan mode as the senior developer's steering wheel. The AI acts as an architect, listing every file it plans to touch and its exact sequence of edits. You can refine or reject the strategy <em>before</em> any code changes occur.</li>
+          <li><strong>Ask Mode for Safety:</strong> Highlight Ask mode as the safest way to navigate production repos or legacy systems. Because it is strictly read-only, there is zero risk of uncommitted diffs or accidental file deletions.</li>
+          <li><strong>Don't Forget <kbd>Cmd+K</kbd> and Tab:</strong> For 80% of daily coding (small refactors, single functions, renaming), never open a chat window. Use Tab autocomplete (<kbd>Tab</kbd>) or Inline Edit (<kbd>Cmd+K</kbd>) to keep flow state intact.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Slide 7: 07-precision-context.html -->
+    <section class="slide" data-slide="7">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">Context Curation</span>
+          <h2>Precision Context Referencing: <span class="gradient-text">@ Mastery</span></h2>
+          <p class="slide-desc">Stop typing <code>@workspace</code>. Learn the exact referencing symbols that feed the model pure signal.</p>
+        </div>
+
+        <div class="grid-2col">
+          <div class="at-symbols-list">
+            <div class="at-item">
+              <span class="at-tag">@Files &amp; Folders</span>
+              <div class="at-info">
+                <strong>Targeted Paths (Deep Drilldown)</strong>
+                <p>Include exact files or directories: <code>@auth.ts</code>, <code>@src/components/</code> (type <code>/</code> to navigate deeper).</p>
+              </div>
+            </div>
+
+            <div class="at-item">
+              <span class="at-tag">@Terminals &amp; Logs</span>
+              <div class="at-info">
+                <strong>Live Terminal Buffer</strong>
+                <p>Pulls active terminal output and test failure traces directly into context without manual copy-pasting.</p>
+              </div>
+            </div>
+
+            <div class="at-item">
+              <span class="at-tag">@Git (Diffs)</span>
+              <div class="at-info">
+                <strong>Working Changes or Branch Diffs</strong>
+                <p><code>@Commit (Diff of Working State)</code> for staged/uncommitted edits, or <code>@Branch (Diff with Main)</code> for PR reviews.</p>
+              </div>
+            </div>
+
+            <div class="at-item">
+              <span class="at-tag">@Docs &amp; Web</span>
+              <div class="at-info">
+                <strong>Official Framework Documentation</strong>
+                <p>Indexes live external documentation (Spring Boot 3.3, Tailwind v4, Spark 3.5) to prevent API hallucination.</p>
+              </div>
+            </div>
+
+            <div class="at-item">
+              <span class="at-tag">@Chats &amp; Browser</span>
+              <div class="at-info">
+                <strong>Cross-Session &amp; UI Context</strong>
+                <p><code>@Chats</code> references past architectural threads; <code>@Browser</code> inspects running web app DOM states.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="context-visual-box">
+            <h3>📉 Signal-to-Noise Ratio Comparison</h3>
+            
+            <div class="snr-bar-wrap">
+              <div class="snr-label">
+                <span><code>@workspace</code> (Blind Stuffing)</span>
+                <span class="text-danger">5% Signal / 95% Noise (300k Tokens)</span>
+              </div>
+              <div class="snr-bar"><div class="snr-fill danger-fill" style="width: 5%;"></div></div>
+            </div>
+
+            <div class="snr-bar-wrap">
+              <div class="snr-label">
+                <span><code>@folder</code> + <code>@docs</code></span>
+                <span class="text-warning">45% Signal / 55% Noise (40k Tokens)</span>
+              </div>
+              <div class="snr-bar"><div class="snr-fill warning-fill" style="width: 45%;"></div></div>
+            </div>
+
+            <div class="snr-bar-wrap">
+              <div class="snr-label">
+                <span><code>@file.ts:L20-50</code> + <code>@types.ts</code></span>
+                <span class="text-success">98% Signal / 2% Noise (3k Tokens)</span>
+              </div>
+              <div class="snr-bar"><div class="snr-fill success-fill" style="width: 98%;"></div></div>
+            </div>
+
+            <div class="pro-tip-box">
+              🎯 <strong>Pro-Tip: Line Range Pinning</strong><br>
+              In Cursor, you can drag a line selection from your editor directly into the chat or reference <code>@File.java:30-55</code> to only load 25 lines. This results in sub-second model responses!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (4 mins):</h4>
+        <ul>
+          <li>Explain why `@workspace` fails in large enterprise repos: Workspace indexing uses embeddings search. If you ask "fix authentication", embeddings might pull 20 random test files and config files rather than the specific JWT interceptor you care about.</li>
+          <li>Showcase `@Docs`: Tell engineers they can add custom docs in Cursor settings (e.g., internal company API docs, AWS CDK docs).</li>
+          <li>Mention `@Git`: "Before opening a PR, hit Cmd+L, type `@Git (Diff with Main) Review this PR for edge cases, memory leaks, and missing unit tests`. Instant 10x code review!"</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Slide 8: 08-cursorrules-standards.html -->
+    <section class="slide" data-slide="8">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">Automation</span>
+          <h2>Automate Standards with <span class="gradient-text">.cursorrules</span></h2>
+          <p class="slide-desc">Never repeat your style guidelines, library choices, or architectural rules in manual prompts again.</p>
+        </div>
+
+        <div class="grid-2col">
+          <div>
+            <h3 class="code-title">📦 Modern Architecture: <code>.cursor/rules/*.mdc</code></h3>
+            <pre><code class="language-markdown">---
+description: Java Spring Boot API Conventions
+globs: src/main/java/**/*.java
+alwaysApply: false
+---
+
+# Architecture Rules
+- Use Constructor Injection via `@RequiredArgsConstructor` (Lombok). Never `@Autowired`.
+- Controllers must return `ResponseEntity<ApiResponse<T>>`.
+- Repositories must use Spring Data JPA specifications for dynamic filtering.
+
+# Negative Constraints (DO NOT)
+- DO NOT use `java.util.Date` or `Calendar`. Always use `java.time.Instant` or `LocalDate`.
+- DO NOT execute raw SQL queries inside Service classes.
+- DO NOT swallow exceptions; wrap in domain `ApiException`.
+
+# Testing Standards
+- Use JUnit 5 + AssertJ + Mockito.
+- Unit tests must be placed in `src/test/java/` mirroring source path.</code></pre>
+          </div>
+
+          <div class="rules-best-practices">
+            <h3 class="code-title">💡 The 5 Rules of Effective <code>.cursorrules</code></h3>
+            <div class="rule-tip">
+              <span class="tip-num">1</span>
+              <div>
+                <strong>Use Glob Scoping (Cursor 2.0+ <code>.mdc</code>)</strong>
+                <p>Don't load React rules when editing Python scripts. Scope rules using globs: <code>globs: **/*.tsx</code>.</p>
+              </div>
+            </div>
+
+            <div class="rule-tip">
+              <span class="tip-num">2</span>
+              <div>
+                <strong>Negative Constraints Beat Positive Instructions</strong>
+                <p>LLMs respond strongly to explicit "DO NOT" boundaries (e.g. <em>"DO NOT use 'any' in TypeScript"</em>).</p>
+              </div>
+            </div>
+            
+            <div class="rule-tip">
+              <span class="tip-num">3</span>
+              <div>
+                <strong>Keep Total Rules Under 150 Lines</strong>
+                <p>Bloated system prompts waste 2,000 tokens on every single prompt and cause instruction collision.</p>
+              </div>
+            </div>
+
+            <div class="rule-tip">
+              <span class="tip-num">4</span>
+              <div>
+                <strong>Declare Exact Framework Versions</strong>
+                <p>State: <code>Next.js 14 App Router</code>, <code>Java 21 (Virtual Threads)</code>, <code>Spark 3.5</code>.</p>
+              </div>
+            </div>
+
+            <div class="rule-tip">
+              <span class="tip-num">5</span>
+              <div>
+                <strong>Pair with Agent Skills (<code>.cursor/skills/</code>)</strong>
+                <p>Use <code>/</code> menu or <kbd>Option+Enter</kbd> to launch on-demand <strong>Custom Modes</strong> (e.g. <code>/tdd</code>) without bloating system rules.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (4 mins):</h4>
+        <ul>
+          <li><strong>The 4 Types of Rules (Official Docs):</strong> Explain Cursor's rule hierarchy:
+            1) <em>Project Rules</em> (<code>.cursor/rules/*.mdc</code>) scoped by globs and version-controlled;
+            2) <em>User Rules</em> (global in user settings);
+            3) <em>Team Rules</em> (managed via Enterprise admin dashboard);
+            4) <em>Legacy .cursorrules</em> (root markdown file).
+          </li>
+          <li><strong>Agent Skills &amp; Custom Modes:</strong> Explain how <code>.cursor/skills/</code> package complex domain procedures (scripts, templates, playbooks). Instead of stuffing 500 lines into every prompt, skills load progressively on demand via <code>/</code> menu or <kbd>Option+Enter</kbd> as Custom Modes!</li>
+          <li>This eliminates 80% of repetitive prompt typing while keeping context lean and sub-second fast.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Slide 9: 09-domain-java.html -->
+    <section class="slide" data-slide="9">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">Real-World Case Study</span>
+          <h2>Domain Example 1: <span class="gradient-text">Java & Spring Boot</span></h2>
+          <p class="slide-desc">Scenario: Adding input validation & clean error handling to a User API endpoint.</p>
+        </div>
+
+        <div class="grid-2col">
+          <div class="prompt-box prompt-bad">
+            <div class="prompt-header">
+              <span class="badge-bad">❌ Low-ROI Brute Force Prompt</span>
+              <span class="token-count">Tokens: ~140k (Scans repo)</span>
+            </div>
+            <div class="prompt-body">
+              <p><em>"My user signup endpoint is crashing with 500 errors when users enter bad emails. Here is my @workspace. Please fix the validation and error handling."</em></p>
+            </div>
+            <div class="prompt-feedback">
+              <strong>Why this fails:</strong>
+              <ul>
+                <li>Agent scans 35 entity & service files looking for "signup".</li>
+                <li>Generates messy manual <code>if (email == null)</code> checks inside the controller method.</li>
+                <li>Burns 140,000 tokens and wastes 30+ seconds.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="prompt-box prompt-good">
+            <div class="prompt-header">
+              <span class="badge-good">✅ Value-Maxed Precision Prompt</span>
+              <span class="token-count">Tokens: ~2.1k | Latency: 1.2s</span>
+              <button class="copy-btn" data-target="copy-java-prompt">Copy</button>
+            </div>
+            <div class="prompt-body">
+              <pre><code id="copy-java-prompt" class="language-markdown">Context: `@UserController.java:L25-45` and `@SignupRequest.java`
+
+Task:
+1. Add `@Valid` with `@Email` and `@NotBlank` annotations to `SignupRequest`.
+2. In `@GlobalExceptionHandler.java`, add `@ExceptionHandler(MethodArgumentNotValidException.class)` to return HTTP 400 with field errors.
+
+Constraints:
+- Do not modify database entities or controller signatures.
+- Follow standard Spring Boot `@RestControllerAdvice` pattern.</code></pre>
+            </div>
+            <div class="prompt-feedback">
+              <strong>Why this wins:</strong>
+              <ul>
+                <li>Pins the exact 2 files; model outputs clean Spring code in 1 pass.</li>
+                <li>98% fewer tokens, instantaneous response under 1.5s!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (4 mins):</h4>
+        <ul>
+          <li><strong>Contrast the Two Prompts:</strong> Notice how the bad prompt relies on `@workspace` and vague instructions. The model has to guess your validation philosophy and scans dozens of unrelated files.</li>
+          <li><strong>The Precision Fix:</strong> By referencing only `@UserController.java:L25-45` and `@SignupRequest.java`, you feed the model pure signal. It uses standard Spring `@Valid` and `@RestControllerAdvice` without touching your database layer.</li>
+          <li><strong>Takeaway:</strong> Always specify the exact files and state the architectural pattern you want (e.g. `@RestControllerAdvice`).</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Slide 10: 10-domain-react-ts.html -->
+    <section class="slide" data-slide="10">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">Real-World Case Study</span>
+          <h2>Domain Example 2: <span class="gradient-text">Full-Stack (React & TS)</span></h2>
+          <p class="slide-desc">Scenario: Adding a 3-way status filter tab with active states to a User Table.</p>
+        </div>
+
+        <div class="grid-2col">
+          <div class="prompt-box prompt-bad">
+            <div class="prompt-header">
+              <span class="badge-bad">❌ Low-ROI Brute Force Prompt</span>
+              <span class="token-count">Tokens: ~110k (Scans components)</span>
+            </div>
+            <div class="prompt-body">
+              <p><em>"Create a filter tab that toggles between All, Active, and Inactive users and updates the table. Here is my @workspace."</em></p>
+            </div>
+            <div class="prompt-feedback">
+              <strong>Why this fails:</strong>
+              <ul>
+                <li>Hallucinates custom CSS styles instead of using project Tailwind utilities.</li>
+                <li>Uses loose TypeScript with <code>any</code> for event handlers and state.</li>
+                <li>Re-implements data fetching from scratch instead of in-memory filtering.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="prompt-box prompt-good">
+            <div class="prompt-header">
+              <span class="badge-good">✅ Value-Maxed Precision Prompt</span>
+              <span class="token-count">Tokens: ~1.9k | Latency: 1.1s</span>
+              <button class="copy-btn" data-target="copy-react-prompt">Copy</button>
+            </div>
+            <div class="prompt-body">
+              <pre><code id="copy-react-prompt" class="language-markdown">Context: `@UserTable.tsx:L15-45` and `@types/user.ts`
+
+Task:
+1. Add a 3-way status filter tab: 'ALL' | 'ACTIVE' | 'INACTIVE'.
+2. Filter users in-memory using `useMemo()` based on selected status.
+3. Style the active tab with Tailwind `bg-blue-600 text-white rounded-md px-3 py-1`.
+
+Constraints:
+- Do not install new packages; use existing UI icons.
+- Strict TypeScript: define `type StatusFilter = 'ALL' | 'ACTIVE' | 'INACTIVE'`. No `any`.</code></pre>
+            </div>
+            <div class="prompt-feedback">
+              <strong>Why this wins:</strong>
+              <ul>
+                <li>Pins exact line range; produces working component code in seconds.</li>
+                <li>Enforces zero `any` and exact styling conventions.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="banner info-banner" style="margin-top:0.8rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.82rem;">
+          <span>🎨 <strong>Cursor Official Feature — Design Mode (<kbd>Cmd + D</kbd>):</strong> Direct agents visually inside the Agents Window browser! Click any UI element to target it, select multiple components, draw on the screen, and let the agent edit code spatially.</span>
+          <span style="font-family: var(--font-mono); font-size: 0.74rem; background: var(--bg-card); padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border-color); white-space: nowrap; font-weight: 700;">Design Mode</span>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (4 mins):</h4>
+        <ul>
+          <li><strong>Frontend Context Rule:</strong> In React codebases, if you don't pin your type definitions (<code>@types/user.ts</code>), the model will invent its own interface and sprinkle <code>any</code> across your codebase.</li>
+          <li><strong>Explicit Constraints:</strong> Notice the constraint: <em>"Do not install new packages; use existing Tailwind utility classes."</em> This prevents the model from hallucinating <code>styled-components</code> or importing an external tab library.</li>
+          <li><strong>Cursor Design Mode (Cmd+D):</strong> Mention Cursor's official Design Mode feature (<code>cursor.com/docs/agent/design-mode</code>). Developers can open the browser in the Agents Window, click UI elements on screen, draw boxes around misaligned buttons, and prompt spatially without manually writing CSS selectors!</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Slide 11: 11-domain-data-sql.html -->
+    <section class="slide" data-slide="11">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">Real-World Case Study</span>
+          <h2>Domain Example 3: <span class="gradient-text">Data Engineering & SQL</span></h2>
+          <p class="slide-desc">Scenario: Optimizing a slow customer retention query with SQL window functions.</p>
+        </div>
+
+        <div class="grid-2col">
+          <div class="prompt-box prompt-bad">
+            <div class="prompt-header">
+              <span class="badge-bad">❌ Low-ROI Brute Force Prompt</span>
+              <span class="token-count">Tokens: ~160k (Dumps all models)</span>
+            </div>
+            <div class="prompt-body">
+              <p><em>"My customer retention SQL query is super slow and timing out. Here are all our analytical models @models. Rewrite it to be fast."</em></p>
+            </div>
+            <div class="prompt-feedback">
+              <strong>Why this fails:</strong>
+              <ul>
+                <li>Dumps entire database directory, burning 160,000 tokens on schema noise.</li>
+                <li>AI cannot see table volume or indexes; suggests generic non-applicable optimizations.</li>
+                <li>Creates hallucinated temporary tables.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="prompt-box prompt-good">
+            <div class="prompt-header">
+              <span class="badge-good">✅ Value-Maxed Precision Prompt</span>
+              <span class="token-count">Tokens: ~1.8k | Latency: 1.0s</span>
+              <button class="copy-btn" data-target="copy-data-prompt">Copy</button>
+            </div>
+            <div class="prompt-body">
+              <pre><code id="copy-data-prompt" class="language-markdown">Context: `@monthly_retention.sql`
+
+Problem: Slow correlated subquery calculating each user's latest order date causes full table scans.
+
+Task:
+1. Replace the correlated subquery with an efficient window function:
+   `ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY order_date DESC) AS rn`.
+2. Filter for `rn = 1` and flag `is_churned = true` where `order_date < CURRENT_DATE - INTERVAL '90 days'`.
+
+Constraints:
+- Standard ANSI SQL / PostgreSQL syntax.
+- Maintain existing output column contracts: `(user_id, last_order_date, is_churned)`.</code></pre>
+            </div>
+            <div class="prompt-feedback">
+              <strong>Why this wins:</strong>
+              <ul>
+                <li>Specifies the exact algorithmic fix (Window Function over Subquery).</li>
+                <li>Instant 1-second generation without loading massive database schemas.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (4 mins):</h4>
+        <ul>
+          <li><strong>The Data Trap:</strong> Dumping 15 SQL models into Cursor chat forces the model to read thousands of lines of unrelated schema DDL.</li>
+          <li><strong>Identify the Bottleneck:</strong> Instead of asking "make my query fast", tell the model the specific bottleneck (e.g. <em>"correlated subquery causing table scans, replace with ROW_NUMBER() window function"</em>).</li>
+          <li><strong>Constraint Power:</strong> Stating the exact target dialect (e.g. PostgreSQL vs Snowflake vs BigQuery) avoids dialect-specific syntax errors.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Slide 12: 12-ccao-framework.html -->
+    <section class="slide" data-slide="12">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">Prompt Engineering</span>
+          <h2>The CCAO Framework & <span class="gradient-text">Production Templates</span></h2>
+          <p class="slide-desc">The 4-part mental checklist every engineer should use for every non-trivial prompt.</p>
+        </div>
+
+        <div class="ccao-container">
+          <div class="ccao-steps">
+            <div class="ccao-step c-step">
+              <div class="ccao-letter">C</div>
+              <div class="ccao-info">
+                <strong>Context</strong>
+                <p>Pin exact <code>@files</code>, symbols, and specific error stack traces.</p>
+              </div>
+            </div>
+
+            <div class="ccao-step c2-step">
+              <div class="ccao-letter">C</div>
+              <div class="ccao-info">
+                <strong>Constraints</strong>
+                <p>Negative limits: what NOT to touch, libraries to avoid, performance budgets.</p>
+              </div>
+            </div>
+
+            <div class="ccao-step a-step">
+              <div class="ccao-letter">A</div>
+              <div class="ccao-info">
+                <strong>Action</strong>
+                <p>Explicit, atomic verbs: Refactor, Implement, Extract, Optimize.</p>
+              </div>
+            </div>
+
+            <div class="ccao-step o-step">
+              <div class="ccao-letter">O</div>
+              <div class="ccao-info">
+                <strong>Output Format</strong>
+                <p>Code diff only, type signatures, unit test inclusion, zero fluff explanation.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-selector-box">
+            <div class="tab-header">
+              <button class="tab-btn active" data-tab="tab-bug">🐛 Bug Hunt</button>
+              <button class="tab-btn" data-tab="tab-refactor">⚡ Refactor</button>
+              <button class="tab-btn" data-tab="tab-test">🧪 Test Suite</button>
+              <button class="tab-btn" data-tab="tab-review">🔍 Code Review</button>
+            </div>
+
+            <div class="tab-content active" id="tab-bug">
+              <div class="template-header">
+                <span>Bug Investigation & Fix Template</span>
+                <button class="copy-btn" data-target="tmpl-bug">Copy Template</button>
+              </div>
+              <pre><code id="tmpl-bug" class="language-markdown">Context: `@Service.java:L50-90`
+Error Trace: `[Paste top 5 lines of stack trace]`
+
+Problem: The method fails when [specific condition, e.g., input is null or token expired].
+
+Action:
+1. Identify the root cause in `@Service.java`.
+2. Implement a defensive null-safe fix without breaking downstream callers.
+3. Add a regression test reproducing this exact stack trace in `@ServiceTest.java`.
+
+Constraints:
+- DO NOT alter public method signature.
+- Avoid introducing third-party dependencies.</code></pre>
+            </div>
+
+            <div class="tab-content" id="tab-refactor">
+              <div class="template-header">
+                <span>Clean Architecture Refactoring Template</span>
+                <button class="copy-btn" data-target="tmpl-refactor">Copy Template</button>
+              </div>
+              <pre><code id="tmpl-refactor" class="language-markdown">Context: `@LegacyModule.ts`
+Target Architecture: Single Responsibility Principle (SRP) & Dependency Inversion
+
+Action:
+1. Extract business logic from UI component into a custom hook `@useModuleLogic.ts`.
+2. Move data transformations into a pure utility function with explicit return types.
+3. Keep the UI component purely presentational.
+
+Constraints:
+- Ensure 100% backward compatibility for all exported props.
+- Output clean code without comments explaining what you did.</code></pre>
+            </div>
+
+            <div class="tab-content" id="tab-test">
+              <div class="template-header">
+                <span>Production-Grade Unit Test Template</span>
+                <button class="copy-btn" data-target="tmpl-test">Copy Template</button>
+              </div>
+              <pre><code id="tmpl-test" class="language-markdown">Context: `@PaymentProcessor.ts`
+Testing Framework: Jest / Vitest + Mock Service Worker (MSW)
+
+Action:
+Generate comprehensive unit tests covering:
+1. Happy path with valid authorization payload.
+2. Network timeout / 503 gateway retry behavior.
+3. Invalid currency code and boundary amount checks (0, negative, MAX_INT).
+
+Constraints:
+- Mock all external HTTP calls; do not make real network requests.
+- Use parameterized / table-driven tests (`test.each`) for edge cases.</code></pre>
+            </div>
+
+            <div class="tab-content" id="tab-review">
+              <div class="template-header">
+                <span>Security & Performance Review Template</span>
+                <button class="copy-btn" data-target="tmpl-review">Copy Template</button>
+              </div>
+              <pre><code id="tmpl-review" class="language-markdown">Context: `@Git (Diff with Main)`
+
+Role: Senior Principal Security & Performance Architect.
+
+Task:
+Review the diff for:
+1. OWASP Top 10 vulnerabilities (SQLi, IDOR, sensitive logging, ReDoS).
+2. Memory leaks (unclosed streams, lingering event listeners).
+3. Database performance (unindexed queries, N+1 patterns).
+
+Output:
+Format findings as a markdown table: `| Severity | Location | Issue | Recommended Fix |`. If no issues found, output "LGTM ✅".</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (5 mins):</h4>
+        <ul>
+          <li>Introduce the <strong>CCAO Framework</strong> (Context, Constraints, Action, Output). Make it easy to remember.</li>
+          <li>Showcase the 4 tabs: These 4 templates cover 90% of an engineer's daily AI tasks. They are also included in the printable handout.</li>
+          <li>Point out the Output constraint: "Output code diff only, no fluff". This saves tokens and cuts response time in half because the LLM doesn't waste 200 tokens explaining "Sure! Here is your code:".</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Slide 13: 13-five-golden-rules.html -->
+    <section class="slide" data-slide="13">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">Executive Summary</span>
+          <h2>The 6 Golden Rules: <span class="gradient-text">Monday Morning Checklist</span></h2>
+          <p class="slide-desc">If you only remember 6 things from this 1-hour masterclass, apply these on Monday morning.</p>
+        </div>
+
+        <div class="rules-summary-grid">
+          <div class="summary-card">
+            <div class="summary-num">1</div>
+            <div class="summary-body">
+              <h3>Reset Ruthlessly (3-Turn Cap)</h3>
+              <p>Never argue past 3 failed turns. Hit <kbd>Cmd+L</kbd> / <kbd>Cmd+N</kbd>, prune your context, and restart fresh.</p>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-num">2</div>
+            <div class="summary-body">
+              <h3>Route by Economics (Protect Pool)</h3>
+              <p>Tab for typing, Composer 2.5 / Haiku for tests/SQL, Sonnet 5 for Agent features, Opus for deep concurrency.</p>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-num">3</div>
+            <div class="summary-body">
+              <h3>Laser-Target Context (No @workspace)</h3>
+              <p>Pin specific <code>@file:L30-80</code> line ranges and <code>@symbols</code>. Feed 98% signal for sub-2s responses.</p>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-num">4</div>
+            <div class="summary-body">
+              <h3>Bake Standards into .cursor/rules/*.mdc</h3>
+              <p>Scope by file globs (<code>globs: **/*.tsx</code>) and enforce strict negative constraints (<em>"DO NOT"</em>).</p>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-num">5</div>
+            <div class="summary-body">
+              <h3>Plan First, Agent Second (Shift+Tab)</h3>
+              <p>Review the architect blueprint &amp; file touch list <em>before</em> authorizing autonomous code edits.</p>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-num">6</div>
+            <div class="summary-body">
+              <h3>Steer Loops &amp; Isolate Context</h3>
+              <p>Approve terminal commands, cap iterations, and let Subagents isolate noisy multi-file exploration.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="roi-banner">
+          <div class="roi-item">
+            <div class="roi-val">80% ↓</div>
+            <div class="roi-text">Token Waste &amp; Latency</div>
+          </div>
+          <div class="roi-divider"></div>
+          <div class="roi-item">
+            <div class="roi-val">3x ↑</div>
+            <div class="roi-text">First-Pass Code Acceptance</div>
+          </div>
+          <div class="roi-divider"></div>
+          <div class="roi-item">
+            <div class="roi-val">5x ↑</div>
+            <div class="roi-text">Shared Enterprise Pool Lifespan</div>
+          </div>
+        </div>
+
+        <div class="adoption-cadence">
+          <div class="cadence-title">🚀 Team Adoption:</div>
+          <div class="cadence-steps">
+            <div class="cadence-step"><span class="cadence-pill">Day 1</span> Drop <code>.cursor/rules/</code> for test &amp; lint</div>
+            <div class="cadence-step"><span class="cadence-pill">Day 3</span> Ban <code>@workspace</code>; pin explicit <code>@file:ranges</code></div>
+            <div class="cadence-step"><span class="cadence-pill">Day 7</span> Default to Composer 2.5 / Haiku &amp; cap turns</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (3 mins):</h4>
+        <ul>
+          <li><strong>Walk through the 6 rules authoritatively:</strong> Reiterate that AI is not magic; it's a compiler that accepts natural language. The cleaner and more structured the input, the higher the output quality.</li>
+          <li><strong>Protecting the Shared Enterprise Pool:</strong> Remind the team that because we share a corporate pooled usage account, following these 6 rules multiplies our collective capacity by 5x!</li>
+          <li><strong>3-Turn Reset discipline:</strong> If you find yourself arguing with the model after 3 turns, stop. It's trapped in a negative context loop. Wipe context (<kbd>Cmd+L</kbd>) and restate with precise line references.</li>
+          <li><strong>Team Adoption:</strong> Encourage every squad lead to implement the Day 1–7 rollout cadence.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Slide 14: 14-qa-toolkit.html -->
+    <section class="slide" data-slide="14">
+      <div class="slide-content qa-slide">
+        <div class="badge-pill">Discussion &amp; Action Items</div>
+        <h1 class="hero-title" style="font-size:2.3rem; margin-bottom:0.35rem">
+          Open Q&amp;A &amp; <span class="gradient-text">Toolkit Handover</span>
+        </h1>
+        <p class="hero-subtitle" style="margin-bottom:0.8rem">
+          Take these templates, rules, and strategies back to your engineering team today.
+        </p>
+
+        <!-- Live Discussion Topics Bar -->
+        <div class="qa-topics-bar">
+          <span class="qa-topics-label">💬 Suggested AMA Prompts:</span>
+          <span class="qa-topic-tag">Prompt Teardowns</span>
+          <span class="qa-topic-tag">Rules vs Skills (.mdc)</span>
+          <span class="qa-topic-tag">Pooled Spend &amp; Quotas</span>
+          <span class="qa-topic-tag">MCP Tools &amp; CLI</span>
+          <span class="qa-topic-tag">Subagent Isolation</span>
+        </div>
+
+        <!-- 4 Actionable Resources -->
+        <div class="resources-grid">
+          <a href="cheatsheet.html" target="_blank" class="resource-card">
+            <div class="res-card-top">
+              <span class="res-icon">📄</span>
+              <h3 class="res-title">Printable Cheatsheet</h3>
+            </div>
+            <p class="res-desc">1-page quick reference with shortcuts, CCAO prompt framework, and model routing table.</p>
+            <div class="res-action-btn">Open Cheatsheet →</div>
+          </a>
+
+          <a href="https://cursor.com/docs" target="_blank" class="resource-card" style="border-top: 3px solid var(--accent-cyan);">
+            <div class="res-card-top">
+              <span class="res-icon">📖</span>
+              <h3 class="res-title">Official Cursor Docs</h3>
+            </div>
+            <p class="res-desc">Reference models, .mdc rules, MCP, subagents, and enterprise pooled token pricing.</p>
+            <div class="res-action-btn">cursor.com/docs ↗</div>
+          </a>
+
+          <div class="resource-card interactive-item" id="btn-open-rules-modal" style="border-top: 3px solid #8b5cf6;">
+            <div class="res-card-top">
+              <span class="res-icon">⚙️</span>
+              <h3 class="res-title">Starter Rules Pack</h3>
+            </div>
+            <p class="res-desc">Copy production-ready <code>.mdc</code> rule templates for Java/Spring, React/TS, and Python.</p>
+            <div class="res-action-btn">View Templates ⚡</div>
+          </div>
+
+          <div class="resource-card" style="border-top: 3px solid #10b981;">
+            <div class="res-card-top">
+              <span class="res-icon">💡</span>
+              <h3 class="res-title">Slack #ai-best-practices</h3>
+            </div>
+            <p class="res-desc">Share high-ROI prompt templates, report token traps, and vote on team-wide cursor rules.</p>
+            <div class="res-action-btn">Join Channel →</div>
+          </div>
+        </div>
+
+        <!-- Interactive Fun: Masterclass Knowledge Challenge & Certificate -->
+        <div class="quiz-wrapper">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.7rem">
+            <h3 style="font-size:1.05rem; color:var(--text-primary); display:flex; align-items:center; gap:8px;">
+              <span>⚡ Interactive Masterclass Challenge:</span>
+              <span id="quiz-step-indicator" style="color:var(--accent-cyan); font-size:0.88rem">Question 1 of 3</span>
+            </h3>
+            <span id="quiz-score-badge" class="game-score-badge">Score: 0 / 3</span>
+          </div>
+
+          <div id="quiz-question-box">
+            <div class="quiz-q-title" id="quiz-q-text">1. Your teammate has an 18-turn chat thread trying to fix a JPA query that's still failing. What is your advice?</div>
+            <div class="quiz-answers-grid" id="quiz-options">
+              <button class="quiz-choice-btn" data-correct="false">
+                <span>A</span>
+                <span>Type "please try again and be more careful this time"</span>
+              </button>
+              <button class="quiz-choice-btn" data-correct="false">
+                <span>B</span>
+                <span>Turn on Claude Opus 5 (Fast Mode) and burn 6x tokens</span>
+              </button>
+              <button class="quiz-choice-btn" data-correct="true">
+                <span>C</span>
+                <span>Hit Cmd+L to wipe the bloated context, pin @OrderRepo.java:40-60, and solve in 1 turn!</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="certificate-banner" id="certificate-banner">
+            <div style="font-size:2.2rem; margin-bottom:0.3rem">🎉 🏆 🎓</div>
+            <h2 style="font-size:1.5rem; color:var(--text-primary); margin-bottom:0.35rem">Certified Cursor Token Architect</h2>
+            <p style="color:var(--text-secondary); font-size:0.9rem; max-width:620px; margin:0 auto 0.8rem auto">
+              You scored 100% on the Token Value-Maxing Masterclass. You are officially authorized to ruthlessly reset chats, route models with laser precision, and stop runaway agent loops!
+            </p>
+            <button class="btn-reset-chat" id="btn-quiz-replay" style="margin:0 auto; padding:6px 18px">
+              <span>↺ Play Challenge Again</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (Remaining Time ~10-15 mins):</h4>
+        <ul>
+          <li><strong>Engage the Room with the 3-Question Challenge:</strong> Have the team call out the answers live on screen.</li>
+          <li>When Question 3 is answered correctly, watch the confetti burst and certificate appear!</li>
+          <li>Remind everyone to print or save the 1-page <a href="cheatsheet.html" target="_blank" style="color:var(--accent-cyan)">Handout Cheatsheet</a>.</li>
+          <li>Open the floor for live AMA using the prompt tags above: "Who has a slow Cursor workflow, tricky JPA bug, or prompt teardown we can optimize together right now?"</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Navigation Controls Footer -->
+  <footer class="deck-footer">
+    <div class="footer-left">
+      <button class="nav-control-btn" id="btn-prev" title="Previous Slide (Left Arrow)">
+        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        <span>Prev</span>
+      </button>
+      <button class="nav-control-btn" id="btn-next" title="Next Slide (Right Arrow or Space)">
+        <span>Next</span>
+        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+
+    <div class="footer-center">
+      <div class="slide-dots" id="slide-dots">
+        <!-- Generated by JS -->
+      </div>
+    </div>
+
+    <div class="footer-right">
+      <span class="tip-shortcut"><kbd>←</kbd> <kbd>→</kbd> Navigate</span>
+      <span class="tip-shortcut"><kbd>N</kbd> Notes Window</span>
+      <span class="tip-shortcut"><kbd>T</kbd> Grid</span>
+    </div>
+  </footer>
+
+  <!-- Slide Overview Modal (TOC Grid) -->
+  <div class="modal-backdrop" id="toc-modal">
+    <div class="modal-content toc-grid-modal">
+      <div class="modal-header">
+        <h3>Presentation Slides Overview</h3>
+        <button class="modal-close-btn" id="btn-close-toc">&times;</button>
+      </div>
+      <div class="toc-grid" id="toc-grid">
+        <!-- Populated via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Starter Rules Modal -->
+  <div class="modal-backdrop" id="rules-modal">
+    <div class="modal-content rules-modal-content">
+      <div class="modal-header">
+        <h3>Starter .cursor/rules Templates Pack</h3>
+        <button class="modal-close-btn" id="btn-close-rules">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Drop these <code>.mdc</code> files into your project's <code>.cursor/rules/</code> directory:</p>
+        <div class="tab-header">
+          <button class="tab-btn active" data-rules-tab="rtab-java">Java / Spring</button>
+          <button class="tab-btn" data-rules-tab="rtab-ts">React / TypeScript</button>
+          <button class="tab-btn" data-rules-tab="rtab-py">Python / Data</button>
+        </div>
+        <div class="tab-content active" id="rtab-java">
+          <pre><code class="language-markdown">---
+description: Java Spring Boot API Standards
+globs: src/main/java/**/*.java
+alwaysApply: false
+---
+- Use Constructor Injection with `@RequiredArgsConstructor`. Never `@Autowired`.
+- Controllers must return `ResponseEntity<ApiResponse<T>>`.
+- Repositories must use Spring Data JPA specifications.
+- Never use `java.util.Date`; always use `java.time.Instant` or `LocalDate`.</code></pre>
+        </div>
+        <div class="tab-content" id="rtab-ts">
+          <pre><code class="language-markdown">---
+description: React & TypeScript UI Standards
+globs: src/**/*.{tsx,ts}
+alwaysApply: false
+---
+- Use functional components with explicit TypeScript prop types.
+- Never use `any`; use `unknown` with Zod schema validation.
+- Style exclusively with Tailwind CSS utility classes.
+- Use `@tanstack/react-query` for all server data fetching.</code></pre>
+        </div>
+        <div class="tab-content" id="rtab-py">
+          <pre><code class="language-markdown">---
+description: Python & PySpark Pipeline Standards
+globs: **/*.py
+alwaysApply: false
+---
+- Use Python 3.11+ type hints (`typing.Annotated`, `pydantic`).
+- Spark DataFrames must use Broadcast Join hints for small lookup tables (&lt; 50MB).
+- Never call `.collect()` on large datasets.
+- Ensure idempotent writes with dynamic partition overwrite.</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Confetti Celebration Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

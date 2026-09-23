@@ -1,0 +1,22 @@
+{
+  "name": "ai-effectiveness-presentation",
+  "version": "1.0.0",
+  "description": "AI Effectiveness & Token Value-Maxing Masterclass Presentation Deck",
+  "scripts": {
+    "build": "node build.js",
+    "watch": "node build.js --watch",
+    "start": "node build.js && npx serve ."
+  },
+  "keywords": [
+    "presentation",
+    "cursor",
+    "ai",
+    "tokens",
+    "masterclass"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  }
+}

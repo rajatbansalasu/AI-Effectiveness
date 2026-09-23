@@ -1,0 +1,139 @@
+<section class="slide" data-slide="12">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">Prompt Engineering</span>
+          <h2>The CCAO Framework & <span class="gradient-text">Production Templates</span></h2>
+          <p class="slide-desc">The 4-part mental checklist every engineer should use for every non-trivial prompt.</p>
+        </div>
+
+        <div class="ccao-container">
+          <div class="ccao-steps">
+            <div class="ccao-step c-step">
+              <div class="ccao-letter">C</div>
+              <div class="ccao-info">
+                <strong>Context</strong>
+                <p>Pin exact <code>@files</code>, symbols, and specific error stack traces.</p>
+              </div>
+            </div>
+
+            <div class="ccao-step c2-step">
+              <div class="ccao-letter">C</div>
+              <div class="ccao-info">
+                <strong>Constraints</strong>
+                <p>Negative limits: what NOT to touch, libraries to avoid, performance budgets.</p>
+              </div>
+            </div>
+
+            <div class="ccao-step a-step">
+              <div class="ccao-letter">A</div>
+              <div class="ccao-info">
+                <strong>Action</strong>
+                <p>Explicit, atomic verbs: Refactor, Implement, Extract, Optimize.</p>
+              </div>
+            </div>
+
+            <div class="ccao-step o-step">
+              <div class="ccao-letter">O</div>
+              <div class="ccao-info">
+                <strong>Output Format</strong>
+                <p>Code diff only, type signatures, unit test inclusion, zero fluff explanation.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="template-selector-box">
+            <div class="tab-header">
+              <button class="tab-btn active" data-tab="tab-bug">🐛 Bug Hunt</button>
+              <button class="tab-btn" data-tab="tab-refactor">⚡ Refactor</button>
+              <button class="tab-btn" data-tab="tab-test">🧪 Test Suite</button>
+              <button class="tab-btn" data-tab="tab-review">🔍 Code Review</button>
+            </div>
+
+            <div class="tab-content active" id="tab-bug">
+              <div class="template-header">
+                <span>Bug Investigation & Fix Template</span>
+                <button class="copy-btn" data-target="tmpl-bug">Copy Template</button>
+              </div>
+              <pre><code id="tmpl-bug" class="language-markdown">Context: `@Service.java:L50-90`
+Error Trace: `[Paste top 5 lines of stack trace]`
+
+Problem: The method fails when [specific condition, e.g., input is null or token expired].
+
+Action:
+1. Identify the root cause in `@Service.java`.
+2. Implement a defensive null-safe fix without breaking downstream callers.
+3. Add a regression test reproducing this exact stack trace in `@ServiceTest.java`.
+
+Constraints:
+- DO NOT alter public method signature.
+- Avoid introducing third-party dependencies.</code></pre>
+            </div>
+
+            <div class="tab-content" id="tab-refactor">
+              <div class="template-header">
+                <span>Clean Architecture Refactoring Template</span>
+                <button class="copy-btn" data-target="tmpl-refactor">Copy Template</button>
+              </div>
+              <pre><code id="tmpl-refactor" class="language-markdown">Context: `@LegacyModule.ts`
+Target Architecture: Single Responsibility Principle (SRP) & Dependency Inversion
+
+Action:
+1. Extract business logic from UI component into a custom hook `@useModuleLogic.ts`.
+2. Move data transformations into a pure utility function with explicit return types.
+3. Keep the UI component purely presentational.
+
+Constraints:
+- Ensure 100% backward compatibility for all exported props.
+- Output clean code without comments explaining what you did.</code></pre>
+            </div>
+
+            <div class="tab-content" id="tab-test">
+              <div class="template-header">
+                <span>Production-Grade Unit Test Template</span>
+                <button class="copy-btn" data-target="tmpl-test">Copy Template</button>
+              </div>
+              <pre><code id="tmpl-test" class="language-markdown">Context: `@PaymentProcessor.ts`
+Testing Framework: Jest / Vitest + Mock Service Worker (MSW)
+
+Action:
+Generate comprehensive unit tests covering:
+1. Happy path with valid authorization payload.
+2. Network timeout / 503 gateway retry behavior.
+3. Invalid currency code and boundary amount checks (0, negative, MAX_INT).
+
+Constraints:
+- Mock all external HTTP calls; do not make real network requests.
+- Use parameterized / table-driven tests (`test.each`) for edge cases.</code></pre>
+            </div>
+
+            <div class="tab-content" id="tab-review">
+              <div class="template-header">
+                <span>Security & Performance Review Template</span>
+                <button class="copy-btn" data-target="tmpl-review">Copy Template</button>
+              </div>
+              <pre><code id="tmpl-review" class="language-markdown">Context: `@Git (Diff with Main)`
+
+Role: Senior Principal Security & Performance Architect.
+
+Task:
+Review the diff for:
+1. OWASP Top 10 vulnerabilities (SQLi, IDOR, sensitive logging, ReDoS).
+2. Memory leaks (unclosed streams, lingering event listeners).
+3. Database performance (unindexed queries, N+1 patterns).
+
+Output:
+Format findings as a markdown table: `| Severity | Location | Issue | Recommended Fix |`. If no issues found, output "LGTM ✅".</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (5 mins):</h4>
+        <ul>
+          <li>Introduce the <strong>CCAO Framework</strong> (Context, Constraints, Action, Output). Make it easy to remember.</li>
+          <li>Showcase the 4 tabs: These 4 templates cover 90% of an engineer's daily AI tasks. They are also included in the printable handout.</li>
+          <li>Point out the Output constraint: "Output code diff only, no fluff". This saves tokens and cuts response time in half because the LLM doesn't waste 200 tokens explaining "Sure! Here is your code:".</li>
+        </ul>
+      </div>
+    </section>

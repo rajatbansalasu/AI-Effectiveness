@@ -1,0 +1,67 @@
+<section class="slide" data-slide="11">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">Real-World Case Study</span>
+          <h2>Domain Example 3: <span class="gradient-text">Data Engineering & SQL</span></h2>
+          <p class="slide-desc">Scenario: Optimizing a slow customer retention query with SQL window functions.</p>
+        </div>
+
+        <div class="grid-2col">
+          <div class="prompt-box prompt-bad">
+            <div class="prompt-header">
+              <span class="badge-bad">❌ Low-ROI Brute Force Prompt</span>
+              <span class="token-count">Tokens: ~160k (Dumps all models)</span>
+            </div>
+            <div class="prompt-body">
+              <p><em>"My customer retention SQL query is super slow and timing out. Here are all our analytical models @models. Rewrite it to be fast."</em></p>
+            </div>
+            <div class="prompt-feedback">
+              <strong>Why this fails:</strong>
+              <ul>
+                <li>Dumps entire database directory, burning 160,000 tokens on schema noise.</li>
+                <li>AI cannot see table volume or indexes; suggests generic non-applicable optimizations.</li>
+                <li>Creates hallucinated temporary tables.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="prompt-box prompt-good">
+            <div class="prompt-header">
+              <span class="badge-good">✅ Value-Maxed Precision Prompt</span>
+              <span class="token-count">Tokens: ~1.8k | Latency: 1.0s</span>
+              <button class="copy-btn" data-target="copy-data-prompt">Copy</button>
+            </div>
+            <div class="prompt-body">
+              <pre><code id="copy-data-prompt" class="language-markdown">Context: `@monthly_retention.sql`
+
+Problem: Slow correlated subquery calculating each user's latest order date causes full table scans.
+
+Task:
+1. Replace the correlated subquery with an efficient window function:
+   `ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY order_date DESC) AS rn`.
+2. Filter for `rn = 1` and flag `is_churned = true` where `order_date < CURRENT_DATE - INTERVAL '90 days'`.
+
+Constraints:
+- Standard ANSI SQL / PostgreSQL syntax.
+- Maintain existing output column contracts: `(user_id, last_order_date, is_churned)`.</code></pre>
+            </div>
+            <div class="prompt-feedback">
+              <strong>Why this wins:</strong>
+              <ul>
+                <li>Specifies the exact algorithmic fix (Window Function over Subquery).</li>
+                <li>Instant 1-second generation without loading massive database schemas.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (4 mins):</h4>
+        <ul>
+          <li><strong>The Data Trap:</strong> Dumping 15 SQL models into Cursor chat forces the model to read thousands of lines of unrelated schema DDL.</li>
+          <li><strong>Identify the Bottleneck:</strong> Instead of asking "make my query fast", tell the model the specific bottleneck (e.g. <em>"correlated subquery causing table scans, replace with ROW_NUMBER() window function"</em>).</li>
+          <li><strong>Constraint Power:</strong> Stating the exact target dialect (e.g. PostgreSQL vs Snowflake vs BigQuery) avoids dialect-specific syntax errors.</li>
+        </ul>
+      </div>
+    </section>

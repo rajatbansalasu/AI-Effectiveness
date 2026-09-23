@@ -1,0 +1,64 @@
+<section class="slide" data-slide="9">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">Real-World Case Study</span>
+          <h2>Domain Example 1: <span class="gradient-text">Java & Spring Boot</span></h2>
+          <p class="slide-desc">Scenario: Adding input validation & clean error handling to a User API endpoint.</p>
+        </div>
+
+        <div class="grid-2col">
+          <div class="prompt-box prompt-bad">
+            <div class="prompt-header">
+              <span class="badge-bad">❌ Low-ROI Brute Force Prompt</span>
+              <span class="token-count">Tokens: ~140k (Scans repo)</span>
+            </div>
+            <div class="prompt-body">
+              <p><em>"My user signup endpoint is crashing with 500 errors when users enter bad emails. Here is my @workspace. Please fix the validation and error handling."</em></p>
+            </div>
+            <div class="prompt-feedback">
+              <strong>Why this fails:</strong>
+              <ul>
+                <li>Agent scans 35 entity & service files looking for "signup".</li>
+                <li>Generates messy manual <code>if (email == null)</code> checks inside the controller method.</li>
+                <li>Burns 140,000 tokens and wastes 30+ seconds.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="prompt-box prompt-good">
+            <div class="prompt-header">
+              <span class="badge-good">✅ Value-Maxed Precision Prompt</span>
+              <span class="token-count">Tokens: ~2.1k | Latency: 1.2s</span>
+              <button class="copy-btn" data-target="copy-java-prompt">Copy</button>
+            </div>
+            <div class="prompt-body">
+              <pre><code id="copy-java-prompt" class="language-markdown">Context: `@UserController.java:L25-45` and `@SignupRequest.java`
+
+Task:
+1. Add `@Valid` with `@Email` and `@NotBlank` annotations to `SignupRequest`.
+2. In `@GlobalExceptionHandler.java`, add `@ExceptionHandler(MethodArgumentNotValidException.class)` to return HTTP 400 with field errors.
+
+Constraints:
+- Do not modify database entities or controller signatures.
+- Follow standard Spring Boot `@RestControllerAdvice` pattern.</code></pre>
+            </div>
+            <div class="prompt-feedback">
+              <strong>Why this wins:</strong>
+              <ul>
+                <li>Pins the exact 2 files; model outputs clean Spring code in 1 pass.</li>
+                <li>98% fewer tokens, instantaneous response under 1.5s!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (4 mins):</h4>
+        <ul>
+          <li><strong>Contrast the Two Prompts:</strong> Notice how the bad prompt relies on `@workspace` and vague instructions. The model has to guess your validation philosophy and scans dozens of unrelated files.</li>
+          <li><strong>The Precision Fix:</strong> By referencing only `@UserController.java:L25-45` and `@SignupRequest.java`, you feed the model pure signal. It uses standard Spring `@Valid` and `@RestControllerAdvice` without touching your database layer.</li>
+          <li><strong>Takeaway:</strong> Always specify the exact files and state the architectural pattern you want (e.g. `@RestControllerAdvice`).</li>
+        </ul>
+      </div>
+    </section>

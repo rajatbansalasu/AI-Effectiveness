@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Effectiveness & Token Value-Maxing | Engineering Masterclass</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Prism.js for syntax highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" id="prism-theme" rel="stylesheet" />
+  <!-- Google Fonts: JetBrains Mono & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body class="theme-light">
+
+  <!-- Header / Navigation Bar -->
+  <header class="top-nav">
+    <div class="nav-left">
+      <div class="brand-badge">
+        <span class="pulse-dot"></span>
+        <span class="brand-title">AI Effectiveness & Token Value-Maxing</span>
+      </div>
+      <span class="slide-indicator" id="slide-indicator">Slide 1 / 14</span>
+    </div>
+    
+    <div class="nav-center">
+      <div class="session-timer" id="session-timer" title="1-Hour Talk Timer">
+        <svg class="timer-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        <span id="timer-display">60:00</span>
+        <button id="timer-toggle-btn" class="icon-btn" title="Start/Pause Timer">▶</button>
+        <button id="timer-reset-btn" class="icon-btn" title="Reset Timer">↺</button>
+      </div>
+    </div>
+
+    <div class="nav-right">
+      <button class="nav-btn" id="btn-theme" title="Toggle Light / Dark Theme">
+        <span id="theme-icon">🌙</span>
+        <span id="theme-label">Dark</span>
+      </button>
+      <button class="nav-btn" id="btn-sound" title="Toggle Sound Effects (Web Audio)">
+        <span id="sound-icon">🔊</span>
+      </button>
+      <button class="nav-btn" id="btn-toc" title="Table of Contents (T)">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        <span>Overview</span>
+      </button>
+      <button class="nav-btn" id="btn-notes" title="Open Speaker Notes in Separate Window (N)">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        <span>Speaker Notes ↗</span>
+      </button>
+      <a href="cheatsheet.html" target="_blank" class="nav-btn highlight" title="Open Printable Handout Cheatsheet">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M6 2L18 2 18 6 6 6z"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        <span>Handout Cheatsheet</span>
+      </a>
+      <button class="nav-btn" id="btn-fullscreen" title="Toggle Fullscreen (F)">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar-container">
+    <div class="progress-bar" id="progress-bar"></div>
+  </div>
+
+  <!-- Main Presentation Deck Container -->
+  <main class="deck-container" id="deck-container">
+
+<!-- SLIDES_PLACEHOLDER -->
+
+  </main>
+
+  <!-- Navigation Controls Footer -->
+  <footer class="deck-footer">
+    <div class="footer-left">
+      <button class="nav-control-btn" id="btn-prev" title="Previous Slide (Left Arrow)">
+        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        <span>Prev</span>
+      </button>
+      <button class="nav-control-btn" id="btn-next" title="Next Slide (Right Arrow or Space)">
+        <span>Next</span>
+        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+
+    <div class="footer-center">
+      <div class="slide-dots" id="slide-dots">
+        <!-- Generated by JS -->
+      </div>
+    </div>
+
+    <div class="footer-right">
+      <span class="tip-shortcut"><kbd>←</kbd> <kbd>→</kbd> Navigate</span>
+      <span class="tip-shortcut"><kbd>N</kbd> Notes Window</span>
+      <span class="tip-shortcut"><kbd>T</kbd> Grid</span>
+    </div>
+  </footer>
+
+  <!-- Slide Overview Modal (TOC Grid) -->
+  <div class="modal-backdrop" id="toc-modal">
+    <div class="modal-content toc-grid-modal">
+      <div class="modal-header">
+        <h3>Presentation Slides Overview</h3>
+        <button class="modal-close-btn" id="btn-close-toc">&times;</button>
+      </div>
+      <div class="toc-grid" id="toc-grid">
+        <!-- Populated via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Starter Rules Modal -->
+  <div class="modal-backdrop" id="rules-modal">
+    <div class="modal-content rules-modal-content">
+      <div class="modal-header">
+        <h3>Starter .cursor/rules Templates Pack</h3>
+        <button class="modal-close-btn" id="btn-close-rules">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Drop these <code>.mdc</code> files into your project's <code>.cursor/rules/</code> directory:</p>
+        <div class="tab-header">
+          <button class="tab-btn active" data-rules-tab="rtab-java">Java / Spring</button>
+          <button class="tab-btn" data-rules-tab="rtab-ts">React / TypeScript</button>
+          <button class="tab-btn" data-rules-tab="rtab-py">Python / Data</button>
+        </div>
+        <div class="tab-content active" id="rtab-java">
+          <pre><code class="language-markdown">---
+description: Java Spring Boot API Standards
+globs: src/main/java/**/*.java
+alwaysApply: false
+---
+- Use Constructor Injection with `@RequiredArgsConstructor`. Never `@Autowired`.
+- Controllers must return `ResponseEntity<ApiResponse<T>>`.
+- Repositories must use Spring Data JPA specifications.
+- Never use `java.util.Date`; always use `java.time.Instant` or `LocalDate`.</code></pre>
+        </div>
+        <div class="tab-content" id="rtab-ts">
+          <pre><code class="language-markdown">---
+description: React & TypeScript UI Standards
+globs: src/**/*.{tsx,ts}
+alwaysApply: false
+---
+- Use functional components with explicit TypeScript prop types.
+- Never use `any`; use `unknown` with Zod schema validation.
+- Style exclusively with Tailwind CSS utility classes.
+- Use `@tanstack/react-query` for all server data fetching.</code></pre>
+        </div>
+        <div class="tab-content" id="rtab-py">
+          <pre><code class="language-markdown">---
+description: Python & PySpark Pipeline Standards
+globs: **/*.py
+alwaysApply: false
+---
+- Use Python 3.11+ type hints (`typing.Annotated`, `pydantic`).
+- Spark DataFrames must use Broadcast Join hints for small lookup tables (&lt; 50MB).
+- Never call `.collect()` on large datasets.
+- Ensure idempotent writes with dynamic partition overwrite.</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Confetti Celebration Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

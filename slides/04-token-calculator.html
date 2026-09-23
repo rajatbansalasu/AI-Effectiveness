@@ -1,0 +1,104 @@
+<section class="slide" data-slide="4">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">Live Tool</span>
+          <h2>Interactive <span class="gradient-text">Token & Cost Calculator</span></h2>
+          <p class="slide-desc">Simulate the actual token burn and latency penalty of different engineering workflow habits.</p>
+        </div>
+
+        <div class="calc-container">
+          <div class="calc-controls">
+            <div class="control-group">
+              <label for="calc-model">Selected Model:</label>
+              <select id="calc-model" class="calc-select">
+                <option value="sonnet5" selected>Claude Sonnet 5 ($2.00/M in, $10.00/M out + $0.25 CTR)</option>
+                <option value="opus5">Claude Opus 5 ($5.00/M in, $25.00/M out + $0.25 CTR)</option>
+                <option value="opus5-fast">Claude Opus 5 Fast ($30.00/M in, $150.00/M out + $0.25 CTR) 🚨 6x</option>
+                <option value="composer25">Composer 2.5 ($0.50/M in, $2.50/M out &bull; $0 CTR Exempt)</option>
+                <option value="composer25-fast">Composer 2.5 Fast ($3.00/M in, $15.00/M out &bull; $0 CTR Exempt) 🚨 6x</option>
+                <option value="grok47">Grok 4.7 ($2.00/M in, $6.00/M out &bull; $0 CTR Exempt)</option>
+                <option value="grok47-fast">Grok 4.7 Fast ($4.00/M in, $12.00/M out &bull; $0 CTR Exempt) 🚨 2x</option>
+                <option value="haiku45">Claude 4.5 Haiku ($1.00/M in, $5.00/M out + $0.25 CTR)</option>
+                <option value="gemini38-flash">Gemini 3.8 Flash ($0.75/M in, $3.50/M out + $0.25 CTR)</option>
+              </select>
+            </div>
+
+            <div class="control-group">
+              <div class="slider-header">
+                <label for="calc-turns">Turns in Single Chat Session:</label>
+                <span class="slider-val" id="val-turns">8 turns</span>
+              </div>
+              <input type="range" id="calc-turns" min="1" max="25" value="8" class="calc-slider">
+              <div class="slider-hints">
+                <span>1 turn (Surgical)</span>
+                <span>3 turns (Ideal)</span>
+                <span>10+ turns (Bloated)</span>
+                <span>25 turns (Toxic)</span>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <div class="slider-header">
+                <label for="calc-context">Context Attached per Turn:</label>
+                <span class="slider-val" id="val-context">@workspace (150,000 tokens)</span>
+              </div>
+              <input type="range" id="calc-context" min="2000" max="300000" step="5000" value="150000" class="calc-slider">
+              <div class="slider-hints">
+                <span>2k (Snippet)</span>
+                <span>15k (2 Files)</span>
+                <span>50k (Folder)</span>
+                <span>300k (@workspace)</span>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="calc-tool-loop" checked>
+                <span>Agentic MCP / Tool Loops Enabled (Multiplies read rounds 3x)</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="calc-results">
+            <div class="metric-box">
+              <div class="metric-title">Cumulative Session Tokens</div>
+              <div class="metric-value" id="res-total-tokens">1,800,000</div>
+              <div class="metric-sub" id="res-tokens-breakdown">In: 1.76M | Out: 40k</div>
+            </div>
+
+            <div class="metric-box">
+              <div class="metric-title">Est. Total Enterprise Burn (Base + CTR)</div>
+              <div class="metric-value text-accent" id="res-total-cost">$5.88</div>
+              <div class="metric-sub" id="res-cost-sub" style="font-family: var(--font-mono); font-size: 0.72rem;">Base: $5.43 | CTR (+ $0.25/M): $0.45</div>
+            </div>
+
+            <div class="metric-box">
+              <div class="metric-title">Average Roundtrip Latency</div>
+              <div class="metric-value text-warning" id="res-latency">18.4s</div>
+              <div class="metric-sub">Time waiting per response</div>
+            </div>
+
+            <div class="metric-box">
+              <div class="metric-title">Context Quality & Attention Health</div>
+              <div class="health-meter">
+                <div class="health-bar" id="res-health-bar" style="width: 32%; background: var(--danger-color);"></div>
+              </div>
+              <div class="metric-sub text-danger" id="res-health-text">🚨 Severe Attention Degradation (32%)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-takeaway">
+          💡 <strong>Live Demo Observation:</strong> A 3-turn session with 2 targeted files costs <strong>$0.05</strong> and responds in <strong>1.8s</strong> with <strong>98% accuracy</strong>. A 15-turn session with blind <code>@workspace</code> costs <strong>$8.40</strong> and responds in <strong>28s</strong> with <strong>30% accuracy</strong>!
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (5 mins):</h4>
+        <ul>
+          <li>Interact with this live slide! Drag the slider from 25 turns down to 3 turns and watch the cost plummet from $10 to $0.05.</li>
+          <li>Show the latency difference: "When you complain Cursor is slow, 80% of the time it's because you're forcing Sonnet to read 200,000 tokens of your entire codebase before it answers a 1-line question."</li>
+          <li>Point out the Attention Health meter: When it turns red, the model is hallucinating imports and forgetting previous constraints.</li>
+        </ul>
+      </div>
+    </section>

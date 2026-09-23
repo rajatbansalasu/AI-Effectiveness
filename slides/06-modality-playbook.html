@@ -1,0 +1,164 @@
+<section class="slide" data-slide="6">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">IDE Mastery &amp; Workflow</span>
+          <h2>The Cursor Modality Playbook: <span class="gradient-text">Plan, Ask, Agent &amp; Surfaces</span></h2>
+          <p class="slide-desc">Cursor provides 4 unified AI Chat Modes (cycle via <kbd>Shift + Tab</kbd>) alongside editor surfaces (Tab, <kbd>Cmd+K</kbd>). Picking the wrong mode burns 10x more tokens and causes file churn.</p>
+        </div>
+
+        <div class="modality-grid">
+          <div class="modality-card">
+            <div class="modality-header">
+              <div class="modality-icon">🗺️</div>
+              <div>
+                <h3>Plan Mode</h3>
+                <span class="shortcut">Shift + Tab &bull; The Architect</span>
+              </div>
+            </div>
+            <div class="modality-body">
+              <div class="badge-row">
+                <span class="mini-badge bg-blue">Plan First</span>
+                <span class="mini-badge bg-green">Zero File Risk</span>
+              </div>
+              <p>Drafts an implementation blueprint &amp; dependency checklist for review <strong>before</strong> modifying code.</p>
+              <div class="when-to-use">
+                <strong>When to use:</strong> Multi-file features, major refactors, complex schema changes, and preventing destructive hallucinated file deletions.
+              </div>
+            </div>
+          </div>
+
+          <div class="modality-card">
+            <div class="modality-header">
+              <div class="modality-icon">💬</div>
+              <div>
+                <h3>Ask Mode</h3>
+                <span class="shortcut">Cmd + L &bull; The Assistant</span>
+              </div>
+            </div>
+            <div class="modality-body">
+              <div class="badge-row">
+                <span class="mini-badge bg-green">Read-Only</span>
+                <span class="mini-badge bg-blue">Fast &amp; Cheap</span>
+              </div>
+              <p>Conversational Q&amp;A, syntax explanations, and codebase navigation with <strong>zero file mutations</strong>.</p>
+              <div class="when-to-use">
+                <strong>When to use:</strong> Exploring unfamiliar legacy files, explaining regex/algorithms, architecture debates, safe production inspection.
+              </div>
+            </div>
+          </div>
+
+          <div class="modality-card">
+            <div class="modality-header">
+              <div class="modality-icon">🚀</div>
+              <div>
+                <h3>Agent Mode</h3>
+                <span class="shortcut">Cmd + I &bull; The Builder</span>
+              </div>
+            </div>
+            <div class="modality-body">
+              <div class="badge-row">
+                <span class="mini-badge bg-red">Autonomous</span>
+                <span class="mini-badge bg-blue">Multi-File Edits</span>
+              </div>
+              <p>Autonomous multi-file editor that creates files, runs terminal tests/lints, and self-heals syntax errors.</p>
+              <div class="when-to-use">
+                <strong>When to use:</strong> Executing an approved Plan, scaffolding fullstack features, cross-layer API contract sync, test verification.
+              </div>
+            </div>
+          </div>
+
+          <div class="modality-card">
+            <div class="modality-header">
+              <div class="modality-icon">🔬</div>
+              <div>
+                <h3>Debug Mode</h3>
+                <span class="shortcut">Shift + Tab &bull; Investigator</span>
+              </div>
+            </div>
+            <div class="modality-body">
+              <div class="badge-row">
+                <span class="mini-badge bg-yellow">Evidence-Based</span>
+                <span class="mini-badge bg-blue">Log Inspector</span>
+              </div>
+              <p>Root-cause investigator that interrogates test failures, runtime errors, and logs without blind guessing.</p>
+              <div class="when-to-use">
+                <strong>When to use:</strong> Diagnosing flaky integration tests, race conditions, connection timeouts, and cryptic stack traces.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="comparison-table-wrap">
+          <table class="simple-table">
+            <thead>
+              <tr>
+                <th>Engineering Task</th>
+                <th>❌ Inefficient Modality</th>
+                <th>✅ Optimal Modality &amp; Surface</th>
+                <th>Token &amp; Speed Advantage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Quick 1-line null-check or helper method</td>
+                <td>Open Agent / Composer (reads entire repo)</td>
+                <td>Highlight &rarr; <kbd>Cmd+K</kbd> (Inline Edit) or <kbd>Tab</kbd></td>
+                <td><strong>95% less tokens</strong>, &lt; 1s instant diff</td>
+              </tr>
+              <tr>
+                <td>Understand a 600-line unfamiliar legacy service</td>
+                <td>Paste into Agent mode (risks accidental edits)</td>
+                <td><strong>Ask Mode (<kbd>Cmd+L</kbd>)</strong> with <code>@file</code></td>
+                <td><strong>100% read-only safe</strong>, 80% less tokens</td>
+              </tr>
+              <tr>
+                <td>Refactor 4 files: Controller, DTO, Entity &amp; API Contract</td>
+                <td>Run Agent mode blind without constraints</td>
+                <td><strong>Plan Mode</strong> first &rarr; approve &rarr; <strong>Agent Mode</strong></td>
+                <td><strong>Eliminates 100k token hallucination loops</strong></td>
+              </tr>
+              <tr>
+                <td>Diagnose failing integration test or cryptic runtime error</td>
+                <td>Ask generic chat with zero logs</td>
+                <td><strong>Debug Mode</strong> with <code>@terminal</code> or test output</td>
+                <td><strong>Targeted surgical fix</strong> backed by evidence</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pricing-truth-box" style="margin-top: 0.8rem; background: var(--bg-card); border: 1px solid var(--border-color); border-left: 4px solid #7e22ce; border-radius: 8px; padding: 0.65rem 0.9rem; font-size: 0.82rem;">
+          <div style="font-weight: 700; color: #7e22ce; margin-bottom: 0.3rem; display: flex; align-items: center; justify-content: space-between;">
+            <span>💰 Official Docs: Is there a Pricing Difference Between Chat Modes?</span>
+            <span style="font-family: var(--font-mono); font-size: 0.74rem; background: rgba(126, 34, 206, 0.1); color: #7e22ce; padding: 2px 8px; border-radius: 4px; font-weight: 700;">Identical Token Rate &bull; 10x-50x Token Volume</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; line-height: 1.4;">
+            <div>
+              <strong>Per-Token Billing Rate: IDENTICAL ($0 Mode Surcharge)</strong><br/>
+              Official Cursor docs confirm: there is no mode-specific surcharge. Plan, Ask, Agent, and Debug bill at the exact same base model token price (e.g., Sonnet 5 @ $2/$10 in/out with $0 platform markup).
+            </div>
+            <div>
+              <strong>Effective Cost: 10x–50x SPREAD (Tool Loop Overhead)</strong><br/>
+              <strong>Ask Mode:</strong> 1 single Q&amp;A turn = ~2k–5k tokens.<br/>
+              <strong>Agent Mode:</strong> Multi-turn tool execution loop (terminal runs, file reads, linter self-heals) = <strong>50k–300k+ tokens</strong> per run!
+            </div>
+          </div>
+        </div>
+
+        <div class="info-banner" style="margin-top: 0.65rem; font-size: 0.83rem; display: flex; align-items: center; justify-content: space-between;">
+          <span>💡 <strong>Workflow Pro-Tip:</strong> Press <kbd>Shift + Tab</kbd> inside the chat prompt to instantly toggle between <strong>Plan &rarr; Agent &rarr; Ask &rarr; Debug</strong>. For non-trivial features, always <em>Plan first</em>, review the file list, then hit <em>Agent</em> to execute!</span>
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent-cyan); white-space: nowrap;">Shift + Tab = Quick Switch</span>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (5 mins):</h4>
+        <ul>
+          <li><strong>Chat Modes Pricing Clarification (Official Docs):</strong> Address the common executive/team question: <em>"Does Agent mode cost more per token than Ask mode?"</em> Official docs answer: <strong>No, the token rate is identical.</strong> However, the bill is 10x–50x higher because Agent mode autonomously chains 5–15 tool calls (reading entire files, running terminal tests, rewriting diffs).</li>
+          <li><strong>The "Agent Trap":</strong> Explain why junior engineers get burned by defaulting to Agent mode for everything: "If you give Agent mode a vague prompt without planning, it will enthusiastically modify 8 files, install 2 npm packages, burn 200k tokens, and break your build in 30 seconds."</li>
+          <li><strong>Why Plan Mode is Essential:</strong> Emphasize Plan mode as the senior developer's steering wheel. The AI acts as an architect, listing every file it plans to touch and its exact sequence of edits. You can refine or reject the strategy <em>before</em> any code changes occur.</li>
+          <li><strong>Ask Mode for Safety:</strong> Highlight Ask mode as the safest way to navigate production repos or legacy systems. Because it is strictly read-only, there is zero risk of uncommitted diffs or accidental file deletions.</li>
+          <li><strong>Don't Forget <kbd>Cmd+K</kbd> and Tab:</strong> For 80% of daily coding (small refactors, single functions, renaming), never open a chat window. Use Tab autocomplete (<kbd>Tab</kbd>) or Inline Edit (<kbd>Cmd+K</kbd>) to keep flow state intact.</li>
+        </ul>
+      </div>
+    </section>

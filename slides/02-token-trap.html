@@ -1,0 +1,83 @@
+<section class="slide" data-slide="2">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">The Problem</span>
+          <h2>The Silent Productivity Killer: <span class="text-danger">The 2M Token Trap</span></h2>
+          <p class="slide-desc">Why running an "infinite chat thread" is killing your code quality and multiplying latency.</p>
+        </div>
+
+        <div class="grid-2col">
+          <div class="card danger-card">
+            <div class="card-header">
+              <span class="card-tag tag-danger">❌ The Anti-Pattern: "Infinite Chat Syndrome"</span>
+            </div>
+            <ul class="bullet-list">
+              <li><strong>Day-Long Chat Threads:</strong> Asking 20 unrelated questions in one Composer / Chat session without resetting.</li>
+              <li><strong>Attention Dilution ("Lost in the Middle"):</strong> As context reaches 500k–2M tokens, the LLM's attention weights smear. Critical constraints are silently ignored.</li>
+              <li><strong>Compounding Hallucinations:</strong> Bad code or temporary bugs produced at step 3 become "ground truth" context for step 15.</li>
+              <li><strong>Latency Explosion:</strong> Model has to ingest 1.5M input tokens before generating 5 lines of code → 25s–40s delay per keystroke.</li>
+            </ul>
+          </div>
+
+          <div class="card success-card">
+            <div class="card-header">
+              <span class="card-tag tag-success">✅ The Fix: High-Velocity Ephemeral Context</span>
+            </div>
+            <ul class="bullet-list">
+              <li><strong>The 3-Turn Rule:</strong> If the AI doesn't solve your bug or generate the correct code in <strong>3 turns</strong>, do NOT argue with it. Hit <kbd>Cmd+L</kbd> / <kbd>Cmd+N</kbd>, prune your prompt, and start fresh.</li>
+              <li><strong>Surgical Context Injection:</strong> Reference <em>only</em> the 2-3 files relevant to the current task using precise <code>@file</code> symbols.</li>
+              <li><strong>Ephemeral Sessions:</strong> Treat chat threads like scratch buffers — disposable, single-purpose, and laser-focused.</li>
+              <li><strong>Sub-2-Second Responses:</strong> Keeping context under 20k tokens yields instantaneous, razor-sharp generations.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Interactive Fun: Context Decay Live Simulator -->
+        <div class="decay-sim-card">
+          <div class="sim-header">
+            <div class="sim-title">
+              <span>🔬 Interactive Lab: Watch an LLM Brain Degrade in Real-Time</span>
+            </div>
+            <button class="btn-reset-chat" id="btn-decay-reset" title="Wipe Session with Cmd+L">
+              <span>⚡ Reset Session (Cmd+L)</span>
+            </button>
+          </div>
+
+          <div class="sim-controls-row">
+            <div class="sim-slider-wrap">
+              <div class="sim-slider-label">
+                <span>Chat Thread Length: <strong id="decay-turns-val" style="color:var(--accent-cyan)">Turn 1 (Fresh Session)</strong></span>
+                <span id="decay-health-pill" style="color:var(--success-color); font-weight:700">100% Attention Precision</span>
+              </div>
+              <input type="range" id="decay-slider" min="1" max="18" value="1" class="calc-slider">
+            </div>
+            <div style="font-size:0.75rem; color:var(--text-muted); min-width: 140px; text-align:right;">
+              <span id="decay-tokens-val">Tokens: ~4,200</span><br>
+              <span id="decay-latency-val">Latency: 1.2s</span>
+            </div>
+          </div>
+
+          <div class="sim-output-box pristine" id="decay-output-box">
+            <code>// Turn 1 Output: return users.filter(u => u.isActive && u.roles.includes('ADMIN')); // 🎯 Surgical, 100% accurate</code>
+          </div>
+        </div>
+
+        <div class="banner info-banner" style="margin-top:0.8rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.83rem;">
+          <div>
+            <strong>🔍 Cursor Official Feature: The Context Ring &amp; Breakdown Tray:</strong>
+            <span style="display:block; margin-top: 0.2rem; font-size: 0.78rem; color: var(--text-secondary);">Click the context ring next to your prompt to inspect the breakdown tray: <code>System prompt</code>, <code>Tools</code>, <code>Rules</code>, <code>Skills</code>, <code>MCP</code>, <code>Subagents</code>, <code>Summarized conversation</code>, and <code>Conversation</code>. When full, Cursor silently compresses earlier turns, losing your original constraints!</span>
+          </div>
+          <span style="font-family: var(--font-mono); font-size: 0.74rem; background: var(--bg-card); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border-color); white-space: nowrap; font-weight: 700;">Click Ring &rarr; Tray</span>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (4 mins):</h4>
+        <ul>
+          <li><strong>Interactive Demo:</strong> Drag the slider from Turn 1 to Turn 18. Watch the output code morph from clean TypeScript into a hallucinated mess of non-existent imports and broken syntax!</li>
+          <li>Click the <strong>"Reset Session (Cmd+L)"</strong> button to demonstrate how hitting reset restores instant 1.2s speed and pristine accuracy.</li>
+          <li><strong>Cursor Official Feature: The Context Ring:</strong> Show attendees the small circle icon next to the chat prompt in Cursor. Clicking it opens the <em>Breakdown Tray</em> showing how tokens are allocated across System, Rules, Skills, MCP tools, and Conversation history. Explain that once this ring fills up, Cursor automatically starts compressing previous turns into lossy summaries, causing instructions to degrade.</li>
+          <li>Introduce the team mantra: <strong>"Reset ruthlessly. Never argue past 3 turns."</strong></li>
+        </ul>
+      </div>
+    </section>

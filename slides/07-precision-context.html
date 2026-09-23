@@ -1,0 +1,95 @@
+<section class="slide" data-slide="7">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">Context Curation</span>
+          <h2>Precision Context Referencing: <span class="gradient-text">@ Mastery</span></h2>
+          <p class="slide-desc">Stop typing <code>@workspace</code>. Learn the exact referencing symbols that feed the model pure signal.</p>
+        </div>
+
+        <div class="grid-2col">
+          <div class="at-symbols-list">
+            <div class="at-item">
+              <span class="at-tag">@Files &amp; Folders</span>
+              <div class="at-info">
+                <strong>Targeted Paths (Deep Drilldown)</strong>
+                <p>Include exact files or directories: <code>@auth.ts</code>, <code>@src/components/</code> (type <code>/</code> to navigate deeper).</p>
+              </div>
+            </div>
+
+            <div class="at-item">
+              <span class="at-tag">@Terminals &amp; Logs</span>
+              <div class="at-info">
+                <strong>Live Terminal Buffer</strong>
+                <p>Pulls active terminal output and test failure traces directly into context without manual copy-pasting.</p>
+              </div>
+            </div>
+
+            <div class="at-item">
+              <span class="at-tag">@Git (Diffs)</span>
+              <div class="at-info">
+                <strong>Working Changes or Branch Diffs</strong>
+                <p><code>@Commit (Diff of Working State)</code> for staged/uncommitted edits, or <code>@Branch (Diff with Main)</code> for PR reviews.</p>
+              </div>
+            </div>
+
+            <div class="at-item">
+              <span class="at-tag">@Docs &amp; Web</span>
+              <div class="at-info">
+                <strong>Official Framework Documentation</strong>
+                <p>Indexes live external documentation (Spring Boot 3.3, Tailwind v4, Spark 3.5) to prevent API hallucination.</p>
+              </div>
+            </div>
+
+            <div class="at-item">
+              <span class="at-tag">@Chats &amp; Browser</span>
+              <div class="at-info">
+                <strong>Cross-Session &amp; UI Context</strong>
+                <p><code>@Chats</code> references past architectural threads; <code>@Browser</code> inspects running web app DOM states.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="context-visual-box">
+            <h3>📉 Signal-to-Noise Ratio Comparison</h3>
+            
+            <div class="snr-bar-wrap">
+              <div class="snr-label">
+                <span><code>@workspace</code> (Blind Stuffing)</span>
+                <span class="text-danger">5% Signal / 95% Noise (300k Tokens)</span>
+              </div>
+              <div class="snr-bar"><div class="snr-fill danger-fill" style="width: 5%;"></div></div>
+            </div>
+
+            <div class="snr-bar-wrap">
+              <div class="snr-label">
+                <span><code>@folder</code> + <code>@docs</code></span>
+                <span class="text-warning">45% Signal / 55% Noise (40k Tokens)</span>
+              </div>
+              <div class="snr-bar"><div class="snr-fill warning-fill" style="width: 45%;"></div></div>
+            </div>
+
+            <div class="snr-bar-wrap">
+              <div class="snr-label">
+                <span><code>@file.ts:L20-50</code> + <code>@types.ts</code></span>
+                <span class="text-success">98% Signal / 2% Noise (3k Tokens)</span>
+              </div>
+              <div class="snr-bar"><div class="snr-fill success-fill" style="width: 98%;"></div></div>
+            </div>
+
+            <div class="pro-tip-box">
+              🎯 <strong>Pro-Tip: Line Range Pinning</strong><br>
+              In Cursor, you can drag a line selection from your editor directly into the chat or reference <code>@File.java:30-55</code> to only load 25 lines. This results in sub-second model responses!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (4 mins):</h4>
+        <ul>
+          <li>Explain why `@workspace` fails in large enterprise repos: Workspace indexing uses embeddings search. If you ask "fix authentication", embeddings might pull 20 random test files and config files rather than the specific JWT interceptor you care about.</li>
+          <li>Showcase `@Docs`: Tell engineers they can add custom docs in Cursor settings (e.g., internal company API docs, AWS CDK docs).</li>
+          <li>Mention `@Git`: "Before opening a PR, hit Cmd+L, type `@Git (Diff with Main) Review this PR for edge cases, memory leaks, and missing unit tests`. Instant 10x code review!"</li>
+        </ul>
+      </div>
+    </section>

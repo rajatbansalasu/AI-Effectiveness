@@ -1,0 +1,111 @@
+<section class="slide" data-slide="14">
+      <div class="slide-content qa-slide">
+        <div class="badge-pill">Discussion &amp; Action Items</div>
+        <h1 class="hero-title" style="font-size:2.3rem; margin-bottom:0.35rem">
+          Open Q&amp;A &amp; <span class="gradient-text">Toolkit Handover</span>
+        </h1>
+        <p class="hero-subtitle" style="margin-bottom:0.8rem">
+          Take these templates, rules, and strategies back to your engineering team today.
+        </p>
+
+        <!-- Live Discussion Topics Bar -->
+        <div class="qa-topics-bar">
+          <span class="qa-topics-label">💬 Suggested AMA Prompts:</span>
+          <span class="qa-topic-tag">Prompt Teardowns</span>
+          <span class="qa-topic-tag">Rules vs Skills (.mdc)</span>
+          <span class="qa-topic-tag">Pooled Spend &amp; Quotas</span>
+          <span class="qa-topic-tag">MCP Tools &amp; CLI</span>
+          <span class="qa-topic-tag">Subagent Isolation</span>
+        </div>
+
+        <!-- 4 Actionable Resources -->
+        <div class="resources-grid">
+          <a href="cheatsheet.html" target="_blank" class="resource-card">
+            <div class="res-card-top">
+              <span class="res-icon">📄</span>
+              <h3 class="res-title">Printable Cheatsheet</h3>
+            </div>
+            <p class="res-desc">1-page quick reference with shortcuts, CCAO prompt framework, and model routing table.</p>
+            <div class="res-action-btn">Open Cheatsheet →</div>
+          </a>
+
+          <a href="https://cursor.com/docs" target="_blank" class="resource-card" style="border-top: 3px solid var(--accent-cyan);">
+            <div class="res-card-top">
+              <span class="res-icon">📖</span>
+              <h3 class="res-title">Official Cursor Docs</h3>
+            </div>
+            <p class="res-desc">Reference models, .mdc rules, MCP, subagents, and enterprise pooled token pricing.</p>
+            <div class="res-action-btn">cursor.com/docs ↗</div>
+          </a>
+
+          <div class="resource-card interactive-item" id="btn-open-rules-modal" style="border-top: 3px solid #8b5cf6;">
+            <div class="res-card-top">
+              <span class="res-icon">⚙️</span>
+              <h3 class="res-title">Starter Rules Pack</h3>
+            </div>
+            <p class="res-desc">Copy production-ready <code>.mdc</code> rule templates for Java/Spring, React/TS, and Python.</p>
+            <div class="res-action-btn">View Templates ⚡</div>
+          </div>
+
+          <div class="resource-card" style="border-top: 3px solid #10b981;">
+            <div class="res-card-top">
+              <span class="res-icon">💡</span>
+              <h3 class="res-title">Slack #ai-best-practices</h3>
+            </div>
+            <p class="res-desc">Share high-ROI prompt templates, report token traps, and vote on team-wide cursor rules.</p>
+            <div class="res-action-btn">Join Channel →</div>
+          </div>
+        </div>
+
+        <!-- Interactive Fun: Masterclass Knowledge Challenge & Certificate -->
+        <div class="quiz-wrapper">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.7rem">
+            <h3 style="font-size:1.05rem; color:var(--text-primary); display:flex; align-items:center; gap:8px;">
+              <span>⚡ Interactive Masterclass Challenge:</span>
+              <span id="quiz-step-indicator" style="color:var(--accent-cyan); font-size:0.88rem">Question 1 of 3</span>
+            </h3>
+            <span id="quiz-score-badge" class="game-score-badge">Score: 0 / 3</span>
+          </div>
+
+          <div id="quiz-question-box">
+            <div class="quiz-q-title" id="quiz-q-text">1. Your teammate has an 18-turn chat thread trying to fix a JPA query that's still failing. What is your advice?</div>
+            <div class="quiz-answers-grid" id="quiz-options">
+              <button class="quiz-choice-btn" data-correct="false">
+                <span>A</span>
+                <span>Type "please try again and be more careful this time"</span>
+              </button>
+              <button class="quiz-choice-btn" data-correct="false">
+                <span>B</span>
+                <span>Turn on Claude Opus 5 (Fast Mode) and burn 6x tokens</span>
+              </button>
+              <button class="quiz-choice-btn" data-correct="true">
+                <span>C</span>
+                <span>Hit Cmd+L to wipe the bloated context, pin @OrderRepo.java:40-60, and solve in 1 turn!</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="certificate-banner" id="certificate-banner">
+            <div style="font-size:2.2rem; margin-bottom:0.3rem">🎉 🏆 🎓</div>
+            <h2 style="font-size:1.5rem; color:var(--text-primary); margin-bottom:0.35rem">Certified Cursor Token Architect</h2>
+            <p style="color:var(--text-secondary); font-size:0.9rem; max-width:620px; margin:0 auto 0.8rem auto">
+              You scored 100% on the Token Value-Maxing Masterclass. You are officially authorized to ruthlessly reset chats, route models with laser precision, and stop runaway agent loops!
+            </p>
+            <button class="btn-reset-chat" id="btn-quiz-replay" style="margin:0 auto; padding:6px 18px">
+              <span>↺ Play Challenge Again</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (Remaining Time ~10-15 mins):</h4>
+        <ul>
+          <li><strong>Engage the Room with the 3-Question Challenge:</strong> Have the team call out the answers live on screen.</li>
+          <li>When Question 3 is answered correctly, watch the confetti burst and certificate appear!</li>
+          <li>Remind everyone to print or save the 1-page <a href="cheatsheet.html" target="_blank" style="color:var(--accent-cyan)">Handout Cheatsheet</a>.</li>
+          <li>Open the floor for live AMA using the prompt tags above: "Who has a slow Cursor workflow, tricky JPA bug, or prompt teardown we can optimize together right now?"</li>
+        </ul>
+      </div>
+    </section>
+

@@ -1,0 +1,69 @@
+<section class="slide" data-slide="10">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">Real-World Case Study</span>
+          <h2>Domain Example 2: <span class="gradient-text">Full-Stack (React & TS)</span></h2>
+          <p class="slide-desc">Scenario: Adding a 3-way status filter tab with active states to a User Table.</p>
+        </div>
+
+        <div class="grid-2col">
+          <div class="prompt-box prompt-bad">
+            <div class="prompt-header">
+              <span class="badge-bad">❌ Low-ROI Brute Force Prompt</span>
+              <span class="token-count">Tokens: ~110k (Scans components)</span>
+            </div>
+            <div class="prompt-body">
+              <p><em>"Create a filter tab that toggles between All, Active, and Inactive users and updates the table. Here is my @workspace."</em></p>
+            </div>
+            <div class="prompt-feedback">
+              <strong>Why this fails:</strong>
+              <ul>
+                <li>Hallucinates custom CSS styles instead of using project Tailwind utilities.</li>
+                <li>Uses loose TypeScript with <code>any</code> for event handlers and state.</li>
+                <li>Re-implements data fetching from scratch instead of in-memory filtering.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="prompt-box prompt-good">
+            <div class="prompt-header">
+              <span class="badge-good">✅ Value-Maxed Precision Prompt</span>
+              <span class="token-count">Tokens: ~1.9k | Latency: 1.1s</span>
+              <button class="copy-btn" data-target="copy-react-prompt">Copy</button>
+            </div>
+            <div class="prompt-body">
+              <pre><code id="copy-react-prompt" class="language-markdown">Context: `@UserTable.tsx:L15-45` and `@types/user.ts`
+
+Task:
+1. Add a 3-way status filter tab: 'ALL' | 'ACTIVE' | 'INACTIVE'.
+2. Filter users in-memory using `useMemo()` based on selected status.
+3. Style the active tab with Tailwind `bg-blue-600 text-white rounded-md px-3 py-1`.
+
+Constraints:
+- Do not install new packages; use existing UI icons.
+- Strict TypeScript: define `type StatusFilter = 'ALL' | 'ACTIVE' | 'INACTIVE'`. No `any`.</code></pre>
+            </div>
+            <div class="prompt-feedback">
+              <strong>Why this wins:</strong>
+              <ul>
+                <li>Pins exact line range; produces working component code in seconds.</li>
+                <li>Enforces zero `any` and exact styling conventions.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="banner info-banner" style="margin-top:0.8rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.82rem;">
+          <span>🎨 <strong>Cursor Official Feature — Design Mode (<kbd>Cmd + D</kbd>):</strong> Direct agents visually inside the Agents Window browser! Click any UI element to target it, select multiple components, draw on the screen, and let the agent edit code spatially.</span>
+          <span style="font-family: var(--font-mono); font-size: 0.74rem; background: var(--bg-card); padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border-color); white-space: nowrap; font-weight: 700;">Design Mode</span>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (4 mins):</h4>
+        <ul>
+          <li><strong>Frontend Context Rule:</strong> In React codebases, if you don't pin your type definitions (<code>@types/user.ts</code>), the model will invent its own interface and sprinkle <code>any</code> across your codebase.</li>
+          <li><strong>Explicit Constraints:</strong> Notice the constraint: <em>"Do not install new packages; use existing Tailwind utility classes."</em> This prevents the model from hallucinating <code>styled-components</code> or importing an external tab library.</li>
+          <li><strong>Cursor Design Mode (Cmd+D):</strong> Mention Cursor's official Design Mode feature (<code>cursor.com/docs/agent/design-mode</code>). Developers can open the browser in the Agents Window, click UI elements on screen, draw boxes around misaligned buttons, and prompt spatially without manually writing CSS selectors!</li>
+        </ul>
+      </div>
+    </section>

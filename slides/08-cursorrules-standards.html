@@ -1,0 +1,91 @@
+<section class="slide" data-slide="8">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">Automation</span>
+          <h2>Automate Standards with <span class="gradient-text">.cursorrules</span></h2>
+          <p class="slide-desc">Never repeat your style guidelines, library choices, or architectural rules in manual prompts again.</p>
+        </div>
+
+        <div class="grid-2col">
+          <div>
+            <h3 class="code-title">📦 Modern Architecture: <code>.cursor/rules/*.mdc</code></h3>
+            <pre><code class="language-markdown">---
+description: Java Spring Boot API Conventions
+globs: src/main/java/**/*.java
+alwaysApply: false
+---
+
+# Architecture Rules
+- Use Constructor Injection via `@RequiredArgsConstructor` (Lombok). Never `@Autowired`.
+- Controllers must return `ResponseEntity<ApiResponse<T>>`.
+- Repositories must use Spring Data JPA specifications for dynamic filtering.
+
+# Negative Constraints (DO NOT)
+- DO NOT use `java.util.Date` or `Calendar`. Always use `java.time.Instant` or `LocalDate`.
+- DO NOT execute raw SQL queries inside Service classes.
+- DO NOT swallow exceptions; wrap in domain `ApiException`.
+
+# Testing Standards
+- Use JUnit 5 + AssertJ + Mockito.
+- Unit tests must be placed in `src/test/java/` mirroring source path.</code></pre>
+          </div>
+
+          <div class="rules-best-practices">
+            <h3 class="code-title">💡 The 5 Rules of Effective <code>.cursorrules</code></h3>
+            <div class="rule-tip">
+              <span class="tip-num">1</span>
+              <div>
+                <strong>Use Glob Scoping (Cursor 2.0+ <code>.mdc</code>)</strong>
+                <p>Don't load React rules when editing Python scripts. Scope rules using globs: <code>globs: **/*.tsx</code>.</p>
+              </div>
+            </div>
+
+            <div class="rule-tip">
+              <span class="tip-num">2</span>
+              <div>
+                <strong>Negative Constraints Beat Positive Instructions</strong>
+                <p>LLMs respond strongly to explicit "DO NOT" boundaries (e.g. <em>"DO NOT use 'any' in TypeScript"</em>).</p>
+              </div>
+            </div>
+            
+            <div class="rule-tip">
+              <span class="tip-num">3</span>
+              <div>
+                <strong>Keep Total Rules Under 150 Lines</strong>
+                <p>Bloated system prompts waste 2,000 tokens on every single prompt and cause instruction collision.</p>
+              </div>
+            </div>
+
+            <div class="rule-tip">
+              <span class="tip-num">4</span>
+              <div>
+                <strong>Declare Exact Framework Versions</strong>
+                <p>State: <code>Next.js 14 App Router</code>, <code>Java 21 (Virtual Threads)</code>, <code>Spark 3.5</code>.</p>
+              </div>
+            </div>
+
+            <div class="rule-tip">
+              <span class="tip-num">5</span>
+              <div>
+                <strong>Pair with Agent Skills (<code>.cursor/skills/</code>)</strong>
+                <p>Use <code>/</code> menu or <kbd>Option+Enter</kbd> to launch on-demand <strong>Custom Modes</strong> (e.g. <code>/tdd</code>) without bloating system rules.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (4 mins):</h4>
+        <ul>
+          <li><strong>The 4 Types of Rules (Official Docs):</strong> Explain Cursor's rule hierarchy:
+            1) <em>Project Rules</em> (<code>.cursor/rules/*.mdc</code>) scoped by globs and version-controlled;
+            2) <em>User Rules</em> (global in user settings);
+            3) <em>Team Rules</em> (managed via Enterprise admin dashboard);
+            4) <em>Legacy .cursorrules</em> (root markdown file).
+          </li>
+          <li><strong>Agent Skills &amp; Custom Modes:</strong> Explain how <code>.cursor/skills/</code> package complex domain procedures (scripts, templates, playbooks). Instead of stuffing 500 lines into every prompt, skills load progressively on demand via <code>/</code> menu or <kbd>Option+Enter</kbd> as Custom Modes!</li>
+          <li>This eliminates 80% of repetitive prompt typing while keeping context lean and sub-second fast.</li>
+        </ul>
+      </div>
+    </section>

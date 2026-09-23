@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursor & AI Effectiveness Cheatsheet | Engineering Reference Card</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root, body.theme-light {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-border: #cbd5e1;
+      --card-bg: #ffffff;
+      --card-alt: #f1f5f9;
+      --text: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --cyan: #0284c7;
+      --cyan-subtle: rgba(2, 132, 199, 0.08);
+      --emerald: #15803d;
+      --emerald-subtle: rgba(21, 128, 61, 0.08);
+      --amber: #b45309;
+      --amber-subtle: rgba(180, 83, 9, 0.08);
+      --rose: #be123c;
+      --rose-subtle: rgba(190, 18, 60, 0.08);
+      --purple: #7e22ce;
+      --kbd-bg: #f1f5f9;
+      --kbd-border: #cbd5e1;
+      --kbd-text: #0369a1;
+      --code-bg: #e0f2fe;
+      --code-text: #0369a1;
+      --pre-bg: #f8fafc;
+      --pre-border: #cbd5e1;
+      --pre-text: #0f172a;
+      --btn-bg: #0284c7;
+      --btn-text: #ffffff;
+      --btn-hover: #0369a1;
+      --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.08);
+    }
+
+    body.theme-dark {
+      --bg: #0b0f19;
+      --surface: #131b2e;
+      --surface-border: #23304b;
+      --card-bg: #0d1424;
+      --card-alt: #162035;
+      --text: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --cyan: #38bdf8;
+      --cyan-subtle: rgba(56, 189, 248, 0.1);
+      --emerald: #34d399;
+      --emerald-subtle: rgba(52, 211, 153, 0.1);
+      --amber: #fbbf24;
+      --amber-subtle: rgba(251, 191, 36, 0.1);
+      --rose: #f87171;
+      --rose-subtle: rgba(248, 113, 113, 0.1);
+      --purple: #c084fc;
+      --kbd-bg: #1e293b;
+      --kbd-border: #334155;
+      --kbd-text: #38bdf8;
+      --code-bg: rgba(56, 189, 248, 0.12);
+      --code-text: #38bdf8;
+      --pre-bg: #060911;
+      --pre-border: #23304b;
+      --pre-text: #e2e8f0;
+      --btn-bg: #38bdf8;
+      --btn-text: #0b0f19;
+      --btn-hover: #7dd3fc;
+      --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 8.5pt !important;
+        padding: 0 !important;
+      }
+      .no-print { display: none !important; }
+      .sheet-container {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        background: #ffffff !important;
+      }
+      .section-card {
+        border: 1px solid #cbd5e1 !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        page-break-inside: avoid;
+        box-shadow: none !important;
+      }
+      kbd, code {
+        border: 1px solid #94a3b8 !important;
+        background: #f1f5f9 !important;
+        color: #0f172a !important;
+      }
+      pre {
+        background: #f8fafc !important;
+        border: 1px solid #cbd5e1 !important;
+        color: #0f172a !important;
+      }
+      .highlight-box {
+        background: #fffbeb !important;
+        border: 1px solid #f59e0b !important;
+        color: #92400e !important;
+      }
+      th { color: #0284c7 !important; }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.4;
+      padding: 1.5rem;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .sheet-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 12px;
+      padding: 1.8rem;
+      box-shadow: var(--shadow-card);
+    }
+
+    .sheet-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--surface-border);
+      padding-bottom: 1rem;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .header-title h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .header-title p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-action {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+
+    .btn-theme-toggle {
+      background: var(--card-alt);
+      border: 1px solid var(--surface-border);
+      color: var(--text);
+    }
+
+    .btn-theme-toggle:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    .btn-print {
+      background: var(--btn-bg);
+      color: var(--btn-text);
+      border: none;
+    }
+
+    .btn-print:hover {
+      background: var(--btn-hover);
+    }
+
+    .btn-home {
+      background: transparent;
+      border: 1px solid var(--surface-border);
+      color: var(--text-secondary);
+    }
+
+    .btn-home:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    .grid-3col {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .grid-2col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 900px) {
+      .grid-3col, .grid-2col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--surface-border);
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: var(--shadow-card);
+    }
+
+    .section-card h2 {
+      font-size: 0.92rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      color: var(--cyan);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid var(--surface-border);
+      padding-bottom: 4px;
+    }
+
+    kbd {
+      font-family: 'Fira Code', monospace;
+      background: var(--kbd-bg);
+      border: 1px solid var(--kbd-border);
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 0.74rem;
+      color: var(--kbd-text);
+      font-weight: 600;
+    }
+
+    code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.78rem;
+      color: var(--code-text);
+      background: var(--code-bg);
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    ul {
+      list-style: none;
+      font-size: 0.78rem;
+    }
+
+    li {
+      margin-bottom: 0.45rem;
+      position: relative;
+      padding-left: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    li strong {
+      color: var(--text);
+    }
+
+    li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--cyan);
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.77rem;
+    }
+
+    th, td {
+      padding: 5px 6px;
+      border-bottom: 1px solid var(--surface-border);
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    th {
+      color: var(--cyan);
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    td {
+      color: var(--text-secondary);
+    }
+
+    td strong {
+      color: var(--text);
+    }
+
+    .tag-free { color: var(--emerald); font-weight: 700; }
+    .tag-cheap { color: var(--cyan); font-weight: 700; }
+    .tag-prem { color: var(--purple); font-weight: 700; }
+    .tag-heavy { color: var(--amber); font-weight: 700; }
+
+    pre {
+      background: var(--pre-bg);
+      border: 1px solid var(--pre-border);
+      border-radius: 6px;
+      padding: 0.6rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.74rem;
+      color: var(--pre-text);
+      overflow-x: auto;
+      margin-top: 0.4rem;
+      line-height: 1.45;
+    }
+
+    .highlight-box {
+      background: var(--cyan-subtle);
+      border: 1px solid var(--cyan);
+      border-left: 4px solid var(--cyan);
+      border-radius: 6px;
+      padding: 0.75rem;
+      font-size: 0.82rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .highlight-box strong {
+      color: var(--text);
+    }
+
+    .golden-rules-banner {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0.5rem;
+      background: var(--card-alt);
+      border: 1px solid var(--surface-border);
+      border-radius: 8px;
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 1rem;
+      font-size: 0.74rem;
+      line-height: 1.35;
+    }
+
+    .rule-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .rule-item .rule-num {
+      font-weight: 800;
+      color: var(--cyan);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+    }
+
+    .rule-item .rule-txt {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+      .golden-rules-banner {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="theme-light">
+
+  <div class="sheet-container">
+    <header class="sheet-header">
+      <div class="header-title">
+        <h1>AI Effectiveness & Token Value-Maxing Cheatsheet</h1>
+        <p>Pragmatic Engineering Guide for Cursor, Pooled Model Routing, and High-ROI Workflows</p>
+      </div>
+      <div class="header-actions no-print">
+        <a href="index.html" class="btn-action btn-home" title="Return to Slides Deck">
+          <span>&larr; Slides Deck</span>
+        </a>
+        <button class="btn-action btn-theme-toggle" id="btn-theme-toggle" title="Toggle Light / Dark Mode">
+          <span id="theme-icon">🌙</span> <span id="theme-text">Dark Mode</span>
+        </button>
+        <button class="btn-action btn-print" onclick="window.print()" title="Print or Save as PDF">
+          <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Print / PDF
+        </button>
+      </div>
+    </header>
+
+    <!-- The 3-Turn Rule Banner -->
+    <div class="highlight-box">
+      <strong>🚨 The 3-Turn Rule:</strong> If the model doesn't solve your issue in <strong>3 turns</strong>, kill the chat session (<kbd>Cmd+N</kbd>). Context rot and compounding hallucinations make turn 5 slower, dumber, and 10x more expensive than turn 1.
+    </div>
+
+    <!-- Golden Rules Quick Strip -->
+    <div class="golden-rules-banner">
+      <div class="rule-item">
+        <span class="rule-num">Rule 1</span>
+        <span class="rule-txt">Plan before Agent loop</span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-num">Rule 2</span>
+        <span class="rule-txt">Tier down first (Tab/Tier 1)</span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-num">Rule 3</span>
+        <span class="rule-txt">Pin exact lines (<kbd>@file:L20-50</kbd>)</span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-num">Rule 4</span>
+        <span class="rule-txt">Kill at Turn 3 (<kbd>Cmd+N</kbd>)</span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-num">Rule 5</span>
+        <span class="rule-txt">Enforce compact <kbd>.mdc</kbd> rules</span>
+      </div>
+    </div>
+
+    <!-- Row 1: 3 Column Core Matrix -->
+    <div class="grid-3col">
+      <!-- Card 1: Modality Selection -->
+      <div class="section-card">
+        <h2>⚡ 1. Cursor Modality Matrix</h2>
+        <table>
+          <thead>
+            <tr><th>Mode</th><th>Shortcut</th><th>Best Use Scope</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Plan</strong></td>
+              <td><kbd>Shift+Tab</kbd></td>
+              <td>Architecture blueprint &amp; file plan before code (<span class="tag-free">0 Mutation Risk</span>)</td>
+            </tr>
+            <tr>
+              <td><strong>Ask</strong></td>
+              <td><kbd>Cmd+L</kbd></td>
+              <td>Read-only code exploration, regex, docs (<span class="tag-cheap">Safe &amp; Cheap</span>)</td>
+            </tr>
+            <tr>
+              <td><strong>Agent</strong></td>
+              <td><kbd>Cmd+I</kbd></td>
+              <td>Autonomous multi-file execution &amp; terminal runs (10x-50x token volume)</td>
+            </tr>
+            <tr>
+              <td><strong>Debug</strong></td>
+              <td><kbd>Shift+Tab</kbd></td>
+              <td>Hypothesis-driven root cause analysis with test logs &amp; stack traces</td>
+            </tr>
+            <tr>
+              <td><strong>Inline/Tab</strong></td>
+              <td><kbd>Cmd+K</kbd> / <kbd>Tab</kbd></td>
+              <td>Surgical 1-file edits or speculative autocomplete (&lt;100ms, ultra-lean footprint)</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 6px; line-height: 1.35;">
+          💡 <em>Docs truth: All chat modes have identical base per-token rates ($0 mode markup). Agent costs more purely due to multi-turn tool loops.</em>
+        </div>
+      </div>
+
+      <!-- Card 2: Model Routing -->
+      <div class="section-card">
+        <h2>🧠 2. Model Routing Matrix</h2>
+        <table>
+          <thead>
+            <tr><th>Tier</th><th>Model</th><th>Task Scope &amp; Target Share</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag-free">In-Editor</span></td>
+              <td>Cursor Tab / Cmd+K</td>
+              <td>Speculative in-editor autocomplete (&lt;100ms), routine boilerplate (~40% share)</td>
+            </tr>
+            <tr>
+              <td><span class="tag-cheap">Tier 1</span></td>
+              <td>Composer 2.5 / Haiku</td>
+              <td>Unit tests, regex, SQL, docstrings ($0.50-$1.00/M, 35-40% share)</td>
+            </tr>
+            <tr>
+              <td><span class="tag-prem">Tier 2</span></td>
+              <td>Claude Sonnet 5 / Grok</td>
+              <td>Agent mode features, multi-file refactors ($2.00/M, 15-20% share)</td>
+            </tr>
+            <tr>
+              <td><span class="tag-heavy">Tier 3</span></td>
+              <td>Claude Opus 5 / 5.5</td>
+              <td>Pinnacle reasoning, deadlocks, audits ($5.00/M, &lt;5% share)</td>
+            </tr>
+            <tr>
+              <td><span class="tag-cheap">Auto</span></td>
+              <td>Cursor Router (Auto)</td>
+              <td>Pass-through routing billed at base model rate ($0 routing markup)</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="font-size: 0.72rem; color: var(--rose); margin-top: 6px; font-weight: 600;">
+          ⚠️ Beware Fast Mode: Fast versions carry 2x–6x cost multipliers (e.g. Composer Fast is $3/$15, Opus Fast is $30/$150)!
+        </div>
+      </div>
+
+      <!-- Card 3: @ Context Symbols -->
+      <div class="section-card">
+        <h2>🎯 3. Precision Context (@ Symbols)</h2>
+        <ul>
+          <li><code>@File.java:L20-50</code>: Loads only 30 targeted lines (98% signal).</li>
+          <li><code>@Symbol / @Code</code>: Pins specific class, interface, or method signature.</li>
+          <li><code>@Git (Diff with Main)</code>: Scopes review to branch changes &amp; PR diffs.</li>
+          <li><code>@Docs</code>: Indexes live official library docs (prevents stale API bugs).</li>
+          <li><code>@Folder</code>: Restricts search boundary to 1 module or package.</li>
+          <li><strong style="color:var(--rose)">🚫 Avoid:</strong> Blind <code>@workspace</code> on large repos (loads 300k noisy tokens).</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Row 2: 2 Column Deep Implementation Blueprint -->
+    <div class="grid-2col">
+      <!-- CCAO Framework & Universal Bugfix Formula -->
+      <div class="section-card">
+        <h2>📝 4. The CCAO Prompt Framework</h2>
+        <ul>
+          <li><strong>Context:</strong> Pin exact <code>@file:Lxx-yy</code>, symbols, and top 5 lines of stack trace.</li>
+          <li><strong>Constraints:</strong> What NOT to touch, libraries to avoid, backwards-compat.</li>
+          <li><strong>Action:</strong> Atomic verbs (Refactor, Extract, Optimize, Test, Scaffold).</li>
+          <li><strong>Output:</strong> "Code diff only, zero conversational fluff, include regression test".</li>
+        </ul>
+
+        <h3 style="font-size:0.8rem; margin-top:0.6rem; color:var(--emerald); font-weight:700;">Universal Bugfix Formula:</h3>
+        <pre>Context: @Service.java:L40-80
+Error: [Top 3 lines of stack trace]
+Task: Fix the NullPointerException when payload is empty.
+Constraints: DO NOT change method signature. Add JUnit 5 regression test.</pre>
+      </div>
+
+      <!-- .cursor/rules/*.mdc Blueprint -->
+      <div class="section-card">
+        <h2>📦 5. Starter .cursor/rules/*.mdc Blueprint</h2>
+        <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.4rem;">
+          Place modular files in <code>.cursor/rules/</code> scoped by glob patterns:
+        </p>
+        <pre>---
+description: Backend API Standards
+globs: src/**/*.java
+alwaysApply: false
+---
+- Use Constructor Injection (@RequiredArgsConstructor). Never @Autowired.
+- Return ResponseEntity&lt;ApiResponse&lt;T&gt;&gt;.
+- DO NOT use java.util.Date; use java.time.Instant.
+- DO NOT swallow exceptions; wrap in domain ApiException.
+- Write unit tests using JUnit 5 + AssertJ.</pre>
+      </div>
+    </div>
+
+    <!-- Footer Summary -->
+    <div style="text-align: center; font-size: 0.78rem; color: var(--text-muted); border-top: 1px solid var(--surface-border); padding-top: 0.8rem;">
+      AI Effectiveness & Token Value-Maxing Masterclass • Keep context small • Choose models deliberately • Reset chats ruthlessly
+    </div>
+  </div>
+
+  <script>
+    const btnThemeToggle = document.getElementById('btn-theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const themeText = document.getElementById('theme-text');
+
+    function applyTheme(theme) {
+      if (theme === 'theme-dark') {
+        document.body.className = 'theme-dark';
+        if (themeIcon) themeIcon.textContent = '☀️';
+        if (themeText) themeText.textContent = 'Light Mode';
+      } else {
+        document.body.className = 'theme-light';
+        if (themeIcon) themeIcon.textContent = '🌙';
+        if (themeText) themeText.textContent = 'Dark Mode';
+      }
+      localStorage.setItem('deck_theme', theme);
+    }
+
+    if (btnThemeToggle) {
+      btnThemeToggle.addEventListener('click', () => {
+        const currentTheme = document.body.classList.contains('theme-dark') ? 'theme-dark' : 'theme-light';
+        const nextTheme = currentTheme === 'theme-dark' ? 'theme-light' : 'theme-dark';
+        applyTheme(nextTheme);
+      });
+    }
+
+    // Initialize from localStorage or default
+    const savedTheme = localStorage.getItem('deck_theme') || 'theme-light';
+    applyTheme(savedTheme);
+  </script>
+
+</body>
+</html>
