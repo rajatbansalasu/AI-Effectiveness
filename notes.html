@@ -727,14 +727,138 @@
       }
     }
 
-    // Extract notes directly from opener DOM if same-origin
+    // Standalone Speaker Notes Directory (Complete Masterclass Talking Points)
+    const fallbackSpeakerNotes = {
+      1: `
+        <h4>🎙️ Speaker Talking Points (3-4 mins):</h4>
+        <ul>
+          <li><strong>Hook:</strong> Welcome everyone. Over the last few months, every engineer here got access to frontier AI in Cursor. But look at our metrics: we are burning millions of tokens per developer, yet half our team is stuck fighting hallucinations, spinning tool loops, and hitting slow response times.</li>
+          <li><strong>The Goal of this 1 Hour:</strong> Shift from <em>"brute-force AI prompting"</em> to <em>"engineering-grade precision AI"</em>. We will cover model economics, context window physics, taming MCP agents, and battle-tested prompt templates across Java, React, and Data pipelines.</li>
+          <li><strong>Workload Target:</strong> Drive ~40% of routine boilerplate and edits through in-editor Tab/Inline, ~35–40% via Tier 1 (Composer 2.5 / Auto), ~15–20% on Sonnet 5, and save Opus for the &lt;5% toughest deadlocks.</li>
+          <li><strong>Takeaway Promise:</strong> You will write better code, finish PRs 3x faster, and stop waiting 45 seconds for a model to respond.</li>
+        </ul>
+      `,
+      2: `
+        <h4>🎙️ Speaker Talking Points (4 mins):</h4>
+        <ul>
+          <li><strong>Interactive Demo:</strong> Drag the slider from Turn 1 to Turn 18. Watch the output code morph from clean TypeScript into a hallucinated mess of non-existent imports and broken syntax!</li>
+          <li>Click the <strong>"Reset Session (Cmd+L)"</strong> button to demonstrate how hitting reset restores instant 1.2s speed and pristine accuracy.</li>
+          <li><strong>Cursor Official Feature: The Context Ring:</strong> Show attendees the small circle icon next to the chat prompt in Cursor. Clicking it opens the <em>Breakdown Tray</em> showing how tokens are allocated across System, Rules, Skills, MCP tools, and Conversation history. Explain that once this ring fills up, Cursor automatically starts compressing previous turns into lossy summaries, causing instructions to degrade.</li>
+          <li>Introduce the team mantra: <strong>"Reset ruthlessly. Never argue past 3 turns."</strong></li>
+        </ul>
+      `,
+      3: `
+        <h4>🎙️ Speaker Talking Points (5 mins):</h4>
+        <ul>
+          <li><strong>Play the Mini-Game with Audience:</strong> Click through the 4 scenarios and ask the room to vote: "Which model would you use for this?"</li>
+          <li><strong>Expose the "Fast Mode" Trap:</strong> Show the room the 6x price jump: "Many engineers click 'Fast' in settings because who doesn't want speed? But Composer 2.5 jumps from $0.50 to $3.00, and Opus jumps to $30.00/$150.00! You burn your entire monthly credit pool in 3 days!"</li>
+          <li><strong>Enterprise Pooled Usage Economics:</strong> Explain our team setup: <em>Everything draws from a shared enterprise credit pool with zero per-seat barrier.</em> If an engineer runs blind 100k-token Agent loops for a 1-line CSS fix, that drains real dollars from the company pool. Driving ~40% of code through Tab and ~35–40% through Tier 1 (Composer 2.5 / Auto) preserves the shared pool for complex features and architecture!</li>
+          <li><strong>Enterprise Auto Mode Billing:</strong> Clarify the exact rule: <em>Auto mode carries $0 routing fee</em> and bills transparently at the exact list price of whatever model handles the prompt.</li>
+          <li><strong>Modern Model Landscape:</strong> Highlight Sonnet 5 ($2.00/M in, $10.00/M out) as the daily driver powerhouse, Composer 2.5 ($0.50/M) as the ultra-cheap utility editor, and Grok 4.7 as the rapid-fire context handler.</li>
+        </ul>
+      `,
+      4: `
+        <h4>🎙️ Speaker Talking Points (5 mins):</h4>
+        <ul>
+          <li><strong>Interactive Slide Demo:</strong> Drag the slider from 25 turns down to 3 turns and watch the cost plummet from $10+ to $0.05.</li>
+          <li><strong>Show Latency vs Context:</strong> "When you complain Cursor is slow, 80% of the time it's because you're forcing Sonnet to read 200,000 tokens of your entire codebase before it answers a 1-line question."</li>
+          <li><strong>Cursor Token Rate (CTR):</strong> Note the live breakdown showing Base Provider Cost + $0.25/M Cursor Token Rate on 3rd-party models (Claude/Gemini) versus $0 CTR on Composer/Grok.</li>
+          <li><strong>Attention Health Meter:</strong> Explain that when the meter turns red, the model is suffering attention degradation, hallucinating imports, and forgetting previous constraints.</li>
+        </ul>
+      `,
+      5: `
+        <h4>🎙️ Speaker Talking Points (5 mins):</h4>
+        <ul>
+          <li><strong>What is MCP?</strong> Explain simply: <em>Model Context Protocol (MCP)</em> is the open standard that gives Cursor superpowers by letting the LLM talk to external systems—Postgres, GitHub, Jira, Sentry, Terminal, and file search.</li>
+          <li><strong>Why do Unsteered Loops Explode?</strong> Walk through the 4-step diagram: The agent executes a tool (e.g. bash test run), ingests all 2,000 lines of terminal error logs back into context, tries to fix it by editing another file, tests again, and accumulates hundreds of thousands of tokens within 3 minutes.</li>
+          <li><strong>Run the Interactive Demo:</strong> Click <strong>"Run Rogue Agent"</strong> to show the audience the simulated runaway loop ($7.25 burned, 32 files searched, build corrupted). Then click <strong>"Run Steered Agent"</strong> to demonstrate surgical precision (2,400 tokens, $0.03, tests green in 2.1s).</li>
+          <li><strong>Explain Context Isolation (Subagents):</strong> Point to the bottom banner: When you need broad research or heavy terminal grep, use Cursor's <strong>Subagents</strong> (<code>cursor.com/docs/subagents</code>) so messy intermediate tool outputs don't contaminate your primary chat context.</li>
+          <li><strong>Quote for the Room:</strong> <em>"An unconstrained agent will happily spend 45 minutes refactoring your entire codebase to fix a typo. Steer the loop with negative constraints!"</em></li>
+        </ul>
+      `,
+      6: `
+        <h4>🎙️ Speaker Talking Points (5 mins):</h4>
+        <ul>
+          <li><strong>Chat Modes Pricing Clarification (Official Docs):</strong> Address the common team question: <em>"Does Agent mode cost more per token than Ask mode?"</em> Official docs answer: <strong>No, the token rate is identical ($0 mode surcharge).</strong> However, the bill is 10x–50x higher because Agent mode autonomously chains 5–15 tool calls (reading entire files, running terminal tests, rewriting diffs).</li>
+          <li><strong>The "Agent Trap":</strong> Explain why junior engineers get burned by defaulting to Agent mode for everything: "If you give Agent mode a vague prompt without planning, it will enthusiastically modify 8 files, install 2 npm packages, burn 200k tokens, and break your build in 30 seconds."</li>
+          <li><strong>Why Plan Mode is Essential:</strong> Emphasize Plan mode as the senior developer's steering wheel. The AI acts as an architect, listing every file it plans to touch and its exact sequence of edits. You can refine or reject the strategy <em>before</em> any code changes occur.</li>
+          <li><strong>Ask Mode for Safety:</strong> Highlight Ask mode as the safest way to navigate production repos or legacy systems. Because it is strictly read-only, there is zero risk of uncommitted diffs or accidental file deletions.</li>
+          <li><strong>Don't Forget <kbd>Cmd+K</kbd> and Tab:</strong> For routine coding (small refactors, single functions, renaming), never open a chat window. Use Tab autocomplete (<kbd>Tab</kbd>) or Inline Edit (<kbd>Cmd+K</kbd>) to keep flow state intact.</li>
+        </ul>
+      `,
+      7: `
+        <h4>🎙️ Speaker Talking Points (4 mins):</h4>
+        <ul>
+          <li><strong>The Core Lesson:</strong> Stop typing <code>@workspace</code>. It dumps 200,000+ tokens of noisy code into your context window, dilutes model attention, and costs 10x more.</li>
+          <li><strong>The Precision Toolset:</strong> Show the power of <code>@file:L40-80</code> (loads 40 lines of pure signal), <code>@symbol</code> (loads exact class/method signature), and <code>@git</code> (diff against main for instant code reviews).</li>
+          <li><strong>Interactive Demo:</strong> Click the <strong>"Copy High-Signal Prompt"</strong> button on screen to show how a 3-line targeted prompt with line numbers solves issues in 1 turn without noise.</li>
+        </ul>
+      `,
+      8: `
+        <h4>🎙️ Speaker Talking Points (4 mins):</h4>
+        <ul>
+          <li><strong>Rules vs Skills (.mdc):</strong> Clarify Cursor's rules architecture. <code>.cursor/rules/*.mdc</code> files allow you to scope rules by glob pattern (e.g. <code>globs: src/**/*.java</code>) so backend rules never pollute frontend prompts.</li>
+          <li><strong>The 100-Token Rule:</strong> Keep rules short, imperative, and actionable. Do not write 5-page essays. Use negative constraints ("Never do X. Always use Y.").</li>
+          <li><strong>Team Standardization:</strong> Commit <code>.cursor/rules/</code> to Git so every developer on your team automatically gets consistent, compliant code output from day one.</li>
+        </ul>
+      `,
+      9: `
+        <h4>🎙️ Speaker Talking Points (4 mins):</h4>
+        <ul>
+          <li><strong>Spring Boot & Java Anti-Patterns:</strong> LLMs love generating outdated field injection (<code>@Autowired</code>) and mutating entities directly.</li>
+          <li><strong>The Fix:</strong> Enforce Lombok <code>@RequiredArgsConstructor</code>, Record DTOs, and JUnit 5 + Mockito fixtures.</li>
+          <li>Show how passing the exact Repository interface with <code>@file</code> produces surgical query optimizations in seconds.</li>
+        </ul>
+      `,
+      10: `
+        <h4>🎙️ Speaker Talking Points (4 mins):</h4>
+        <ul>
+          <li><strong>Full-Stack React & TypeScript:</strong> Common AI bugs include <code>any</code> types, missing React Query stale-time configurations, and state synchronization loops.</li>
+          <li><strong>Best Practice:</strong> Supply Zod schemas for runtime validation, use strict TypeScript contracts, and keep UI components atomic and decoupled.</li>
+        </ul>
+      `,
+      11: `
+        <h4>🎙️ Speaker Talking Points (4 mins):</h4>
+        <ul>
+          <li><strong>Data Engineering & SQL:</strong> LLMs frequently generate full table scans (<code>SELECT *</code>), missing partition filters, and non-SARGable WHERE clauses.</li>
+          <li><strong>The Remedy:</strong> Feed the exact <code>EXPLAIN ANALYZE</code> plan or schema DDL into Cursor using <code>@file</code>. Demand indexed lookups, CTE modularity, and idempotent migration scripts.</li>
+        </ul>
+      `,
+      12: `
+        <h4>🎙️ Speaker Talking Points (4 mins):</h4>
+        <ul>
+          <li><strong>The CCAO Framework:</strong> <strong>C</strong>ontext, <strong>C</strong>onstraints, <strong>A</strong>ction, <strong>O</strong>utput.</li>
+          <li>Walk through the Universal Bugfix Formula: pin <code>@file:Lxx-yy</code>, paste top 3 stack trace lines, state negative constraints, and request "Code diff only + regression test".</li>
+          <li>Have the audience click "Copy CCAO Template" to use immediately on Monday morning.</li>
+        </ul>
+      `,
+      13: `
+        <h4>🎙️ Speaker Talking Points (4 mins):</h4>
+        <ul>
+          <li><strong>Review the 5 Golden Rules:</strong> Summarize the executive takeaways: Plan before Agent, Tier down first, Pin exact lines, 3-turn reset rule, and Scoped .mdc rules.</li>
+          <li><strong>Team Rollout Cadence:</strong> Day 1 (Audit rules & kill stale chats), Day 3 (Install starter .mdc rules), Day 7 (Review token metrics & pool ROI).</li>
+          <li>Quote: <em>"AI won't replace software engineers, but engineers who master precision AI will replace engineers who don't."</em></li>
+        </ul>
+      `,
+      14: `
+        <h4>🎙️ Speaker Talking Points (Remaining Time ~10-15 mins):</h4>
+        <ul>
+          <li><strong>Engage the Room with the 3-Question Challenge:</strong> Have the team call out the answers live on screen.</li>
+          <li>When Question 3 is answered correctly, watch the confetti burst and certificate appear!</li>
+          <li>Remind everyone to print or save the 1-page <a href="cheatsheet.html" target="_blank" style="color:var(--accent-cyan)">Handout Cheatsheet</a> and clone the repo via <code>git clone https://github.com/rajatbansalasu/AI-Effectiveness.git</code>.</li>
+          <li>Open the floor for live AMA using the prompt tags on screen: "Who has a slow Cursor workflow, tricky JPA bug, or prompt teardown we can optimize together right now?"</li>
+        </ul>
+      `
+    };
+
+    // Extract notes directly from opener DOM or use embedded fallback
     function extractNotesFromOpener(slideNum) {
       try {
         if (window.opener && !window.opener.closed && window.opener.document) {
           const slideElem = window.opener.document.querySelector(`.slide[data-slide="${slideNum}"]`);
           if (slideElem) {
             const notesEl = slideElem.querySelector('.speaker-notes');
-            if (notesEl) {
+            if (notesEl && notesEl.innerHTML.trim().length > 0) {
               notesContent.innerHTML = notesEl.innerHTML;
               setConnected(true);
               return;
@@ -745,7 +869,10 @@
         // Cross-origin or restricted
       }
 
-      if (!notesContent.innerHTML || notesContent.innerHTML.trim() === '') {
+      // Use rich embedded fallback speaker notes
+      if (fallbackSpeakerNotes[slideNum]) {
+        notesContent.innerHTML = fallbackSpeakerNotes[slideNum];
+      } else {
         notesContent.innerHTML = `
           <h4>🎙️ Speaker Talking Points</h4>
           <p>Deliver the core takeaway for <em>${slideTitles[slideNum - 1]}</em> clearly and concisely.</p>
