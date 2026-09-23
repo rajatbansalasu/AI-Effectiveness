@@ -42,7 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
     "Domain Example 3: Data Engineering & SQL",
     "CCAO Framework & Reusable Templates",
     "The 5 Golden Rules for Monday Morning",
-    "Open Q&A & Resource Toolkit"
+    "Open Q&A & Resource Toolkit",
+    "Appendix A: Team MCP Infrastructure",
+    "Appendix B: CI/CD Guardrails & Quality"
   ];
 
   // ==========================================

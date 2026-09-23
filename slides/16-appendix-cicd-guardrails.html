@@ -1,0 +1,91 @@
+<section class="slide" data-slide="16">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">Appendix B &bull; DevOps &amp; Quality</span>
+          <h2>CI/CD Guardrails: <span class="gradient-text">Headless Agent &amp; Rule Audit</span></h2>
+          <p class="slide-desc">How to enforce <code>.cursor/rules/*.mdc</code> compliance, verify AI-generated PR diffs, and automate spend alerts in GitHub Actions.</p>
+        </div>
+
+        <!-- 2-Column Grid: Pipeline Flow + Workflow YAML -->
+        <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 0.9rem; flex: 1; min-height: 0;">
+
+          <!-- Left Column: Automated PR Quality Gate Diagram -->
+          <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.8rem 1rem;">
+              <h3 style="font-size: 0.88rem; color: var(--accent-cyan); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 6px;">
+                <span>🚦</span> 3-Stage CI/CD AI Quality Gateway
+              </h3>
+
+              <div style="display: flex; flex-direction: column; gap: 0.45rem;">
+                <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-left: 3px solid #38bdf8; border-radius: 6px; padding: 0.45rem 0.75rem; font-size: 0.76rem;">
+                  <strong style="color: #38bdf8;">Stage 1: <code>.cursor/rules</code> Linter (AST Audit)</strong>
+                  <div style="color: var(--text-secondary); margin-top: 2px;">Scans diffs for banned AI anti-patterns: <code>@Autowired</code>, <code>Date</code>, unparameterized SQL queries, or raw <code>any</code> types.</div>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-left: 3px solid #a855f7; border-radius: 6px; padding: 0.45rem 0.75rem; font-size: 0.76rem;">
+                  <strong style="color: #a855f7;">Stage 2: Strict Regression &amp; Coverage Gate</strong>
+                  <div style="color: var(--text-secondary); margin-top: 2px;">Ensures every new AI-generated method is paired with a matching unit test fixture before human review.</div>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-left: 3px solid #10b981; border-radius: 6px; padding: 0.45rem 0.75rem; font-size: 0.76rem;">
+                  <strong style="color: #10b981;">Stage 3: Token ROI &amp; Diff Hygiene</strong>
+                  <div style="color: var(--text-secondary); margin-top: 2px;">Flags massive 50-file unreviewed agent rewrites, enforcing small, reviewable PR branches.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Spend Monitoring Alert Card -->
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-left: 3px solid var(--accent-amber); border-radius: 6px; padding: 0.5rem 0.8rem; font-size: 0.75rem;">
+              <strong style="color: var(--accent-amber);">📊 Enterprise Quota &amp; Anomaly Detection:</strong>
+              <div style="color: var(--text-secondary); margin-top: 2px; line-height: 1.35;">
+                <span>• Set automated Slack alerts if a single user session burns &gt; <strong>$10.00</strong> in under 15 minutes.</span><br/>
+                <span>• Track monthly team workload shares (~40% Tab / 40% Tier 1) in your central admin dashboard.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: GitHub Actions Workflow YAML Blueprint -->
+          <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.8rem 1rem; flex: 1; display: flex; flex-direction: column;">
+              <h3 style="font-size: 0.88rem; color: var(--accent-emerald); margin-bottom: 0.4rem; display: flex; align-items: center; justify-content: space-between;">
+                <span>⚙️ GitHub Actions Rule Audit Workflow</span>
+                <span style="font-family: var(--font-mono); font-size: 0.68rem; background: var(--bg-card); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border-color);">.github/workflows/ai-lint.yml</span>
+              </h3>
+
+              <pre style="margin-top: 0.2rem; flex: 1; font-size: 0.72rem; line-height: 1.4; padding: 0.6rem;">name: "AI Code & Rules Audit"
+on: [pull_request]
+
+jobs:
+  rule-compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit .cursor/rules Compliance
+        run: |
+          # Block forbidden @Autowired in Java PR diffs
+          if git diff origin/main -- '*.java' | grep -E '^\+.*@Autowired'; then
+            echo "❌ Violation: @Autowired found! Use Lombok @RequiredArgsConstructor."
+            exit 1
+          fi
+      - name: Run Regression Test Suite
+        run: mvn test</pre>
+            </div>
+
+            <!-- Team Rollout Summary -->
+            <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 6px; padding: 0.45rem 0.8rem; font-size: 0.74rem; text-align: center; color: var(--text-secondary);">
+              🔒 <em>Deterministic CI linters prevent AI hallucinations from ever reaching your production codebase.</em>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (3-4 mins):</h4>
+        <ul>
+          <li><strong>Closing the Loop with CI/CD:</strong> Explain that prompt rules in <code>.cursor/rules/</code> are great guidelines, but automated CI checks in GitHub Actions make them unbreakable standards.</li>
+          <li><strong>Catching Banned Patterns:</strong> Walk through the simple shell grep script in the YAML example: it automatically rejects PRs that introduce forbidden legacy patterns like <code>@Autowired</code> or mutable DTOs before a human engineer even spends review time.</li>
+          <li><strong>Spend Monitoring:</strong> Explain that tracking team spend in Cursor's enterprise admin dashboard helps managers identify engineers who might need 1-on-1 coaching on prompt scoping or the 3-turn reset rule.</li>
+        </ul>
+      </div>
+    </section>

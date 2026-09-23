@@ -1,0 +1,116 @@
+<section class="slide" data-slide="15">
+      <div class="slide-content">
+        <div class="slide-header">
+          <span class="slide-category">Appendix A &bull; Infrastructure &amp; Security</span>
+          <h2>Team MCP Topology: <span class="gradient-text">Safe Multi-Developer Setup</span></h2>
+          <p class="slide-desc">How engineering teams deploy centralized, containerized MCP servers with strict token limits, read-only replicas, and secure credentials.</p>
+        </div>
+
+        <!-- 3-Column Architecture & Implementation Grid -->
+        <div style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 0.9rem; flex: 1; min-height: 0;">
+          
+          <!-- Left Column: Visual Architecture Flow -->
+          <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.8rem 1rem;">
+              <h3 style="font-size: 0.88rem; color: var(--accent-cyan); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 6px;">
+                <span>🏛️</span> Enterprise MCP Infrastructure Architecture
+              </h3>
+
+              <!-- Visual Flow Nodes -->
+              <div style="display: flex; flex-direction: column; gap: 0.45rem;">
+                <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-left: 3px solid #38bdf8; border-radius: 6px; padding: 0.45rem 0.75rem; font-size: 0.76rem;">
+                  <strong style="color: #38bdf8;">1. Developer Workstations (Cursor IDE)</strong>
+                  <div style="color: var(--text-secondary); margin-top: 2px;">Local <code>.cursor/mcp.json</code> points to secure corporate gateway via HTTPS / SSH tunnel.</div>
+                </div>
+
+                <div style="text-align: center; color: var(--accent-cyan); font-size: 0.8rem; line-height: 1;">⬇️ <em>Passes Bearer Token &amp; Query</em></div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-left: 3px solid #a855f7; border-radius: 6px; padding: 0.45rem 0.75rem; font-size: 0.76rem;">
+                  <strong style="color: #a855f7;">2. Team Docker MCP Gateway (Rate-Limited &amp; Truncated)</strong>
+                  <div style="color: var(--text-secondary); margin-top: 2px;">Enforces <strong>Max 50 Rows / 2,000 Tokens</strong> per query response to prevent context window explosion.</div>
+                </div>
+
+                <div style="text-align: center; color: var(--accent-cyan); font-size: 0.8rem; line-height: 1;">⬇️ <em>Dispatches to Scoped Services</em></div>
+
+                <!-- 4 Tool Connectors Grid -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem;">
+                  <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-color); border-radius: 4px; padding: 0.35rem 0.5rem; font-size: 0.72rem;">
+                    <strong>🐘 PostgreSQL MCP</strong>
+                    <div style="color: var(--text-muted);">Read-Only Replica only</div>
+                  </div>
+                  <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-color); border-radius: 4px; padding: 0.35rem 0.5rem; font-size: 0.72rem;">
+                    <strong>⚡ Sentry Error MCP</strong>
+                    <div style="color: var(--text-muted);">Sanitized stack traces</div>
+                  </div>
+                  <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-color); border-radius: 4px; padding: 0.35rem 0.5rem; font-size: 0.72rem;">
+                    <strong>🐙 GitHub PR MCP</strong>
+                    <div style="color: var(--text-muted);">Targeted branch diffs</div>
+                  </div>
+                  <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-color); border-radius: 4px; padding: 0.35rem 0.5rem; font-size: 0.72rem;">
+                    <strong>📚 OpenAPI / Docs MCP</strong>
+                    <div style="color: var(--text-muted);">Live endpoint schemas</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Security Callout -->
+            <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 6px; padding: 0.5rem 0.8rem; font-size: 0.75rem;">
+              <strong style="color: #ef4444;">🚨 Security Rule #1: Never Grant Direct Write Access</strong>
+              <div style="color: var(--text-secondary); margin-top: 2px;">Agents should only query read-only replicas. All schema mutations must go through reviewable Git migrations (Flyway / Liquibase).</div>
+            </div>
+          </div>
+
+          <!-- Right Column: Production Configuration Blueprint & Checklist -->
+          <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.8rem 1rem; flex: 1; display: flex; flex-direction: column;">
+              <h3 style="font-size: 0.88rem; color: var(--accent-emerald); margin-bottom: 0.4rem; display: flex; align-items: center; justify-content: space-between;">
+                <span>📦 Production <code>.cursor/mcp.json</code> Blueprint</span>
+                <span style="font-family: var(--font-mono); font-size: 0.68rem; background: var(--bg-card); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border-color);">JSON Config</span>
+              </h3>
+
+              <pre style="margin-top: 0.2rem; flex: 1; font-size: 0.72rem; line-height: 1.4; padding: 0.6rem;">{
+  "mcpServers": {
+    "postgres-readonly": {
+      "command": "docker",
+      "args": [
+        "run", "-i", "--rm",
+        "-e", "DATABASE_URL=${POSTGRES_READONLY_URL}",
+        "-e", "MAX_ROWS=50",
+        "mcp/postgres:latest"
+      ]
+    },
+    "sentry-issues": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sentry"],
+      "env": {
+        "SENTRY_AUTH_TOKEN": "${SENTRY_AUTH_TOKEN}"
+      }
+    }
+  }
+}</pre>
+            </div>
+
+            <!-- Token Guardrails Summary -->
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-left: 3px solid var(--accent-cyan); border-radius: 6px; padding: 0.5rem 0.8rem; font-size: 0.75rem;">
+              <strong style="color: var(--accent-cyan);">🛡️ The 3 MCP Enterprise Guardrails:</strong>
+              <div style="color: var(--text-secondary); margin-top: 2px; line-height: 1.35;">
+                <span>1. <strong>Row Limits:</strong> Hard-cap table returns to avoid 500k-token JSON bloat.</span><br/>
+                <span>2. <strong>Env Secrets:</strong> Never commit plaintext tokens in <code>mcp.json</code>.</span><br/>
+                <span>3. <strong>Context Isolation:</strong> Run heavy MCP exploratory queries in dedicated Subagents.</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (3-4 mins):</h4>
+        <ul>
+          <li><strong>Why Containerize MCP?</strong> Explain that if each developer runs ad-hoc MCP servers with local database credentials, you risk credentials leaking or engineers accidentally running mutating DDL queries on live databases.</li>
+          <li><strong>The Token Truncation Rule:</strong> Highlight <code>MAX_ROWS=50</code> in the Docker snippet. Explain: "If an agent queries a table with 100,000 rows without limit, it will attempt to feed 15MB of raw JSON into the context window, crashing the turn and burning your budget."</li>
+          <li><strong>Credential Management:</strong> Emphasize using environment variables (<code>${POSTGRES_READONLY_URL}</code>) and read-only IAM roles.</li>
+        </ul>
+      </div>
+    </section>

@@ -583,7 +583,9 @@
       "Domain Example 3: Data Engineering & SQL",
       "CCAO Framework & Reusable Templates",
       "The 5 Golden Rules for Monday Morning",
-      "Open Q&A & Resource Toolkit"
+      "Open Q&A & Resource Toolkit",
+      "Appendix A: Team MCP Infrastructure",
+      "Appendix B: CI/CD Guardrails & Quality"
     ];
 
     const slideCategories = [
@@ -600,7 +602,9 @@
       "Domain Architecture",
       "Prompt Framework",
       "Executive Takeaways",
-      "Q&A & Resources"
+      "Q&A & Resources",
+      "Appendix A • Infrastructure & Security",
+      "Appendix B • DevOps & Quality"
     ];
 
     let currentSlide = 1;
@@ -847,6 +851,22 @@
           <li>When Question 3 is answered correctly, watch the confetti burst and certificate appear!</li>
           <li>Remind everyone to print or save the 1-page <a href="cheatsheet.html" target="_blank" style="color:var(--accent-cyan)">Handout Cheatsheet</a> and clone the repo via <code>git clone https://github.com/rajatbansalasu/AI-Effectiveness.git</code>.</li>
           <li>Open the floor for live AMA using the prompt tags on screen: "Who has a slow Cursor workflow, tricky JPA bug, or prompt teardown we can optimize together right now?"</li>
+        </ul>
+      `,
+      15: `
+        <h4>🎙️ Speaker Talking Points (3-4 mins):</h4>
+        <ul>
+          <li><strong>Why Containerize MCP?</strong> Explain that if each developer runs ad-hoc MCP servers with local database credentials, you risk credentials leaking or engineers accidentally running mutating DDL queries on live databases.</li>
+          <li><strong>The Token Truncation Rule:</strong> Highlight <code>MAX_ROWS=50</code> in the Docker snippet. Explain: "If an agent queries a table with 100,000 rows without limit, it will attempt to feed 15MB of raw JSON into the context window, crashing the turn and burning your budget."</li>
+          <li><strong>Credential Management:</strong> Emphasize using environment variables (<code>\${POSTGRES_READONLY_URL}</code>) and read-only IAM roles.</li>
+        </ul>
+      `,
+      16: `
+        <h4>🎙️ Speaker Talking Points (3-4 mins):</h4>
+        <ul>
+          <li><strong>Closing the Loop with CI/CD:</strong> Explain that prompt rules in <code>.cursor/rules/</code> are great guidelines, but automated CI checks in GitHub Actions make them unbreakable standards.</li>
+          <li><strong>Catching Banned Patterns:</strong> Walk through the simple shell grep script in the YAML example: it automatically rejects PRs that introduce forbidden legacy patterns like <code>@Autowired</code> or mutable DTOs before a human engineer even spends review time.</li>
+          <li><strong>Spend Monitoring:</strong> Explain that tracking team spend in Cursor's enterprise admin dashboard helps managers identify engineers who might need 1-on-1 coaching on prompt scoping or the 3-turn reset rule.</li>
         </ul>
       `
     };
