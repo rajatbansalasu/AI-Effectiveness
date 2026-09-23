@@ -648,13 +648,25 @@
       console.warn('BroadcastChannel not available:', e);
     }
 
+    function getNoteSlideTitle(idx) {
+      if (slideTitles[idx]) return slideTitles[idx];
+      return `Slide ${idx + 1}`;
+    }
+
+    function getNoteSlideCategory(idx) {
+      if (slideCategories[idx]) return slideCategories[idx];
+      return 'Masterclass';
+    }
+
     // Populate Slide Selector and Agenda Map
     function initUI() {
       slideSelect.innerHTML = '';
       agendaList.innerHTML = '';
 
-      slideTitles.forEach((title, idx) => {
+      for (let idx = 0; idx < totalSlides; idx++) {
         const slideNum = idx + 1;
+        const title = getNoteSlideTitle(idx);
+
         // Option for select dropdown
         const opt = document.createElement('option');
         opt.value = slideNum;
@@ -674,7 +686,7 @@
           updateSlideView(slideNum);
         });
         agendaList.appendChild(li);
-      });
+      }
     }
 
     // Update the console display for a given slide number
@@ -692,8 +704,8 @@
       btnNext.disabled = currentSlide === totalSlides;
 
       // Update Category & Title
-      slideCategory.textContent = slideCategories[currentSlide - 1] || 'Presentation';
-      slideTitle.textContent = `Slide ${currentSlide}: ${slideTitles[currentSlide - 1]}`;
+      slideCategory.textContent = getNoteSlideCategory(currentSlide - 1);
+      slideTitle.textContent = `Slide ${currentSlide}: ${getNoteSlideTitle(currentSlide - 1)}`;
 
       // Update Agenda active states
       const items = agendaList.querySelectorAll('.agenda-item');
@@ -706,8 +718,8 @@
       // Update Next Slide Preview
       if (currentSlide < totalSlides) {
         nextSlideNum.textContent = `Slide ${currentSlide + 1}`;
-        nextSlideName.textContent = slideTitles[currentSlide];
-        nextSlidePreview.textContent = `Coming up: ${slideCategories[currentSlide]} - ${slideTitles[currentSlide]}`;
+        nextSlideName.textContent = getNoteSlideTitle(currentSlide);
+        nextSlidePreview.textContent = `Coming up: ${getNoteSlideCategory(currentSlide)} - ${getNoteSlideTitle(currentSlide)}`;
       } else {
         nextSlideNum.textContent = 'End of Deck';
         nextSlideName.textContent = 'Q&A / Wrap-Up';

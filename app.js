@@ -201,17 +201,36 @@ document.addEventListener('DOMContentLoaded', () => {
   const savedTheme = localStorage.getItem('deck_theme') || 'theme-light';
   applyTheme(savedTheme, false);
 
+  // Helper to reliably get slide title with DOM fallback
+  function getSlideTitle(i) {
+    if (slideTitles[i - 1]) return slideTitles[i - 1];
+    const slideElem = document.querySelector(`.slide[data-slide="${i}"]`);
+    if (slideElem) {
+      const h2 = slideElem.querySelector('h2');
+      if (h2) {
+        return h2.textContent.replace(/\s+/g, ' ').trim();
+      }
+      const h1 = slideElem.querySelector('h1');
+      if (h1) {
+        return h1.textContent.replace(/\s+/g, ' ').trim();
+      }
+    }
+    return `Slide ${i}`;
+  }
+
   // Initialize Slide Dots & TOC Grid
   function initNav() {
     slideDotsContainer.innerHTML = '';
     tocGrid.innerHTML = '';
 
     for (let i = 1; i <= totalSlides; i++) {
+      const title = getSlideTitle(i);
+
       // Dots
       const dot = document.createElement('div');
       dot.classList.add('slide-dot');
       if (i === 1) dot.classList.add('active');
-      dot.title = `Slide ${i}: ${slideTitles[i - 1]}`;
+      dot.title = `Slide ${i}: ${title}`;
       dot.addEventListener('click', () => goToSlide(i));
       slideDotsContainer.appendChild(dot);
 
@@ -221,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (i === 1) tocItem.classList.add('active');
       tocItem.innerHTML = `
         <span class="toc-num">Slide ${i}</span>
-        <span class="toc-title">${slideTitles[i - 1]}</span>
+        <span class="toc-title">${title}</span>
       `;
       tocItem.addEventListener('click', () => {
         goToSlide(i);
