@@ -356,42 +356,62 @@ document.addEventListener('DOMContentLoaded', () => {
       document.fullscreenElement ||
       document.webkitFullscreenElement ||
       document.mozFullScreenElement ||
-      document.msFullscreenElement
+      document.msFullscreenElement ||
+      document.body.classList.contains('pseudo-fullscreen')
     );
   }
 
   function toggleFullscreen() {
     const docEl = document.documentElement;
+    const bodyEl = document.body;
+
     if (!isFullscreenActive()) {
-      try {
-        if (docEl.requestFullscreen) {
-          docEl.requestFullscreen().catch(() => {});
-        } else if (docEl.webkitRequestFullscreen) {
-          docEl.webkitRequestFullscreen();
-        } else if (docEl.mozRequestFullScreen) {
-          docEl.mozRequestFullScreen();
-        } else if (docEl.msRequestFullscreen) {
-          docEl.msRequestFullscreen();
-        }
-      } catch (err) {
-        console.warn('Fullscreen request failed:', err);
+      let req = null;
+      if (docEl.requestFullscreen) {
+        req = docEl.requestFullscreen();
+      } else if (docEl.webkitRequestFullscreen) {
+        req = docEl.webkitRequestFullscreen();
+      } else if (docEl.mozRequestFullScreen) {
+        req = docEl.mozRequestFullScreen();
+      } else if (docEl.msRequestFullscreen) {
+        req = docEl.msRequestFullscreen();
+      } else if (bodyEl.requestFullscreen) {
+        req = bodyEl.requestFullscreen();
+      }
+
+      if (req && req.catch) {
+        req.catch(() => {
+          // If browser restricts native fullscreen, fallback to CSS pseudo-fullscreen
+          bodyEl.classList.toggle('pseudo-fullscreen');
+          updateFullscreenButtonState();
+        });
       }
     } else {
-      try {
-        if (document.exitFullscreen) {
-          document.exitFullscreen().catch(() => {});
-        } else if (document.webkitExitFullscreen) {
-          document.webkitExitFullscreen();
-        } else if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen();
-        } else if (document.msExitFullscreen) {
-          document.msExitFullscreen();
-        }
-      } catch (err) {
-        console.warn('Exit fullscreen failed:', err);
+      if (bodyEl.classList.contains('pseudo-fullscreen')) {
+        bodyEl.classList.remove('pseudo-fullscreen');
+        updateFullscreenButtonState();
+        return;
+      }
+
+      let exit = null;
+      if (document.exitFullscreen) {
+        exit = document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        exit = document.webkitExitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        exit = document.mozCancelFullScreen();
+      } else if (document.msExitFullscreen) {
+        exit = document.msExitFullscreen();
+      }
+
+      if (exit && exit.catch) {
+        exit.catch(() => {});
       }
     }
   }
+
+  // Expose on window for direct HTML onclick execution
+  window.toggleFullscreen = toggleFullscreen;
 
   function updateFullscreenButtonState() {
     if (!btnFullscreen) return;
