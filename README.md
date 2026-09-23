@@ -1,5 +1,9 @@
 # 🚀 AI Effectiveness & Token Value-Maxing: 1-Hour Masterclass
 
+> 🌐 **Live Interactive Deck:** [https://rajatbansalasu.github.io/AI-Effectiveness/](https://rajatbansalasu.github.io/AI-Effectiveness/)  
+> 📄 **Live Cheatsheet:** [https://rajatbansalasu.github.io/AI-Effectiveness/cheatsheet.html](https://rajatbansalasu.github.io/AI-Effectiveness/cheatsheet.html)  
+> 🎙️ **Presenter Console:** [https://rajatbansalasu.github.io/AI-Effectiveness/notes.html](https://rajatbansalasu.github.io/AI-Effectiveness/notes.html)
+
 A pragmatic, engineering-focused 1-hour workshop and interactive slide deck designed to transform how software engineers use AI coding tools (specifically **Cursor**, frontier models, and agentic workflows).
 
 ---
