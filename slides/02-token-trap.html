@@ -1,71 +1,70 @@
 <section class="slide" data-slide="2">
       <div class="slide-content">
-        <div class="slide-header">
+        <div class="slide-header" style="margin-bottom: 0.9rem;">
           <span class="slide-category">The Problem</span>
           <h2>The Silent Productivity Killer: <span class="text-danger">The 2M Token Trap</span></h2>
-          <p class="slide-desc">Why running an "infinite chat thread" is killing your code quality and multiplying latency.</p>
+          <p class="slide-desc" style="font-size: 1rem;">Why running an "infinite chat thread" is killing your code quality and multiplying latency.</p>
         </div>
 
-        <div class="grid-2col">
-          <div class="card danger-card">
-            <div class="card-header">
-              <span class="card-tag tag-danger">❌ The Anti-Pattern: "Infinite Chat Syndrome"</span>
+        <div class="grid-2col" style="gap: 0.9rem;">
+          <div class="card danger-card" style="padding: 0.85rem 1.1rem;">
+            <div class="card-header" style="margin-bottom: 0.5rem;">
+              <span class="card-tag tag-danger" style="font-size: 0.84rem;">❌ The Anti-Pattern: "Infinite Chat Syndrome"</span>
             </div>
-            <ul class="bullet-list">
-              <li><strong>Day-Long Chat Threads:</strong> Asking 20 unrelated questions in one Composer / Chat session without resetting.</li>
-              <li><strong>Attention Dilution ("Lost in the Middle"):</strong> As context reaches 500k–2M tokens, the LLM's attention weights smear. Critical constraints are silently ignored.</li>
-              <li><strong>Compounding Hallucinations:</strong> Bad code or temporary bugs produced at step 3 become "ground truth" context for step 15.</li>
-              <li><strong>Latency Explosion:</strong> Model has to ingest 1.5M input tokens before generating 5 lines of code → 25s–40s delay per keystroke.</li>
+            <ul class="bullet-list" style="gap: 0.45rem; font-size: 0.88rem; line-height: 1.35;">
+              <li><strong>Day-Long Chat Threads:</strong> Asking 20 unrelated questions in one session without resetting.</li>
+              <li><strong>Attention Dilution ("Lost in the Middle"):</strong> Context bloat smears attention weights; critical constraints are silently ignored.</li>
+              <li><strong>Latency Explosion:</strong> Model ingests 1M+ input tokens before generating 5 lines &rarr; 25s–40s delay per keystroke.</li>
             </ul>
           </div>
 
-          <div class="card success-card">
-            <div class="card-header">
-              <span class="card-tag tag-success">✅ The Fix: High-Velocity Ephemeral Context</span>
+          <div class="card success-card" style="padding: 0.85rem 1.1rem;">
+            <div class="card-header" style="margin-bottom: 0.5rem;">
+              <span class="card-tag tag-success" style="font-size: 0.84rem;">✅ The Fix: High-Velocity Ephemeral Context</span>
             </div>
-            <ul class="bullet-list">
-              <li><strong>The 3-Turn Rule:</strong> If the AI doesn't solve your bug or generate the correct code in <strong>3 turns</strong>, do NOT argue with it. Hit <kbd>Cmd+L</kbd> / <kbd>Cmd+N</kbd>, prune your prompt, and start fresh.</li>
-              <li><strong>Surgical Context Injection:</strong> Reference <em>only</em> the 2-3 files relevant to the current task using precise <code>@file</code> symbols.</li>
-              <li><strong>Ephemeral Sessions:</strong> Treat chat threads like scratch buffers — disposable, single-purpose, and laser-focused.</li>
-              <li><strong>Sub-2-Second Responses:</strong> Keeping context under 20k tokens yields instantaneous, razor-sharp generations.</li>
+            <ul class="bullet-list" style="gap: 0.45rem; font-size: 0.88rem; line-height: 1.35;">
+              <li><strong>The 3-Turn Rule:</strong> If not solved in <strong>3 turns</strong>, do NOT argue. Hit <kbd>Cmd+L</kbd> / <kbd>Cmd+N</kbd> and reset.</li>
+              <li><strong>Surgical Context Injection:</strong> Reference <em>only</em> 2-3 relevant files using precise <code>@file:line</code> symbols.</li>
+              <li><strong>Sub-2-Second Responses:</strong> Keeping context under 20k tokens yields instantaneous, razor-sharp results.</li>
             </ul>
           </div>
         </div>
 
         <!-- Interactive Fun: Context Decay Live Simulator -->
-        <div class="decay-sim-card">
-          <div class="sim-header">
-            <div class="sim-title">
+        <div class="decay-sim-card" style="margin-top: 0.75rem; padding: 0.75rem 1rem;">
+          <div class="sim-header" style="margin-bottom: 0.4rem;">
+            <div class="sim-title" style="font-size: 0.9rem;">
               <span>🔬 Interactive Lab: Watch an LLM Brain Degrade in Real-Time</span>
             </div>
-            <button class="btn-reset-chat" id="btn-decay-reset" title="Wipe Session with Cmd+L">
+            <button class="btn-reset-chat" id="btn-decay-reset" title="Wipe Session with Cmd+L" style="padding: 4px 10px; font-size: 0.78rem;">
               <span>⚡ Reset Session (Cmd+L)</span>
             </button>
           </div>
 
-          <div class="sim-controls-row">
+          <div class="sim-controls-row" style="margin-bottom: 0.4rem;">
             <div class="sim-slider-wrap">
-              <div class="sim-slider-label">
+              <div class="sim-slider-label" style="font-size: 0.82rem;">
                 <span>Chat Thread Length: <strong id="decay-turns-val" style="color:var(--accent-cyan)">Turn 1 (Fresh Session)</strong></span>
                 <span id="decay-health-pill" style="color:var(--success-color); font-weight:700">100% Attention Precision</span>
               </div>
               <input type="range" id="decay-slider" min="1" max="18" value="1" class="calc-slider">
             </div>
-            <div style="font-size:0.75rem; color:var(--text-muted); min-width: 140px; text-align:right;">
+            <div style="font-size:0.78rem; color:var(--text-muted); min-width: 140px; text-align:right;">
               <span id="decay-tokens-val">Tokens: ~4,200</span><br>
               <span id="decay-latency-val">Latency: 1.2s</span>
             </div>
           </div>
 
-          <div class="sim-output-box pristine" id="decay-output-box">
+          <div class="sim-output-box pristine" id="decay-output-box" style="padding: 0.5rem 0.75rem; font-size: 0.82rem;">
             <code>// Turn 1 Output: return users.filter(u => u.isActive && u.roles.includes('ADMIN')); // 🎯 Surgical, 100% accurate</code>
           </div>
         </div>
 
-        <div class="banner info-banner" style="margin-top:0.8rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.83rem;">
+        <!-- Context Ring Feature Callout -->
+        <div class="banner info-banner" style="margin-top: 0.65rem; padding: 0.55rem 0.9rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: 0.82rem;">
           <div>
             <strong>🔍 Cursor Official Feature: The Context Ring &amp; Breakdown Tray:</strong>
-            <span style="display:block; margin-top: 0.2rem; font-size: 0.78rem; color: var(--text-secondary);">Click the context ring next to your prompt to inspect the breakdown tray: <code>System prompt</code>, <code>Tools</code>, <code>Rules</code>, <code>Skills</code>, <code>MCP</code>, <code>Subagents</code>, <code>Summarized conversation</code>, and <code>Conversation</code>. When full, Cursor silently compresses earlier turns, losing your original constraints!</span>
+            <span style="display:block; margin-top: 0.15rem; font-size: 0.78rem; color: var(--text-secondary);">Click the context ring icon next to your prompt to inspect allocation: <code>System</code>, <code>Tools</code>, <code>Rules</code>, <code>MCP</code>, and <code>Conversation</code>. When full, Cursor silently compresses earlier turns!</span>
           </div>
           <span style="font-family: var(--font-mono); font-size: 0.74rem; background: var(--bg-card); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border-color); white-space: nowrap; font-weight: 700;">Click Ring &rarr; Tray</span>
         </div>
