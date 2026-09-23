@@ -1,0 +1,96 @@
+<section class="slide" data-slide="17">
+      <div class="slide-content">
+        <div class="slide-header" style="margin-bottom: 0.65rem;">
+          <span class="slide-category">Appendix C &bull; Workflow Velocity &amp; Sandboxing</span>
+          <h2>Power User Playbook: <span class="gradient-text">.cursorignore &amp; Git Worktrees</span></h2>
+          <p class="slide-desc" style="font-size: 0.95rem;">Advanced hygiene to keep vector indexing clean, sandbox multi-file Agent refactors, and maximize developer velocity.</p>
+        </div>
+
+        <!-- 2-Column Grid -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; flex: 1; min-height: 0;">
+
+          <!-- Left Column: .cursorignore + Git Worktree Sandboxing -->
+          <div style="display: flex; flex-direction: column; gap: 0.55rem;">
+            <!-- .cursorignore Box -->
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.65rem 0.85rem;">
+              <h3 style="font-size: 0.86rem; color: var(--accent-cyan); margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
+                <span>🛡️ Vector Indexing Hygiene: <code>.cursorignore</code></span>
+                <span style="font-family: var(--font-mono); font-size: 0.66rem; background: var(--bg-card); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border-color);">Root Config</span>
+              </h3>
+              <p style="font-size: 0.74rem; color: var(--text-secondary); margin-bottom: 0.35rem;">
+                Prevents 50k-line lockfiles and compiled binaries from polluting <code>@codebase</code> vector search:
+              </p>
+              <pre style="margin: 0; font-size: 0.72rem; line-height: 1.35; padding: 0.5rem;">node_modules/
+dist/ | build/ | target/ | .next/
+coverage/ | .git/ | .env*
+package-lock.json | yarn.lock | pnpm-lock.yaml
+*.min.js | *.map | *.d.ts.map</pre>
+            </div>
+
+            <!-- Git Worktree Sandbox Callout -->
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-left: 3px solid var(--accent-emerald); border-radius: 6px; padding: 0.55rem 0.8rem; font-size: 0.76rem;">
+              <strong style="color: var(--accent-emerald);">🌲 Git Worktree Agent Sandboxing:</strong>
+              <div style="color: var(--text-secondary); margin-top: 2px; line-height: 1.35;">
+                <span>• Run autonomous multi-file refactors in an isolated worktree branch:</span>
+                <div style="font-family: var(--font-mono); background: var(--bg-card); padding: 3px 6px; border-radius: 4px; margin: 3px 0; border: 1px solid var(--border-color); font-size: 0.7rem; color: var(--accent-cyan);">
+                  git worktree add ../ai-refactor -b refactor/order-service
+                </div>
+                <span>• Protects your active dev server and uncommitted changes from dirty agent overwrites.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Spec-Driven Development + Velocity Keybindings -->
+          <div style="display: flex; flex-direction: column; gap: 0.55rem;">
+            <!-- Spec-Driven Development (SDD) Card -->
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.65rem 0.85rem;">
+              <h3 style="font-size: 0.86rem; color: var(--accent-purple); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 6px;">
+                <span>📋 Spec-Driven Development (SDD)</span>
+              </h3>
+              <div style="display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.74rem;">
+                <div style="background: var(--bg-card); border-left: 2px solid var(--accent-purple); padding: 0.3rem 0.6rem; border-radius: 4px;">
+                  <strong>Phase 1 (Spec &amp; Review):</strong> Ask Chat to write <code>spec.md</code> (contracts, endpoints, edge cases). Human reviews &amp; approves.
+                </div>
+                <div style="background: var(--bg-card); border-left: 2px solid var(--accent-cyan); padding: 0.3rem 0.6rem; border-radius: 4px;">
+                  <strong>Phase 2 (Surgical Execution):</strong> Prompt Composer: <em>"Implement Step 1 from @spec.md only. Run tests before proceeding."</em>
+                </div>
+              </div>
+            </div>
+
+            <!-- Developer Velocity Table & Terminal Scoping -->
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.65rem 0.85rem; flex: 1;">
+              <h3 style="font-size: 0.86rem; color: var(--accent-amber); margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
+                <span>⚡ Velocity Shortcuts &amp; Terminal Scoping</span>
+              </h3>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; font-size: 0.73rem; margin-bottom: 0.4rem;">
+                <div style="background: var(--bg-card); padding: 0.3rem 0.5rem; border-radius: 4px; border: 1px solid var(--border-color);">
+                  <kbd>Cmd+K</kbd> <span style="color: var(--text-secondary);">Inline 10-line edit</span>
+                </div>
+                <div style="background: var(--bg-card); padding: 0.3rem 0.5rem; border-radius: 4px; border: 1px solid var(--border-color);">
+                  <kbd>Option+Enter</kbd> <span style="color: var(--text-secondary);">Fast non-indexed query</span>
+                </div>
+                <div style="background: var(--bg-card); padding: 0.3rem 0.5rem; border-radius: 4px; border: 1px solid var(--border-color);">
+                  <kbd>Cmd+Shift+L</kbd> <span style="color: var(--text-secondary);">Send selection to Chat</span>
+                </div>
+                <div style="background: var(--bg-card); padding: 0.3rem 0.5rem; border-radius: 4px; border: 1px solid var(--border-color);">
+                  <kbd>Cmd+I</kbd> <span style="color: var(--text-secondary);">Toggle Composer float</span>
+                </div>
+              </div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); background: var(--bg-card); padding: 0.35rem 0.6rem; border-radius: 4px; border: 1px solid var(--border-color);">
+                💡 <strong>Terminal Scoping:</strong> Pipe error logs using <code>mvn test 2&gt;&amp;1 | tail -n 25</code> to prevent dumping 5,000 lines of buffer into context.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="speaker-notes">
+        <h4>🎙️ Speaker Talking Points (3-4 mins):</h4>
+        <ul>
+          <li><strong>The .cursorignore Imperative:</strong> Explain why lockfiles and build outputs are vector indexing poison: "When an engineer types <code>@codebase how does auth work?</code>, Cursor searches embeddings. If <code>package-lock.json</code> is indexed, it injects 30,000 lines of npm package names, crowding out actual source code!"</li>
+          <li><strong>Git Worktree Sandboxing:</strong> Show how senior engineers run aggressive agent refactors in a separate git worktree without dirtying their main branch or killing their dev server.</li>
+          <li><strong>Spec-Driven Development:</strong> Explain that writing a quick markdown spec before letting an agent touch code reduces wasted tokens and rollback cycles by over 70%.</li>
+        </ul>
+      </div>
+    </section>

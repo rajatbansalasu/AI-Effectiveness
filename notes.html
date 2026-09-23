@@ -585,7 +585,8 @@
       "The 5 Golden Rules for Monday Morning",
       "Open Q&A & Resource Toolkit",
       "Appendix A: Team MCP Infrastructure",
-      "Appendix B: CI/CD Guardrails & Quality"
+      "Appendix B: CI/CD Guardrails & Quality",
+      "Appendix C: Power User Playbook & .cursorignore"
     ];
 
     const slideCategories = [
@@ -604,7 +605,8 @@
       "Executive Takeaways",
       "Q&A & Resources",
       "Appendix A • Infrastructure & Security",
-      "Appendix B • DevOps & Quality"
+      "Appendix B • DevOps & Quality",
+      "Appendix C • Velocity & Sandboxing"
     ];
 
     let currentSlide = 1;
@@ -867,6 +869,14 @@
           <li><strong>Closing the Loop with CI/CD:</strong> Explain that prompt rules in <code>.cursor/rules/</code> are great guidelines, but automated CI checks in GitHub Actions make them unbreakable standards.</li>
           <li><strong>Catching Banned Patterns:</strong> Walk through the simple shell grep script in the YAML example: it automatically rejects PRs that introduce forbidden legacy patterns like <code>@Autowired</code> or mutable DTOs before a human engineer even spends review time.</li>
           <li><strong>Spend Monitoring:</strong> Explain that tracking team spend in Cursor's enterprise admin dashboard helps managers identify engineers who might need 1-on-1 coaching on prompt scoping or the 3-turn reset rule.</li>
+        </ul>
+      `,
+      17: `
+        <h4>🎙️ Speaker Talking Points (3-4 mins):</h4>
+        <ul>
+          <li><strong>The .cursorignore Imperative:</strong> Explain why lockfiles and build outputs are vector indexing poison: "When an engineer types <code>@codebase how does auth work?</code>, Cursor searches embeddings. If <code>package-lock.json</code> is indexed, it injects 30,000 lines of npm package names, crowding out actual source code!"</li>
+          <li><strong>Git Worktree Sandboxing:</strong> Show how senior engineers run aggressive agent refactors in a separate git worktree without dirtying their main branch or killing their dev server.</li>
+          <li><strong>Spec-Driven Development:</strong> Explain that writing a quick markdown spec before letting an agent touch code reduces wasted tokens and rollback cycles by over 70%.</li>
         </ul>
       `
     };

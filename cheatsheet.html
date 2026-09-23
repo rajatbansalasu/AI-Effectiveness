@@ -585,6 +585,37 @@ alwaysApply: false
       </div>
     </div>
 
+    <!-- Row 3: Power User Velocity & Vector Hygiene -->
+    <div class="grid-2col" style="margin-top: 0.8rem;">
+      <!-- Velocity Shortcuts & Terminal Buffer Scoping -->
+      <div class="section-card">
+        <h2>⚡ 6. Power User Shortcuts &amp; Terminal Scoping</h2>
+        <ul style="margin-bottom: 0.4rem;">
+          <li><kbd>Cmd+K</kbd>: Surgical 10-line inline edit directly in active editor.</li>
+          <li><kbd>Cmd+Shift+L</kbd>: Instantly pipe selected lines into a fresh Chat session.</li>
+          <li><kbd>Option+Enter</kbd>: Fast query submission bypassing codebase embeddings.</li>
+          <li><kbd>Cmd+I</kbd>: Toggle floating Composer for fast 2-file changes.</li>
+        </ul>
+        <div style="font-size: 0.73rem; background: var(--surface-bg-elevated); padding: 5px 8px; border-radius: 4px; border: 1px solid var(--surface-border); color: var(--text-muted);">
+          💡 <strong>Terminal Scoping:</strong> Always run <code>mvn test 2&gt;&amp;1 | tail -n 25</code> to avoid feeding 5,000 lines of buffer noise into context.
+        </div>
+      </div>
+
+      <!-- Vector Hygiene & Git Worktree -->
+      <div class="section-card">
+        <h2>🛡️ 7. Vector Indexing (.cursorignore) &amp; Worktrees</h2>
+        <p style="font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.3rem;">
+          Exclude lockfiles and build outputs to keep <code>@codebase</code> retrieval razor sharp:
+        </p>
+        <pre style="margin-bottom: 0.4rem;"># .cursorignore
+node_modules/ | dist/ | build/ | target/ | .next/
+package-lock.json | yarn.lock | pnpm-lock.yaml | *.map</pre>
+        <div style="font-size: 0.73rem; background: var(--surface-bg-elevated); padding: 5px 8px; border-radius: 4px; border: 1px solid var(--surface-border); color: var(--emerald);">
+          🌲 <strong>Agent Sandbox:</strong> <code>git worktree add ../ai-sandbox -b refactor/svc</code> protects your running dev server from dirty agent overwrites.
+        </div>
+      </div>
+    </div>
+
     <!-- Footer Summary -->
     <div style="text-align: center; font-size: 0.78rem; color: var(--text-muted); border-top: 1px solid var(--surface-border); padding-top: 0.8rem;">
       AI Effectiveness & Token Value-Maxing Masterclass • Keep context small • Choose models deliberately • Reset chats ruthlessly
